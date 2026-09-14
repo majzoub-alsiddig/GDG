@@ -14,10 +14,9 @@ const NavBar = () => {
   const pathname = usePathname();
   const pages: IPage[] = [
     { name: "Home", url: "/" },
-    { name: "Members", url: "/members" },
+    { name: "Members", url: "/contact" },
     { name: "Courses", url: "/courses" },
     { name: "Articles", url: "/articles" },
-    { name: "Contact", url: "/contact" },
     { name: "FAQ", url: "/faq" },
     { name: "Admin", url: "/admin" },
   ];
