@@ -1,62 +1,29 @@
+// app/team/page.tsx
 import Footer from "@/components/Footer";
-import Header from "./components/Header";
-import RenderContacts from "./components/RenderContacts";
+import SiteHeader from "./components/SiteHeader";
+import TeamHero from "./components/TeamHero";
+import TeamIntroduction from "./components/TeamIntroduction";
+import TeamCulture from "./components/TeamCulture";
+import TeamSection from "./components/TeamSection";
+import JoinCommunityCTA from "./components/JoinCommunityCTA";
+import { teamMembers } from "./data/team";
 
-const testingContactsData = [
-    {
-        name: "The contact name",
-        role: "The contact role",
-        about: "The contact about lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-        link: "The contact link",
-        img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80"
-    },
-    {
-        name: "The contact name",
-        role: "The contact role",
-        about: "The contact about lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-        link: "The contact link",
-        img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80"
-    },
-    {
-        name: "The contact name",
-        role: "The contact role",
-        about: "The contact about lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-        link: "The contact link",
-        img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80"
-    },
-    {
-        name: "The contact name",
-        role: "The contact role",
-        about: "The contact about lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-        link: "The contact link",
-        img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80"
-    },
-    {
-        name: "The contact name",
-        role: "The contact role",
-        about: "The contact about lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-        link: "The contact link",
-        img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80"
-    },  
-    {
-        name: "The contact name",
-        role: "The contact role",
-        about: "The contact about lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
-        link: "The contact link",
-        img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80"
-    }
-]
+const Team = () => {
+  return (
+    <div className="flex min-h-screen flex-col bg-white font-poppins">
+      <SiteHeader active="Team" />
 
-const Contact = () => {
-    return (
-        <div className="flex min-h-screen flex-col gap-3 items-center justify-center font-poppins">
-            <Header />
-            <div className="w-full gap-3">
-                <RenderContacts contacts={testingContactsData} />
-                <Footer />
-            </div>
-        </div>
-    );
+      <main className="flex-1">
+        <TeamHero />
+        <TeamIntroduction />
+        <TeamCulture />
+        <TeamSection members={teamMembers} />
+        <JoinCommunityCTA />
+      </main>
+
+      <Footer />
+    </div>
+  );
 };
 
-export default Contact;
+export default Team;
