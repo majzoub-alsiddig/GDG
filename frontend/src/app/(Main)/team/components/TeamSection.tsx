@@ -20,7 +20,6 @@ const CATEGORY_ORDER: TeamCategory[] = [
 ];
 
 export default function TeamSection({ members, loading = false }: Props) {
-  // Group members by category, respecting a preferred category order.
   const grouped = useMemo(() => {
     const map = new Map<TeamCategory, TeamMember[]>();
     for (const member of members) {
@@ -33,7 +32,6 @@ export default function TeamSection({ members, loading = false }: Props) {
       const list = map.get(category);
       if (list && list.length > 0) ordered.push({ category, members: list });
     }
-    // Include any categories not in the preferred order
     for (const [category, list] of map) {
       if (!CATEGORY_ORDER.includes(category) && list.length > 0) {
         ordered.push({ category, members: list });
@@ -50,27 +48,28 @@ export default function TeamSection({ members, loading = false }: Props) {
       className="scroll-mt-24 px-4 pb-16 pt-12 sm:px-6 sm:pb-20 sm:pt-14 lg:px-8 lg:pb-24 lg:pt-16"
     >
       <div className="mx-auto max-w-7xl">
-        {/* Section header */}
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-              The people behind GDG
-            </h2>
-            <p className="mt-2 max-w-xl text-sm leading-relaxed text-gray-600 sm:text-base">
-              Meet the organizers, developers, designers, and volunteers who
-              make our community possible.
-            </p>
-          </div>
+        {/* Centered section header */}
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1a73e8]">
+            Our team
+          </span>
+          <h2 className="mt-3 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+            The people behind GDG
+          </h2>
+          <p className="mt-4 text-sm leading-relaxed text-gray-600 sm:text-base">
+            Meet the organizers, developers, designers, and volunteers who make
+            our community possible.
+          </p>
 
           {!loading && members.length > 0 && (
-            <p className="shrink-0 text-sm text-gray-500">
+            <p className="mt-5 inline-flex items-center rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-medium text-gray-500">
               {members.length} member{members.length === 1 ? "" : "s"}
             </p>
           )}
         </div>
 
         {/* Content */}
-        <div className="mt-10 sm:mt-12">
+        <div className="mt-12 sm:mt-14">
           {loading ? (
             <TeamSkeleton />
           ) : members.length === 0 ? (
@@ -80,21 +79,18 @@ export default function TeamSection({ members, loading = false }: Props) {
               {grouped.map(({ category, members: list }) => (
                 <div key={category}>
                   {showCategoryHeadings && (
-                    <div className="mb-6 flex items-center gap-4 sm:mb-8">
-                      <h3 className="text-lg font-bold tracking-tight text-gray-900 sm:text-xl">
+                    /* Centered category heading with flanking rules */
+                    <div className="mb-8 flex items-center justify-center gap-4 sm:mb-10">
+                      <span aria-hidden="true" className="h-px w-8 bg-gray-200 sm:w-12" />
+                      <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-gray-500">
                         {category}
                       </h3>
-                      <span
-                        aria-hidden="true"
-                        className="h-px flex-1 bg-gray-100"
-                      />
-                      <span className="text-xs font-medium text-gray-400">
-                        {list.length}
-                      </span>
+                      <span aria-hidden="true" className="h-px w-8 bg-gray-200 sm:w-12" />
                     </div>
                   )}
 
-                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-10">
+                  {/* Centered flex-wrap grid — centers any count of cards */}
+                  <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
                     {list.map((member) => (
                       <TeamMemberCard key={member.id} member={member} />
                     ))}

@@ -9,7 +9,7 @@ export const teamMembers: TeamMember[] = [
     about:
       "Leads GDG UofK with a passion for community building and empowering students through technology.",
     photo:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+      "https://imags.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
     category: "Leadership",
     socials: {
       linkedin: "https://linkedin.com",
@@ -33,7 +33,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: "majzoub-al-siddig",
     name: "Majzoub Al Siddig",
-    role: "Technical Lead",
+    role: "Software Dev",
     about:
       "Passionate about web development and building tools that make learning more accessible for students.",
     photo:
@@ -52,7 +52,7 @@ export const teamMembers: TeamMember[] = [
     about:
       "Builds native Android apps with Kotlin and Jetpack Compose, and mentors new mobile developers.",
     photo:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80",
+      "https://images.unplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80",
     category: "Technical",
     socials: {
       github: "https://github.com",
@@ -80,7 +80,7 @@ export const teamMembers: TeamMember[] = [
     about:
       "Tells the stories of GDG through written and visual content, shaping how the community is seen.",
     photo:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplah.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
     category: "Media",
     socials: {
       instagram: "https://instagram.com",
@@ -108,7 +108,7 @@ export const teamMembers: TeamMember[] = [
     about:
       "Organizes workshops, meetups, and study jams that keep the GDG community active and engaged.",
     photo:
-      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=800&q=80",
+      "https://images.unspash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=800&q=80",
     category: "Operations",
     socials: {
       linkedin: "https://linkedin.com",
