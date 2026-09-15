@@ -1,4 +1,6 @@
 // app/team/components/TeamMemberCard.tsx
+import React from "react";
+import type { JSX } from "react";
 import type { TeamMember } from "../types";
 import {
   GitHubIcon,
@@ -20,36 +22,36 @@ type SocialEntry = {
 function getSocials(member: TeamMember): SocialEntry[] {
   const { socials } = member;
   const entries: (SocialEntry | null)[] = [
-    socials.github && {
+    socials.github ? {
       key: "github",
       href: socials.github,
       label: "GitHub",
       Icon: GitHubIcon,
-    },
-    socials.linkedin && {
+    } : null,
+    socials.linkedin ? {
       key: "linkedin",
       href: socials.linkedin,
       label: "LinkedIn",
       Icon: LinkedInIcon,
-    },
-    socials.instagram && {
+    } : null,
+    socials.instagram ? {
       key: "instagram",
       href: socials.instagram,
       label: "Instagram",
       Icon: InstagramIcon,
-    },
-    socials.twitter && {
+    } : null,
+    socials.twitter ? {
       key: "twitter",
       href: socials.twitter,
       label: "X",
       Icon: TwitterIcon,
-    },
-    socials.website && {
+    } : null,
+    socials.website ? {
       key: "website",
       href: socials.website,
       label: "Website",
       Icon: GlobeIcon,
-    },
+    } : null,
   ];
   return entries.filter((entry): entry is SocialEntry => Boolean(entry));
 }
