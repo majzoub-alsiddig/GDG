@@ -10,7 +10,7 @@ export default function CourseCard({ course }: { course: Course }) {
       rel="noopener noreferrer"
       className="group flex flex-col rounded-2xl outline-none transition-transform duration-300 ease-out hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-4"
     >
-      {/* Thumbnail — always 16:9 for a consistent rhythm */}
+      {/* Thumbnail - always 16:9 for a consistent rhythm */}
       <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-gray-100 ring-1 ring-black/5">
         <img
           src={course.cover}

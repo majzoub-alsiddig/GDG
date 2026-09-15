@@ -37,7 +37,7 @@ export default function TeamHero() {
           />
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-gray-200 sm:text-lg">
-            The people behind GDG UofK — a community of developers, designers,
+            The people behind GDG UofK - a community of developers, designers,
             organizers, and technology enthusiasts working together to create
             opportunities for students to learn and grow.
           </p>

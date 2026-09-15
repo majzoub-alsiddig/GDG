@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
-import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
+import SiteHeader from "@/components/SiteHeader";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -31,9 +32,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable}  ${geistMono.variable} ${poppins.variable} bg-white  antialiased `}
+        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} bg-white antialiased`}
       >
-        {children}
+        <div className="min-h-screen bg-white">
+          <SiteHeader />
+          <div className="flex-1">{children}</div>
+          <Footer />
+        </div>
       </body>
     </html>
   );

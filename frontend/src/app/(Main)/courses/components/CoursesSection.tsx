@@ -43,7 +43,7 @@ export default function CoursesSection({ courses, loading = false }: Props) {
               Explore all courses
             </h2>
             <p className="mt-2 max-w-xl text-sm leading-relaxed text-gray-600 sm:text-base">
-              Pick a topic and start learning right away — every course opens
+              Pick a topic and start learning right away - every course opens
               on our YouTube channel.
             </p>
           </div>
@@ -56,7 +56,7 @@ export default function CoursesSection({ courses, loading = false }: Props) {
           )}
         </div>
 
-        {/* Filters — designed in, ready for scale */}
+        {/* Filters - designed in, ready for scale */}
         {!loading && categories.length > 0 && (
           <div className="mt-8 -mx-4 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <div

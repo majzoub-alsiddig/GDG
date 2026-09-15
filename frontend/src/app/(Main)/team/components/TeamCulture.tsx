@@ -24,7 +24,7 @@ const PILLARS = [
     Icon: ShareIcon,
     title: "Share",
     description:
-      "Teach, mentor, and grow together — because knowledge multiplies when it's shared.",
+      "Teach, mentor, and grow together - because knowledge multiplies when it's shared.",
     accent: "text-[#EA4335]",
     ring: "ring-red-100",
     bg: "bg-red-50",

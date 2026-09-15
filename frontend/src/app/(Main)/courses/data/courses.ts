@@ -16,7 +16,7 @@ export const courses: Course[] = [
     id: "intro-to-web-development",
     title: "Introduction to Web Development",
     description:
-      "Build your first web pages with HTML, CSS, and JavaScript — from structure to styling to interactivity.",
+      "Build your first web pages with HTML, CSS, and JavaScript - from structure to styling to interactivity.",
     cover:
       "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80",
     link: "https://youtube.com",

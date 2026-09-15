@@ -1,27 +1,33 @@
-import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
-
+// app/page.tsx
+import Hero from "./home/components/Hero";
+import CommunityStats from "./home/components/CommunityStats";
+import WhatWeDo from "./home/components/WhatWeDo";
+import UpcomingEvents from "./home/components/UpcomingEvents";
+import FeaturedCourses from "./home/components/FeaturedCourses";
+import AboutPreview from "./home/components/AboutPreview";
+import CommunityStory from "./home/components/CommunityStory";
+import Mission from "./home/components/Mission";
+import JoinCommunity from "./home/components/JoinCommunity";
 import {
-  FirstSection,
-  SecondSection,
-  ThirdSection,
-} from "@/components/Sections";
-
-//TODO: Extract all the footer to the parent layoout
-//TODO: Add Loading Skeletons to the pages
-//TODO: Add Error not found to the pages
-//TODO: Design some api endpoints
+  communityStats,
+  featuredCourses,
+  featuredEvents,
+} from "./home/data/content";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen  flex-col gap-3 items-center justify-center font-poppins">
-      <Hero />
-      <div className=" gap-3">
-        <FirstSection />
-        <SecondSection />
-        <ThirdSection />
-        <Footer />
-      </div>
+    <div className="flex min-h-screen flex-col bg-white font-poppins">
+      <main className="flex-1">
+        <Hero />
+        <CommunityStats stats={communityStats} />
+        <WhatWeDo />
+        <UpcomingEvents events={featuredEvents} />
+        <FeaturedCourses courses={featuredCourses} />
+        <AboutPreview />
+        <CommunityStory />
+        <Mission />
+        <JoinCommunity />
+      </main>
     </div>
   );
 }

@@ -59,7 +59,7 @@ export default function TeamMemberCard({ member }: { member: TeamMember }) {
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_32px_-12px_rgba(0,0,0,0.12)]">
-      {/* Portrait photo — 3:4 for people-first visual rhythm */}
+      {/* Portrait photo - 3:4 for people-first visual rhythm */}
       <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-100">
         <img
           src={member.photo}

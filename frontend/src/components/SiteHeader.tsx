@@ -1,22 +1,28 @@
-// app/courses/components/SiteHeader.tsx
+// components/SiteHeader.tsx
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CloseIcon, MenuIcon } from "./icons";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "Team", href: "/team" },
   { label: "About", href: "/about" },
+  { label: "Articles", href: "/articles" },
   { label: "Events", href: "/events" },
   { label: "Courses", href: "/courses" },
-  { label: "Contact", href: "/contact" },
+  { label: "Team", href: "/team" },
+  { label: "FAQ", href: "/faq" },
 ];
 
-type Props = { active?: string };
+function isActive(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
-export default function SiteHeader({ active = "Courses" }: Props) {
+export default function SiteHeader() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -26,6 +32,11 @@ export default function SiteHeader({ active = "Courses" }: Props) {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Close the mobile menu when the route changes
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -37,11 +48,12 @@ export default function SiteHeader({ active = "Courses" }: Props) {
   return (
     <header
       className={`sticky top-0 z-50 w-full bg-white/85 backdrop-blur-md transition-shadow duration-300 ${
-        scrolled ? "border-b border-gray-200/80 shadow-[0_1px_16px_rgba(0,0,0,0.04)]" : "border-b border-transparent"
+        scrolled
+          ? "border-b border-gray-200/80 shadow-[0_1px_16px_rgba(0,0,0,0.04)]"
+          : "border-b border-transparent"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-18 lg:px-8">
-        {/* Logo */}
         <Link
           href="/"
           className="flex items-center gap-2.5 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-2"
@@ -57,17 +69,16 @@ export default function SiteHeader({ active = "Courses" }: Props) {
           </span>
         </Link>
 
-        {/* Desktop nav */}
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
           {NAV_LINKS.map((link) => {
-            const isActive = link.label === active;
+            const active = isActive(pathname, link.href);
             return (
               <Link
                 key={link.label}
                 href={link.href}
-                aria-current={isActive ? "page" : undefined}
+                aria-current={active ? "page" : undefined}
                 className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
-                  isActive
+                  active
                     ? "bg-blue-50 text-[#1a73e8]"
                     : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                 }`}
@@ -78,7 +89,6 @@ export default function SiteHeader({ active = "Courses" }: Props) {
           })}
         </nav>
 
-        {/* Mobile toggle */}
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
@@ -91,7 +101,6 @@ export default function SiteHeader({ active = "Courses" }: Props) {
         </button>
       </div>
 
-      {/* Mobile nav */}
       <div
         id="mobile-nav"
         className={`overflow-hidden border-gray-100 bg-white transition-[max-height,opacity] duration-300 ease-out lg:hidden ${
@@ -100,15 +109,17 @@ export default function SiteHeader({ active = "Courses" }: Props) {
       >
         <nav className="mx-auto flex max-w-7xl flex-col px-4 py-3 sm:px-6" aria-label="Mobile">
           {NAV_LINKS.map((link) => {
-            const isActive = link.label === active;
+            const active = isActive(pathname, link.href);
             return (
               <Link
                 key={link.label}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                aria-current={isActive ? "page" : undefined}
+                aria-current={active ? "page" : undefined}
                 className={`rounded-xl px-3.5 py-3 text-[15px] font-medium transition-colors ${
-                  isActive ? "bg-blue-50 text-[#1a73e8]" : "text-gray-700 hover:bg-gray-50"
+                  active
+                    ? "bg-blue-50 text-[#1a73e8]"
+                    : "text-gray-700 hover:bg-gray-50"
                 }`}
               >
                 {link.label}

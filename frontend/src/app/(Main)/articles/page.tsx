@@ -1,7 +1,6 @@
 import { json } from "stream/consumers";
 import ArticleCard from "./components/ArticleCard";
 import articles from "./exampleArticles.json";
-import Footer from "@/components/Footer";
 
 const ArticlesPage = () => {
   return (
@@ -27,9 +26,6 @@ const ArticlesPage = () => {
           ))}
         </div>
       </main>
-      <div className="w-full mt-10">
-        <Footer />
-      </div>
     </div>
   );
 };
