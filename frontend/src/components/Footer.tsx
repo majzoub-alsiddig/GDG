@@ -1,7 +1,8 @@
+// components/Footer.tsx
 import Link from "next/link";
 
 /* ------------------------------------------------------------------ */
-/*  Icons — inline SVG, inherit currentColor (safe on dark bg)        */
+/*  Icons — inline SVG, inherit currentColor                           */
 /* ------------------------------------------------------------------ */
 
 type IconProps = { className?: string };
@@ -65,15 +66,6 @@ function MailIcon({ className }: IconProps) {
   );
 }
 
-function ArrowRightIcon({ className }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-      strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
-      <path d="M5 12h14M13 6l6 6-6 6" />
-    </svg>
-  );
-}
-
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
 /* ------------------------------------------------------------------ */
@@ -121,12 +113,12 @@ const SOCIAL_LINKS: SocialLink[] = [
 const EMAIL = "contact@gdguofk.club";
 
 /* ------------------------------------------------------------------ */
-/*  Footer                                                            */
+/*  Footer                                                             */
 /* ------------------------------------------------------------------ */
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-950 text-slate-300">
+    <footer className="border-t border-gray-200 bg-white text-gray-600">
       {/* ---------- Main footer ---------- */}
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <div className="grid grid-cols-2 gap-10 md:grid-cols-4 lg:gap-16">
@@ -134,7 +126,7 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1">
             <Link
               href="/"
-              className="inline-flex items-center gap-2.5 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+              className="inline-flex items-center gap-2.5 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-2"
             >
               <span className="grid grid-cols-2 gap-[3px]" aria-hidden="true">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#4285F4]" />
@@ -142,12 +134,12 @@ export default function Footer() {
                 <span className="h-1.5 w-1.5 rounded-full bg-[#FBBC05]" />
                 <span className="h-1.5 w-1.5 rounded-full bg-[#34A853]" />
               </span>
-              <span className="text-[15px] font-bold tracking-tight text-white">
-                GDG <span className="font-medium text-slate-400">UofK</span>
+              <span className="text-[15px] font-bold tracking-tight text-gray-900">
+                GDG <span className="font-medium text-gray-500">UofK</span>
               </span>
             </Link>
 
-            <p className="mt-5 max-w-xs text-sm leading-relaxed text-slate-400">
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-gray-500">
               A student-driven community at the University of Khartoum where
               developers, designers, and tech enthusiasts learn, build, and
               connect.
@@ -156,7 +148,7 @@ export default function Footer() {
 
           {/* Explore */}
           <div>
-            <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">
               Explore
             </h3>
             <ul className="mt-5 space-y-3">
@@ -164,7 +156,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="rounded text-sm text-slate-300 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                    className="rounded text-sm text-gray-600 transition-colors hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8]"
                   >
                     {link.label}
                   </Link>
@@ -175,7 +167,7 @@ export default function Footer() {
 
           {/* Community */}
           <div>
-            <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">
               Community
             </h3>
             <ul className="mt-5 space-y-3">
@@ -183,7 +175,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="rounded text-sm text-slate-300 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                    className="rounded text-sm text-gray-600 transition-colors hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8]"
                   >
                     {link.label}
                   </Link>
@@ -194,7 +186,7 @@ export default function Footer() {
 
           {/* Connect */}
           <div>
-            <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">
               Connect
             </h3>
             <ul className="mt-5 space-y-2">
@@ -205,9 +197,9 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Follow GDG UofK on ${label}`}
-                    className="group inline-flex items-center gap-3 rounded-full pr-3 text-sm text-slate-300 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                    className="group inline-flex items-center gap-3 rounded-full pr-3 text-sm text-gray-600 transition-colors hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8]"
                   >
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-slate-300 transition-colors group-hover:bg-white/10 group-hover:text-white">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition-colors group-hover:bg-gray-200 group-hover:text-gray-900">
                       <Icon className="h-[18px] w-[18px]" />
                     </span>
                     <span>{label}</span>
@@ -219,7 +211,7 @@ export default function Footer() {
             {/* Email as text */}
             <a
               href={`mailto:${EMAIL}`}
-              className="mt-4 inline-flex items-center gap-2 rounded text-sm font-medium text-slate-300 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+              className="mt-4 inline-flex items-center gap-2 rounded text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8]"
             >
               <MailIcon className="h-4 w-4" />
               {EMAIL}
@@ -229,12 +221,12 @@ export default function Footer() {
       </div>
 
       {/* ---------- Bottom bar ---------- */}
-      <div className="border-t border-white/10">
+      <div className="border-t border-gray-200">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-center sm:flex-row sm:px-6 sm:text-left lg:px-8">
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-gray-500">
             © {new Date().getFullYear()} GDG University of Khartoum
           </p>
-          <p className="text-xs font-medium tracking-[0.14em] text-slate-500 uppercase">
+          <p className="text-xs font-medium tracking-[0.14em] text-gray-400 uppercase">
             Learn. Build. Connect.
           </p>
         </div>
