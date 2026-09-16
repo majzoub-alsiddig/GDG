@@ -120,10 +120,10 @@ export default function Footer() {
   return (
     <footer className="border-t border-gray-200 bg-white text-gray-600">
       {/* ---------- Main footer ---------- */}
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-        <div className="grid grid-cols-2 gap-10 md:grid-cols-4 lg:gap-16">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
+        <div className="grid grid-cols-1 gap-y-10 md:grid-cols-4 md:gap-16">
           {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
+          <div className="flex flex-col items-center text-center md:items-start md:text-left">
             <Link
               href="/"
               className="inline-flex items-center gap-2.5 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-2"
@@ -139,19 +139,19 @@ export default function Footer() {
               </span>
             </Link>
 
-            <p className="mt-5 max-w-xs text-sm leading-relaxed text-gray-500">
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-gray-500 md:mt-5 md:max-w-xs">
               A student-driven community at the University of Khartoum where
               developers, designers, and tech enthusiasts learn, build, and
               connect.
             </p>
           </div>
 
-          {/* Explore */}
-          <div>
+          {/* Explore — centered flex row on mobile, vertical list on desktop */}
+          <div className="flex flex-col items-center text-center md:items-start md:text-left">
             <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">
               Explore
             </h3>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-4 flex flex-wrap items-center justify-center gap-5 md:mt-5 md:flex-col md:items-start md:gap-3">
               {EXPLORE_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -165,12 +165,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Community */}
-          <div>
+          {/* Community — same pattern */}
+          <div className="flex flex-col items-center text-center md:items-start md:text-left">
             <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">
               Community
             </h3>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-4 flex flex-wrap items-center justify-center gap-5 md:mt-5 md:flex-col md:items-start md:gap-3">
               {COMMUNITY_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -184,12 +184,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Connect */}
-          <div>
+          {/* Connect — icons centered on mobile, vertical list on desktop */}
+          <div className="flex flex-col items-center text-center md:items-start md:text-left">
             <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">
               Connect
             </h3>
-            <ul className="mt-5 space-y-2">
+            <ul className="mt-4 flex flex-wrap items-center justify-center gap-5 md:mt-5 md:flex-col md:items-start md:gap-3">
               {SOCIAL_LINKS.map(({ label, href, Icon }) => (
                 <li key={label}>
                   <a
@@ -197,21 +197,21 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Follow GDG UofK on ${label}`}
-                    className="group inline-flex items-center gap-3 rounded-full pr-3 text-sm text-gray-600 transition-colors hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8]"
+                    className="group inline-flex items-center gap-3 rounded-full text-sm text-gray-600 transition-colors hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] md:pr-3"
                   >
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition-colors group-hover:bg-gray-200 group-hover:text-gray-900">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition-colors group-hover:bg-gray-200 group-hover:text-gray-900 md:h-8 md:w-8">
                       <Icon className="h-[18px] w-[18px]" />
                     </span>
-                    <span>{label}</span>
+                    <span className="hidden md:inline">{label}</span>
                   </a>
                 </li>
               ))}
             </ul>
 
-            {/* Email as text */}
+            {/* Email — centered on mobile, left-aligned on desktop */}
             <a
               href={`mailto:${EMAIL}`}
-              className="mt-4 inline-flex items-center gap-2 rounded text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8]"
+              className="mt-5 inline-flex items-center gap-2 rounded text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] md:mt-4"
             >
               <MailIcon className="h-4 w-4" />
               {EMAIL}
