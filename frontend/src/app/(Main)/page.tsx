@@ -1,4 +1,3 @@
-// app/page.tsx
 import Hero from "./home/components/Hero";
 import CommunityStats from "./home/components/CommunityStats";
 import UpcomingEvents from "./home/components/UpcomingEvents";

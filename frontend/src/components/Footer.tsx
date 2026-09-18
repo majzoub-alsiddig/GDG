@@ -12,6 +12,21 @@ import {
 
 type IconProps = { className?: string };
 
+function GDGMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 72 44" className={className} aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#18181b" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round">
+      <rect x="-5.5" y="-5.5" width="28" height="11" rx="5.5" fill="#EA4335" transform="translate(15, 22) rotate(-40)" />
+      <rect x="-5.5" y="-5.5" width="28" height="11" rx="5.5" fill="#4285F4" transform="translate(15, 22) rotate(40)" />
+
+      <rect x="-22.5" y="-5.5" width="28" height="11" rx="5.5" fill="#FBBC05" transform="translate(57, 22) rotate(-40)" />
+      <rect x="-22.5" y="-5.5" width="28" height="11" rx="5.5" fill="#34A853" transform="translate(57, 22) rotate(40)" />
+    </g>
+  </svg>
+  );
+}
+
+
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
 /* ------------------------------------------------------------------ */
@@ -28,7 +43,7 @@ const EXPLORE_LINKS = [
 const COMMUNITY_LINKS = [
   { label: "Meet the Team", href: "/team" },
   { label: "Upcoming Events", href: "/events" },
-  { label: "Contact us", href: "/contact" },
+  { label: "Contact us", href: "/" }, // TODO add linktree here
 ] as const;
 
 type SocialLink = {
@@ -74,12 +89,7 @@ export default function Footer() {
               href="/"
               className="inline-flex items-center gap-2.5 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-2"
             >
-              <span className="grid grid-cols-2 gap-[3px]" aria-hidden="true">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#4285F4]" />
-                <span className="h-1.5 w-1.5 rounded-full bg-[#EA4335]" />
-                <span className="h-1.5 w-1.5 rounded-full bg-[#FBBC05]" />
-                <span className="h-1.5 w-1.5 rounded-full bg-[#34A853]" />
-              </span>
+              <GDGMark className="h-6 w-auto" />
               <span className="text-[15px] font-bold tracking-tight text-gray-900">
                 GDG <span className="font-medium text-gray-500">UofK</span>
               </span>

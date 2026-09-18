@@ -70,14 +70,10 @@ export default function ArticlesExplorer({ articles }: { articles: Article[] }) 
 
         <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-14 sm:px-6 sm:pt-20 sm:pb-16 lg:px-8 lg:pt-24">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-gray-600 shadow-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#4285F4]" />
-              GDG UofK · Articles
-            </span>
 
             <h1 className="mt-6 text-4xl font-bold leading-[1.08] tracking-tight text-gray-900 sm:text-5xl lg:text-[56px]">
               Ideas, Tutorials
-              <span className="block text-[#1a73e8]">&amp; Stories</span>
+              <span className="text-[#1a73e8]"> &amp; Stories</span>
             </h1>
 
             <span

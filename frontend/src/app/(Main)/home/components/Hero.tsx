@@ -36,6 +36,37 @@ export default function Hero() {
       />
 
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-4 pt-14 pb-16 sm:px-6 sm:pt-16 sm:pb-20 lg:grid-cols-12 lg:gap-12 lg:px-8 lg:pt-20 lg:pb-24">
+        {/* Image column */}
+        <div className="lg:col-span-6">
+          <div className="relative">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-[0_24px_60px_-24px_rgba(0,0,0,0.25)] ring-1 ring-black/5 sm:aspect-[5/4]">
+              <Image
+                src={heroImage}
+                alt="GDG UofK students collaborating at a community workshop"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+              {/* Subtle vignette for depth */}
+              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-transparent" />
+            </div>
+
+            {/* Floating badge - Google colour accent */}
+            <div className="absolute -bottom-4 left-4 hidden rounded-2xl border border-gray-100 bg-white px-4 py-3 shadow-lg sm:block">
+              <div className="flex items-center gap-3">
+                <GDGMark className="h-6 w-auto" />
+                <div>
+                  <p className="text-xs font-semibold text-gray-900">
+                    Student-led community
+                  </p>
+                  <p className="text-[11px] text-gray-500">University of Khartoum</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Text column */}
         <div className="lg:col-span-6">
           <span className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-gray-600 shadow-sm">
@@ -79,37 +110,6 @@ export default function Hero() {
           <p className="mt-8 text-xs font-medium uppercase tracking-[0.14em] text-gray-400">
             Active since 2021 · 200+ events
           </p>
-        </div>
-
-        {/* Image column */}
-        <div className="lg:col-span-6">
-          <div className="relative">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-[0_24px_60px_-24px_rgba(0,0,0,0.25)] ring-1 ring-black/5 sm:aspect-[5/4]">
-              <Image
-                src={heroImage}
-                alt="GDG UofK students collaborating at a community workshop"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
-              {/* Subtle vignette for depth */}
-              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-transparent" />
-            </div>
-
-            {/* Floating badge - Google colour accent */}
-            <div className="absolute -bottom-4 left-4 hidden rounded-2xl border border-gray-100 bg-white px-4 py-3 shadow-lg sm:block">
-              <div className="flex items-center gap-3">
-                <GDGMark className="h-6 w-auto" />
-                <div>
-                  <p className="text-xs font-semibold text-gray-900">
-                    Student-led community
-                  </p>
-                  <p className="text-[11px] text-gray-500">University of Khartoum</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
