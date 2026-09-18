@@ -13,7 +13,7 @@ import {
   LinkIcon,
   TwitterIcon,
   WhatsAppIcon,
-} from "../components/icons";
+} from "@/components/icons";
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", {

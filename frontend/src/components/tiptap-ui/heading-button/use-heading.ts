@@ -18,12 +18,12 @@ import {
 } from "@/lib/tiptap-utils"
 
 // --- Icons ---
-import { HeadingOneIcon } from "@/components/tiptap-icons/heading-one-icon"
-import { HeadingTwoIcon } from "@/components/tiptap-icons/heading-two-icon"
-import { HeadingThreeIcon } from "@/components/tiptap-icons/heading-three-icon"
-import { HeadingFourIcon } from "@/components/tiptap-icons/heading-four-icon"
-import { HeadingFiveIcon } from "@/components/tiptap-icons/heading-five-icon"
-import { HeadingSixIcon } from "@/components/tiptap-icons/heading-six-icon"
+import { HeadingOneIcon } from "@/components/icons"
+import { HeadingTwoIcon } from "@/components/icons"
+import { HeadingThreeIcon } from "@/components/icons"
+import { HeadingFourIcon } from "@/components/icons"
+import { HeadingFiveIcon } from "@/components/icons"
+import { HeadingSixIcon } from "@/components/icons"
 
 export type Level = 1 | 2 | 3 | 4 | 5 | 6
 

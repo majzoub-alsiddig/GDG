@@ -55,9 +55,9 @@ import { TextAlignButton } from "@/components/tiptap-ui/text-align-button";
 import { UndoRedoButton } from "@/components/tiptap-ui/undo-redo-button";
 
 // --- Icons ---
-import { ArrowLeftIcon } from "@/components/tiptap-icons/arrow-left-icon";
-import { HighlighterIcon } from "@/components/tiptap-icons/highlighter-icon";
-import { LinkIcon } from "@/components/tiptap-icons/link-icon";
+import { ArrowLeftIcon } from "@/components/icons";
+import { HighlighterIcon } from "@/components/icons";
+import { LinkIconTiptap as LinkIcon } from "@/components/icons";
 
 // --- Hooks ---
 import { useIsBreakpoint } from "@/hooks/use-is-breakpoint";

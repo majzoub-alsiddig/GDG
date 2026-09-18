@@ -8,9 +8,9 @@ import { NodeSelection, TextSelection } from "@tiptap/pm/state"
 import { useTiptapEditor } from "@/hooks/use-tiptap-editor"
 
 // --- Icons ---
-import { ListIcon } from "@/components/tiptap-icons/list-icon"
-import { ListOrderedIcon } from "@/components/tiptap-icons/list-ordered-icon"
-import { ListTodoIcon } from "@/components/tiptap-icons/list-todo-icon"
+import { ListIcon } from "@/components/icons"
+import { ListOrderedIcon } from "@/components/icons"
+import { ListTodoIcon } from "@/components/icons"
 
 // --- Lib ---
 import {
