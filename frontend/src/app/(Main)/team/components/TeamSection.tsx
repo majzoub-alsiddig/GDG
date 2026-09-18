@@ -60,12 +60,6 @@ export default function TeamSection({ members, loading = false }: Props) {
             Meet the organizers, developers, designers, and volunteers who make
             our community possible.
           </p>
-
-          {!loading && members.length > 0 && (
-            <p className="mt-5 inline-flex items-center rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-medium text-gray-500">
-              {members.length} member{members.length === 1 ? "" : "s"}
-            </p>
-          )}
         </div>
 
         {/* Content */}
