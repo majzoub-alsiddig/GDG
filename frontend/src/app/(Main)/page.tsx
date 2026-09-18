@@ -4,9 +4,6 @@ import CommunityStats from "./home/components/CommunityStats";
 import WhatWeDo from "./home/components/WhatWeDo";
 import UpcomingEvents from "./home/components/UpcomingEvents";
 import FeaturedCourses from "./home/components/FeaturedCourses";
-import AboutPreview from "./home/components/AboutPreview";
-import CommunityStory from "./home/components/CommunityStory";
-import Mission from "./home/components/Mission";
 import JoinCommunity from "./home/components/JoinCommunity";
 import {
   communityStats,
@@ -19,13 +16,10 @@ export default function Home() {
     <div className="flex min-h-screen flex-col bg-white font-poppins">
       <main className="flex-1">
         <Hero />
-        <CommunityStats stats={communityStats} />
+        {/* <CommunityStats stats={communityStats} /> */}
         <WhatWeDo />
         <UpcomingEvents events={featuredEvents} />
         <FeaturedCourses courses={featuredCourses} />
-        <AboutPreview />
-        <CommunityStory />
-        <Mission />
         <JoinCommunity />
       </main>
     </div>

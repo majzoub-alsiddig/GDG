@@ -31,7 +31,7 @@ export default function JoinCommunity() {
 
           <div className="relative mt-9 flex flex-wrap items-center justify-center gap-3">
             <a
-              href="/contact"
+              href="/team"
               className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-gray-900 transition hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
             >
               Join the community

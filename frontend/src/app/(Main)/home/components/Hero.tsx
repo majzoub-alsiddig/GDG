@@ -1,7 +1,22 @@
 // app/home/components/Hero.tsx
 import Image from "next/image";
-import heroImage from "@/../assets/backiee-195094-landscape.jpg";
+import heroImage from "@/../assets/cover.jpg";
 import { ArrowRightIcon, SparkleIcon } from "@/components/icons";
+
+function GDGMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 72 44" className={className} aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#18181b" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round">
+        <rect x="-5.5" y="-5.5" width="28" height="11" rx="5.5" fill="#EA4335" transform="translate(15, 22) rotate(-40)" />
+        <rect x="-5.5" y="-5.5" width="28" height="11" rx="5.5" fill="#4285F4" transform="translate(15, 22) rotate(40)" />
+
+        <rect x="-22.5" y="-5.5" width="28" height="11" rx="5.5" fill="#FBBC05" transform="translate(57, 22) rotate(-40)" />
+        <rect x="-22.5" y="-5.5" width="28" height="11" rx="5.5" fill="#34A853" transform="translate(57, 22) rotate(40)" />
+      </g>
+    </svg>
+  );
+}
+
 
 export default function Hero() {
   return (
@@ -24,7 +39,6 @@ export default function Hero() {
         {/* Text column */}
         <div className="lg:col-span-6">
           <span className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-gray-600 shadow-sm">
-            <SparkleIcon className="h-3 w-3 text-[#FBBC05]" />
             GDG University of Khartoum
           </span>
 
@@ -54,7 +68,7 @@ export default function Hero() {
               <ArrowRightIcon className="h-4 w-4" />
             </a>
             <a
-              href="/contact"
+              href="/team"
               className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-semibold text-gray-900 transition hover:border-gray-300 hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-2"
             >
               Join the community
@@ -80,21 +94,13 @@ export default function Hero() {
                 className="object-cover"
               />
               {/* Subtle vignette for depth */}
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-transparent"
-              />
+              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-transparent" />
             </div>
 
             {/* Floating badge - Google colour accent */}
             <div className="absolute -bottom-4 left-4 hidden rounded-2xl border border-gray-100 bg-white px-4 py-3 shadow-lg sm:block">
               <div className="flex items-center gap-3">
-                <span className="grid grid-cols-2 gap-[3px]" aria-hidden="true">
-                  <span className="h-2 w-2 rounded-full bg-[#4285F4]" />
-                  <span className="h-2 w-2 rounded-full bg-[#EA4335]" />
-                  <span className="h-2 w-2 rounded-full bg-[#FBBC05]" />
-                  <span className="h-2 w-2 rounded-full bg-[#34A853]" />
-                </span>
+                <GDGMark className="h-6 w-auto" />
                 <div>
                   <p className="text-xs font-semibold text-gray-900">
                     Student-led community

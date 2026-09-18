@@ -2936,7 +2936,7 @@ export default function JoinCommunity() {
 ------------------------------------------------------------
 // app/home/components/Hero.tsx
 import Image from "next/image";
-import heroImage from "@/../assets/backiee-195094-landscape.jpg";
+import heroImage from "@/../assets/cover.jpg";
 import { ArrowRightIcon, SparkleIcon } from "@/components/icons";
 
 export default function Hero() {
@@ -3279,7 +3279,7 @@ export default function WhatWeDo() {
 ------------------------------------------------------------
 // app/home/components/AboutPreview.tsx
 import Image from "next/image";
-import aboutImage from "@/../assets/backiee-195094-landscape.jpg";
+import aboutImage from "@/../assets/cover.jpg";
 import { ArrowRightIcon } from "@/components/icons";
 
 export default function AboutPreview() {

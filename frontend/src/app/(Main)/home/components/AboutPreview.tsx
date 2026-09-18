@@ -1,6 +1,6 @@
 // app/home/components/AboutPreview.tsx
 import Image from "next/image";
-import aboutImage from "@/../assets/backiee-195094-landscape.jpg";
+import aboutImage from "@/../assets/cover.jpg";
 import { ArrowRightIcon } from "@/components/icons";
 
 export default function AboutPreview() {
