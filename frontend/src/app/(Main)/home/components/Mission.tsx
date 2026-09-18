@@ -1,5 +1,5 @@
 // app/home/components/Mission.tsx
-import { GlobeIcon } from "./icons";
+import { GlobeIcon } from "@/components/icons";
 
 export default function Mission() {
   return (

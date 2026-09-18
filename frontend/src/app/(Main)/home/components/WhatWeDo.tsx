@@ -1,5 +1,5 @@
 // app/home/components/WhatWeDo.tsx
-import { ArrowRightIcon, BookIcon, CodeIcon, UsersIcon } from "./icons";
+import { ArrowRightIcon, BookIcon, CodeIcon, UsersIcon } from "@/components/icons";
 
 const PILLARS = [
   {

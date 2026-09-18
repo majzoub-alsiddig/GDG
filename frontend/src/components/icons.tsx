@@ -1,5 +1,17 @@
-// app/home/components/icons.tsx
+'use client';
+
+import { memo } from 'react';
+
+/* ============================================================================ */
+/*  Type Definitions                                                            */
+/* ============================================================================ */
+
 type IconProps = { className?: string };
+type SvgProps = React.ComponentPropsWithoutRef<'svg'>;
+
+/* ============================================================================ */
+/*  GENERAL UI ICONS                                                            */
+/* ============================================================================ */
 
 export function MenuIcon({ className }: IconProps) {
   return (
@@ -28,6 +40,15 @@ export function ArrowRightIcon({ className }: IconProps) {
   );
 }
 
+export function ArrowLeftIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+      strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M19 12H5M11 18l-6-6 6-6" />
+    </svg>
+  );
+}
+
 export function PlayIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -42,6 +63,16 @@ export function CalendarIcon({ className }: IconProps) {
       strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
       <rect x="3" y="5" width="18" height="16" rx="2" />
       <path d="M8 3v4M16 3v4M3 11h18" />
+    </svg>
+  );
+}
+
+export function ClockIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"
+      strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" />
     </svg>
   );
 }
@@ -62,6 +93,16 @@ export function BookIcon({ className }: IconProps) {
       strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
       <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5v-15Z" />
       <path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H19v3H6.5A2.5 2.5 0 0 1 4 20.5Z" />
+    </svg>
+  );
+}
+
+export function BookOpenIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"
+      strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M12 6.5C10.5 5 8.5 4 6 4H3v15h3c2.5 0 4.5 1 6 2.5 1.5-1.5 3.5-2.5 6-2.5h3V4h-3c-2.5 0-4.5 1-6 2.5Z" />
+      <path d="M12 6.5V21.5" />
     </svg>
   );
 }
@@ -102,3 +143,525 @@ export function GlobeIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+export function SearchIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+      strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <circle cx="11" cy="11" r="7" />
+      <path d="m20 20-3.5-3.5" />
+    </svg>
+  );
+}
+
+export function PenIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"
+      strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z" />
+    </svg>
+  );
+}
+
+export function LightbulbIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"
+      strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M15 12c0-1.657-1.343-3-3-3s-3 1.343-3 3 1.343 3 3 3 3-1.343 3-3Z" />
+      <path d="M9 17v3h6v-3M10 20h4" />
+    </svg>
+  );
+}
+
+export function ShareIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"
+      strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <circle cx="18" cy="5" r="3" />
+      <circle cx="6" cy="12" r="3" />
+      <circle cx="18" cy="19" r="3" />
+      <path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4" />
+    </svg>
+  );
+}
+
+export function HelpCircleIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"
+      strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 16v.01M12 12a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3" />
+    </svg>
+  );
+}
+
+export function MessageIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"
+      strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z" />
+    </svg>
+  );
+}
+
+export function LinkIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+      strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+    </svg>
+  );
+}
+
+/* ============================================================================ */
+/*  SOCIAL & EXTERNAL LINKS                                                     */
+/* ============================================================================ */
+
+export function LinkedInIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    </svg>
+  );
+}
+
+export function TwitterIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z" />
+    </svg>
+  );
+}
+
+export function InstagramIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+    </svg>
+  );
+}
+
+export function FacebookIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.51 1.49-3.9 3.77-3.9 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.89h-2.33v6.99A10 10 0 0 0 22 12Z" />
+    </svg>
+  );
+}
+
+export function GitHubIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+    </svg>
+  );
+}
+
+export function YouTubeIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M23.5 6.2a3 3 0 0 0-2.11-2.12C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.39.53A3 3 0 0 0 .5 6.2A31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.11 2.12c1.89.53 9.39.53 9.39.53s7.5 0 9.39-.53A3 3 0 0 0 23.5 17.8A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.54 15.84V8.16L15.82 12l-6.28 3.84z" />
+    </svg>
+  );
+}
+
+export function WhatsAppIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347Z" />
+      <path d="M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.893c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652a12.03 12.03 0 0 0 5.71 1.447h.006c6.585 0 11.946-5.335 11.949-11.895a11.82 11.82 0 0 0-3.48-8.451ZM12.05 21.785h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.98.999-3.649-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.002-5.45 4.437-9.884 9.892-9.884 2.64 0 5.122 1.03 6.988 2.898a9.83 9.83 0 0 1 2.892 6.994c-.003 5.45-4.438 9.887-9.89 9.887Z" />
+    </svg>
+  );
+}
+
+export function XIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z" />
+    </svg>
+  );
+}
+
+
+export function TikTokIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1Z" />
+    </svg>
+  );
+}
+
+export function MailIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"
+      strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" />
+      <path d="m3.5 6.5 8.5 6 8.5-6" />
+    </svg>
+  );
+}
+
+/* ============================================================================ */
+/*  TIPTAP / TEXT EDITOR ICONS (memoized for performance)                      */
+/* ============================================================================ */
+
+export const BoldIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path fillRule="evenodd" clipRule="evenodd" d="M6 2.5C5.17157 2.5 4.5 3.17157 4.5 4V20C4.5 20.8284 5.17157 21.5 6 21.5H15C16.4587 21.5 17.8576 20.9205 18.8891 19.8891C19.9205 18.8576 20.5 17.4587 20.5 16C20.5 14.5413 19.9205 13.1424 18.8891 12.1109C18.6781 11.9 18.4518 11.7079 18.2128 11.5359C19.041 10.5492 19.5 9.29829 19.5 8C19.5 6.54131 18.9205 5.14236 17.8891 4.11091C16.8576 3.07946 15.4587 2.5 14 2.5H6ZM14 10.5C14.663 10.5 15.2989 10.2366 15.7678 9.76777C16.2366 9.29893 16.5 8.66304 16.5 8C16.5 7.33696 16.2366 6.70107 15.7678 6.23223C15.2989 5.76339 14.663 5.5 14 5.5H7.5V10.5H14ZM7.5 18.5V13.5H15C15.663 13.5 16.2989 13.7634 16.7678 14.2322C17.2366 14.7011 17.5 15.337 17.5 16C17.5 16.663 17.2366 17.2989 16.7678 17.7678C16.2989 18.2366 15.663 18.5 15 18.5H7.5Z" fill="currentColor"/>
+    </svg>
+  );
+});
+BoldIcon.displayName = 'BoldIcon';
+
+export const ItalicIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M15.0222 3H19C19.5523 3 20 3.44772 20 4C20 4.55228 19.5523 5 19 5H15.693L10.443 19H14C14.5523 19 15 19.4477 15 20C15 20.5523 14.5523 21 14 21H9.02418C9.00802 21.0004 8.99181 21.0004 8.97557 21H5C4.44772 21 4 20.5523 4 20C4 19.4477 4.44772 19 5 19H8.30704L13.557 5H10C9.44772 5 9 4.55228 9 4C9 3.44772 9.44772 3 10 3H14.9782C14.9928 2.99968 15.0075 2.99967 15.0222 3Z" fill="currentColor"/>
+    </svg>
+  );
+});
+ItalicIcon.displayName = 'ItalicIcon';
+
+export const UnderlineIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path fillRule="evenodd" clipRule="evenodd" d="M7 4C7 3.44772 6.55228 3 6 3C5.44772 3 5 3.44772 5 4V10C5 11.8565 5.7375 13.637 7.05025 14.9497C8.36301 16.2625 10.1435 17 12 17C13.8565 17 15.637 16.2625 16.9497 14.9497C18.2625 13.637 19 11.8565 19 10V4C19 3.44772 18.5523 3 18 3C17.4477 3 17 3.44772 17 4V10C17 11.3261 16.4732 12.5979 15.5355 13.5355C14.5979 14.4732 13.3261 15 12 15C10.6739 15 9.40215 14.4732 8.46447 13.5355C7.52678 12.5979 7 11.3261 7 10V4ZM4 19C3.44772 19 3 19.4477 3 20C3 20.5523 3.44772 21 4 21H20C20.5523 21 21 20.5523 21 20C21 19.4477 20.5523 19 20 19H4Z" fill="currentColor"/>
+    </svg>
+  );
+});
+UnderlineIcon.displayName = 'UnderlineIcon';
+
+export const StrikeIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M9.00039 3H16.0001C16.5524 3 17.0001 3.44772 17.0001 4C17.0001 4.55229 16.5524 5 16.0001 5H9.00011C8.68006 4.99983 8.36412 5.07648 8.07983 5.22349C7.79555 5.37051 7.55069 5.5836 7.36585 5.84487C7.181 6.10614 7.06155 6.40796 7.01754 6.72497C6.97352 7.04198 7.00623 7.36492 7.11292 7.66667C7.29701 8.18737 7.02414 8.75872 6.50344 8.94281C5.98274 9.1269 5.4114 8.85403 5.2273 8.33333C5.01393 7.72984 4.94851 7.08396 5.03654 6.44994C5.12456 5.81592 5.36346 5.21229 5.73316 4.68974C6.10285 4.1672 6.59256 3.74101 7.16113 3.44698C7.72955 3.15303 8.36047 2.99975 9.00039 3Z" fill="currentColor"/>
+      <path d="M18 13H20C20.5523 13 21 12.5523 21 12C21 11.4477 20.5523 11 20 11H4C3.44772 11 3 11.4477 3 12C3 12.5523 3.44772 13 4 13H14C14.7956 13 15.5587 13.3161 16.1213 13.8787C16.6839 14.4413 17 15.2044 17 16C17 16.7956 16.6839 17.5587 16.1213 18.1213C15.5587 18.6839 14.7956 19 14 19H6C5.44772 19 5 19.4477 5 20C5 20.5523 5.44772 21 6 21H14C15.3261 21 16.5979 20.4732 17.5355 19.5355C18.4732 18.5979 19 17.3261 19 16C19 14.9119 18.6453 13.8604 18 13Z" fill="currentColor"/>
+    </svg>
+  );
+});
+StrikeIcon.displayName = 'StrikeIcon';
+
+export const SubscriptIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path fillRule="evenodd" clipRule="evenodd" d="M3.29289 7.29289C3.68342 6.90237 4.31658 6.90237 4.70711 7.29289L12.7071 15.2929C13.0976 15.6834 13.0976 16.3166 12.7071 16.7071C12.3166 17.0976 11.6834 17.0976 11.2929 16.7071L3.29289 8.70711C2.90237 8.31658 2.90237 7.68342 3.29289 7.29289Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M12.7071 7.29289C13.0976 7.68342 13.0976 8.31658 12.7071 8.70711L4.70711 16.7071C4.31658 17.0976 3.68342 17.0976 3.29289 16.7071C2.90237 16.3166 2.90237 15.6834 3.29289 15.2929L11.2929 7.29289C11.6834 6.90237 12.3166 6.90237 12.7071 7.29289Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M17.4079 14.3995C18.0284 14.0487 18.7506 13.9217 19.4536 14.0397C20.1566 14.1578 20.7977 14.5138 21.2696 15.0481L21.2779 15.0574L21.2778 15.0575C21.7439 15.5988 22 16.2903 22 17C22 18.0823 21.3962 18.8401 20.7744 19.3404C20.194 19.8073 19.4858 20.141 18.9828 20.378C18.9638 20.387 18.9451 20.3958 18.9266 20.4045C18.4473 20.6306 18.2804 20.7817 18.1922 20.918C18.1773 20.9412 18.1619 20.9681 18.1467 21H21C21.5523 21 22 21.4477 22 22C22 22.5523 21.5523 23 21 23H17C16.4477 23 16 22.5523 16 22C16 21.1708 16.1176 20.4431 16.5128 19.832C16.9096 19.2184 17.4928 18.8695 18.0734 18.5956C18.6279 18.334 19.138 18.0901 19.5207 17.7821C19.8838 17.49 20 17.2477 20 17C20 16.7718 19.9176 16.5452 19.7663 16.3672C19.5983 16.1792 19.3712 16.0539 19.1224 16.0121C18.8722 15.9701 18.6152 16.015 18.3942 16.1394C18.1794 16.2628 18.0205 16.4549 17.9422 16.675C17.7572 17.1954 17.1854 17.4673 16.665 17.2822C16.1446 17.0972 15.8728 16.5254 16.0578 16.005C16.2993 15.3259 16.7797 14.7584 17.4039 14.4018L17.4079 14.3995L17.4079 14.3995Z" fill="currentColor"/>
+    </svg>
+  );
+});
+SubscriptIcon.displayName = 'SubscriptIcon';
+
+export const SuperscriptIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path fillRule="evenodd" clipRule="evenodd" d="M12.7071 7.29289C13.0976 7.68342 13.0976 8.31658 12.7071 8.70711L4.70711 16.7071C4.31658 17.0976 3.68342 17.0976 3.29289 16.7071C2.90237 16.3166 2.90237 15.6834 3.29289 15.2929L11.2929 7.29289C11.6834 6.90237 12.3166 6.90237 12.7071 7.29289Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M3.29289 7.29289C3.68342 6.90237 4.31658 6.90237 4.70711 7.29289L12.7071 15.2929C13.0976 15.6834 13.0976 16.3166 12.7071 16.7071C12.3166 17.0976 11.6834 17.0976 11.2929 16.7071L3.29289 8.70711C2.90237 8.31658 2.90237 7.68342 3.29289 7.29289Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M17.405 1.40657C18.0246 1.05456 18.7463 0.92634 19.4492 1.04344C20.1521 1.16054 20.7933 1.51583 21.2652 2.0497L21.2697 2.05469L21.2696 2.05471C21.7431 2.5975 22 3.28922 22 4.00203C22 5.08579 21.3952 5.84326 20.7727 6.34289C20.1966 6.80531 19.4941 7.13675 18.9941 7.37261C18.9714 7.38332 18.9491 7.39383 18.9273 7.40415C18.4487 7.63034 18.2814 7.78152 18.1927 7.91844C18.1778 7.94155 18.1625 7.96834 18.1473 8.00003H21C21.5523 8.00003 22 8.44774 22 9.00003C22 9.55231 21.5523 10 21 10H17C16.4477 10 16 9.55231 16 9.00003C16 8.17007 16.1183 7.44255 16.5138 6.83161C16.9107 6.21854 17.4934 5.86971 18.0728 5.59591C18.6281 5.33347 19.1376 5.09075 19.5208 4.78316C19.8838 4.49179 20 4.25026 20 4.00203C20 3.77192 19.9178 3.54865 19.7646 3.37182C19.5968 3.18324 19.3696 3.05774 19.1205 3.01625C18.8705 2.97459 18.6137 3.02017 18.3933 3.14533C18.1762 3.26898 18.0191 3.45826 17.9406 3.67557C17.7531 4.19504 17.18 4.46414 16.6605 4.27662C16.141 4.0891 15.8719 3.51596 16.0594 2.99649C16.303 2.3219 16.7817 1.76125 17.4045 1.40689L17.405 1.40657Z" fill="currentColor"/>
+    </svg>
+  );
+});
+SuperscriptIcon.displayName = 'SuperscriptIcon';
+
+export const HighlighterIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path fillRule="evenodd" clipRule="evenodd" d="M14.7072 4.70711C15.0977 4.31658 15.0977 3.68342 14.7072 3.29289C14.3167 2.90237 13.6835 2.90237 13.293 3.29289L8.69294 7.89286L8.68594 7.9C8.13626 8.46079 7.82837 9.21474 7.82837 10C7.82837 10.2306 7.85491 10.4584 7.90631 10.6795L2.29289 16.2929C2.10536 16.4804 2 16.7348 2 17V20C2 20.5523 2.44772 21 3 21H12C12.2652 21 12.5196 20.8946 12.7071 20.7071L15.3205 18.0937C15.5416 18.1452 15.7695 18.1717 16.0001 18.1717C16.7853 18.1717 17.5393 17.8639 18.1001 17.3142L22.7072 12.7071C23.0977 12.3166 23.0977 11.6834 22.7072 11.2929C22.3167 10.9024 21.6835 10.9024 21.293 11.2929L16.6971 15.8887C16.5105 16.0702 16.2605 16.1717 16.0001 16.1717C15.7397 16.1717 15.4897 16.0702 15.303 15.8887L10.1113 10.697C9.92992 10.5104 9.82837 10.2604 9.82837 10C9.82837 9.73963 9.92992 9.48958 10.1113 9.30297L14.7072 4.70711ZM13.5858 17L9.00004 12.4142L4 17.4142V19H11.5858L13.5858 17Z" fill="currentColor"/>
+    </svg>
+  );
+});
+HighlighterIcon.displayName = 'HighlighterIcon';
+
+export const AlignLeftIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path fillRule="evenodd" clipRule="evenodd" d="M2 6C2 5.44772 2.44772 5 3 5H21C21.5523 5 22 5.44772 22 6C22 6.55228 21.5523 7 21 7H3C2.44772 7 2 6.55228 2 6Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M2 12C2 11.4477 2.44772 11 3 11H15C15.5523 11 16 11.4477 16 12C16 12.5523 15.5523 13 15 13H3C2.44772 13 2 12.5523 2 12Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M2 18C2 17.4477 2.44772 17 3 17H17C17.5523 17 18 17.4477 18 18C18 18.5523 17.5523 19 17 19H3C2.44772 19 2 18.5523 2 18Z" fill="currentColor"/>
+    </svg>
+  );
+});
+AlignLeftIcon.displayName = 'AlignLeftIcon';
+
+export const AlignCenterIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path fillRule="evenodd" clipRule="evenodd" d="M2 6C2 5.44772 2.44772 5 3 5H21C21.5523 5 22 5.44772 22 6C22 6.55228 21.5523 7 21 7H3C2.44772 7 2 6.55228 2 6Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M6 12C6 11.4477 6.44772 11 7 11H17C17.5523 11 18 11.4477 18 12C18 12.5523 17.5523 13 17 13H7C6.44772 13 6 12.5523 6 12Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M4 18C4 17.4477 4.44772 17 5 17H19C19.5523 17 20 17.4477 20 18C20 18.5523 19.5523 19 19 19H5C4.44772 19 4 18.5523 4 18Z" fill="currentColor"/>
+    </svg>
+  );
+});
+AlignCenterIcon.displayName = 'AlignCenterIcon';
+
+export const AlignRightIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path fillRule="evenodd" clipRule="evenodd" d="M2 6C2 5.44772 2.44772 5 3 5H21C21.5523 5 22 5.44772 22 6C22 6.55228 21.5523 7 21 7H3C2.44772 7 2 6.55228 2 6Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M8 12C8 11.4477 8.44772 11 9 11H21C21.5523 11 22 11.4477 22 12C22 12.5523 21.5523 13 21 13H9C8.44772 13 8 12.5523 8 12Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M6 18C6 17.4477 6.44772 17 7 17H21C21.5523 17 22 17.4477 22 18C22 18.5523 21.5523 19 21 19H7C6.44772 19 6 18.5523 6 18Z" fill="currentColor"/>
+    </svg>
+  );
+});
+AlignRightIcon.displayName = 'AlignRightIcon';
+
+export const AlignJustifyIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path fillRule="evenodd" clipRule="evenodd" d="M2 6C2 5.44772 2.44772 5 3 5H21C21.5523 5 22 5.44772 22 6C22 6.55228 21.5523 7 21 7H3C2.44772 7 2 6.55228 2 6Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M2 12C2 11.4477 2.44772 11 3 11H21C21.5523 11 22 11.4477 22 12C22 12.5523 21.5523 13 21 13H3C2.44772 13 2 12.5523 2 12Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M2 18C2 17.4477 2.44772 17 3 17H21C21.5523 17 22 17.4477 22 18C22 18.5523 21.5523 19 21 19H3C2.44772 19 2 18.5523 2 18Z" fill="currentColor"/>
+    </svg>
+  );
+});
+AlignJustifyIcon.displayName = 'AlignJustifyIcon';
+
+export const HeadingIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path fillRule="evenodd" clipRule="evenodd" d="M4 3.99219C4.00014 3.4399 4.44797 2.99206 5 2.99219C5.55228 2.99232 6 3.44445 6 3.99674V8.99742H13V4C13 3.44771 13.4477 3 14 3C14.5523 3 15 3.44771 15 4V20C15 20.5523 14.5523 21 14 21C13.4477 21 13 20.5523 13 20V11H6V20C6 20.5523 5.55228 21 5 21C4.44772 21 4 20.5523 4 20V3.99219Z" fill="currentColor"/>
+    </svg>
+  );
+});
+HeadingIcon.displayName = 'HeadingIcon';
+
+export const HeadingOneIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M5 6C5 5.44772 4.55228 5 4 5C3.44772 5 3 5.44772 3 6V18C3 18.5523 3.44772 19 4 19C4.55228 19 5 18.5523 5 18V13H11V18C11 18.5523 11.4477 19 12 19C12.5523 19 13 18.5523 13 18V6C13 5.44772 12.5523 5 12 5C11.4477 5 11 5.44772 11 6V11H5V6Z" fill="currentColor"/>
+      <path d="M21.0001 10C21.0001 9.63121 20.7971 9.29235 20.472 9.11833C20.1468 8.94431 19.7523 8.96338 19.4454 9.16795L16.4454 11.168C15.9859 11.4743 15.8617 12.0952 16.1681 12.5547C16.4744 13.0142 17.0953 13.1384 17.5548 12.8321L19.0001 11.8685V18C19.0001 18.5523 19.4478 19 20.0001 19C20.5524 19 21.0001 18.5523 21.0001 18V10Z" fill="currentColor"/>
+    </svg>
+  );
+});
+HeadingOneIcon.displayName = 'HeadingOneIcon';
+
+export const HeadingTwoIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M5 6C5 5.44772 4.55228 5 4 5C3.44772 5 3 5.44772 3 6V18C3 18.5523 3.44772 19 4 19C4.55228 19 5 18.5523 5 18V13H11V18C11 18.5523 11.4477 19 12 19C12.5523 19 13 18.5523 13 18V6C13 5.44772 12.5523 5 12 5C11.4477 5 11 5.44772 11 6V11H5V6Z" fill="currentColor"/>
+      <path d="M19.75 8.996C19.2677 8.96036 18.803 9.17158 18.4775 9.57348C18.152 9.97538 18.0001 10.5344 18.0005 11.1046C18.0001 11.6722 18.1436 12.229 18.4181 12.7152C18.6926 13.2014 19.0844 13.6011 19.5573 13.8789L20.75 14.5973V15C20.75 15.4142 20.414 15.75 20 15.75H18.5C18.0858 15.75 17.75 16.0858 17.75 16.5C17.75 16.9142 18.0858 17.25 18.5 17.25H20C21.2426 17.25 22.25 16.2426 22.25 15V14.25C22.25 13.5539 21.9129 12.9057 21.3457 12.5098C20.9883 12.2741 20.6154 12.0674 20.25 11.8903V11.5C20.25 11.0858 20.586 10.75 21 10.75H22.5C22.9142 10.75 23.25 10.4142 23.25 10C23.25 9.58579 22.9142 9.25 22.5 9.25H21C19.7574 9.25 18.75 10.2574 18.75 11.5V12C18.75 12.6046 19.0202 13.174 19.4688 13.573" fill="currentColor"/>
+    </svg>
+  );
+});
+HeadingTwoIcon.displayName = 'HeadingTwoIcon';
+
+export const HeadingThreeIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M5 6C5 5.44772 4.55228 5 4 5C3.44772 5 3 5.44772 3 6V18C3 18.5523 3.44772 19 4 19C4.55228 19 5 18.5523 5 18V13H11V18C11 18.5523 11.4477 19 12 19C12.5523 19 13 18.5523 13 18V6C13 5.44772 12.5523 5 12 5C11.4477 5 11 5.44772 11 6V11H5V6Z" fill="currentColor"/>
+      <path d="M17.5 9C17.0858 9 16.75 9.33579 16.75 9.75C16.75 10.1642 17.0858 10.5 17.5 10.5H19.25V11.5C19.25 12.0523 18.8023 12.5 18.25 12.5H17.5C17.0858 12.5 16.75 12.8358 16.75 13.25C16.75 13.6642 17.0858 14 17.5 14H18.25C19.4926 14 20.5 13.0 20.5 11.75V10.75C20.5 9.63807 19.6119 8.75 18.5 8.75H17.5Z" fill="currentColor"/>
+      <path d="M18.25 15.5H17.5C17.0858 15.5 16.75 15.8358 16.75 16.25C16.75 16.6642 17.0858 17 17.5 17H18C18.5523 17 19 17.4477 19 18C19 18.5523 18.5523 19 18 19H17.5C17.0858 19 16.75 19.3358 16.75 19.75C16.75 20.1642 17.0858 20.5 17.5 20.5H18C19.933 20.5 21.5 19.0711 21.5 17.25C21.5 15.7881 20.3889 14.5702 18.9062 14.2393C20.1506 13.9006 21 12.7512 21 11.25C21 9.42893 19.3807 8 17.5 8H16.5C16.0858 8 15.75 8.33579 15.75 8.75C15.75 9.16421 16.0858 9.5 16.5 9.5H17.5C18.7426 9.5 19.75 10.3954 19.75 11.5C19.75 12.6046 18.7426 13.5 17.5 13.5H16.5C16.0858 13.5 15.75 13.8358 15.75 14.25C15.75 14.6642 16.0858 15 16.5 15H18.25C19.4926 15 20.5 16.0074 20.5 17.25C20.5 18.4926 19.4926 19.5 18.25 19.5H17.5V20.5H18C19.933 20.5 21.5 19.0711 21.5 17.25C21.5 15.7881 20.3889 14.5702 18.9062 14.2393C20.1506 13.9006 21 12.7512 21 11.25" fill="currentColor"/>
+    </svg>
+  );
+});
+HeadingThreeIcon.displayName = 'HeadingThreeIcon';
+
+export const HeadingFourIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M5 6C5 5.44772 4.55228 5 4 5C3.44772 5 3 5.44772 3 6V18C3 18.5523 3.44772 19 4 19C4.55228 19 5 18.5523 5 18V13H11V18C11 18.5523 11.4477 19 12 19C12.5523 19 13 18.5523 13 18V6C13 5.44772 12.5523 5 12 5C11.4477 5 11 5.44772 11 6V11H5V6Z" fill="currentColor"/>
+      <path d="M22 9C22.5523 9 23 9.44772 23 10V19C23 19.5523 22.5523 20 22 20C21.4477 20 21 19.5523 21 19V10C21 9.44772 21.4477 9 22 9Z" fill="currentColor"/>
+      <path d="M15.75 9C15.4453 9 15.1565 9.13318 14.9643 9.36671L17.5407 14H16C15.5858 14 15.25 14.3358 15.25 14.75C15.25 15.1642 15.5858 15.5 16 15.5H22C22.4142 15.5 22.75 15.1642 22.75 14.75C22.75 14.3358 22.4142 14 22 14H20.4593L17.8829 9.36671C17.6907 9.13318 17.4019 9 17.0972 9H15.75Z" fill="currentColor"/>
+    </svg>
+  );
+});
+HeadingFourIcon.displayName = 'HeadingFourIcon';
+
+export const HeadingFiveIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M5 6C5 5.44772 4.55228 5 4 5C3.44772 5 3 5.44772 3 6V18C3 18.5523 3.44772 19 4 19C4.55228 19 5 18.5523 5 18V13H11V18C11 18.5523 11.4477 19 12 19C12.5523 19 13 18.5523 13 18V6C13 5.44772 12.5523 5 12 5C11.4477 5 11 5.44772 11 6V11H5V6Z" fill="currentColor"/>
+      <path d="M19 9H16.5C16.0858 9 15.75 9.33579 15.75 9.75C15.75 10.1642 16.0858 10.5 16.5 10.5H18.25V11.5C18.25 12.0523 17.8023 12.5 17.25 12.5C17.1067 12.5 16.9701 12.4799 16.8404 12.4427L17.7804 11.5027C18.1709 11.1122 18.1709 10.4791 17.7804 10.0885C17.3899 9.69801 16.7567 9.69801 16.3662 10.0885L15 11.4547L13.6338 10.0885C13.2433 9.69801 12.6101 9.69801 12.2196 10.0885C11.8291 10.4791 11.8291 11.1122 12.2196 11.5027L13.1596 12.4427C13.0299 12.4799 12.8933 12.5 12.75 12.5C12.1977 12.5 11.75 12.0523 11.75 11.5C11.75 11.0318 12.1008 10.6567 12.5496 10.5652C12.1873 10.0852 11.9 9.52003 11.75 8.9C11.75 7.20508 13.1051 5.75 14.75 5.75C16.0247 5.75 17.1124 6.5301 17.5869 7.625H19.25C19.6642 7.625 20 7.28921 20 6.875C20 6.46079 19.6642 6.125 19.25 6.125H18.25C18.9404 5.52813 19.7957 5.25 20.75 5.25C22.5449 5.25 24 6.70507 24 8.5C24 10.1949 22.8549 11.6025 21.3359 11.8684C20.9738 11.929 20.6124 11.8973 20.2827 11.7869C19.9737 12.0882 19.5467 12.25 19.0769 12.25C18.8056 12.25 18.5473 12.1965 18.3125 12.0983" fill="currentColor"/>
+    </svg>
+  );
+});
+HeadingFiveIcon.displayName = 'HeadingFiveIcon';
+
+export const HeadingSixIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M5 6C5 5.44772 4.55228 5 4 5C3.44772 5 3 5.44772 3 6V18C3 18.5523 3.44772 19 4 19C4.55228 19 5 18.5523 5 18V13H11V18C11 18.5523 11.4477 19 12 19C12.5523 19 13 18.5523 13 18V6C13 5.44772 12.5523 5 12 5C11.4477 5 11 5.44772 11 6V11H5V6Z" fill="currentColor"/>
+      <path d="M15.75 11.5C15.75 10.8096 15.939 10.1556 16.2687 9.58594C16.5985 9.01626 17.0482 8.54655 17.5833 8.22969C18.1184 7.91283 18.7241 7.75 19.3333 7.75C20.5759 7.75 21.75 8.48706 22.4293 9.62871C22.6502 10.0049 22.7451 10.4408 22.7007 10.8717C22.6518 11.3657 22.4434 11.8301 22.1099 12.1869C21.7764 12.5438 21.3361 12.779 20.8646 12.8629C20.3931 12.9469 19.909 12.8757 19.4932 12.6607C19.3013 12.5638 19.126 12.4312 18.9844 12.2717V13.0625C18.9844 13.9129 18.2682 14.6 17.375 14.6C16.4818 14.6 15.7656 13.9129 15.7656 13.0625C15.7656 12.2121 16.4818 11.525 17.375 11.525C17.7842 11.525 18.1625 11.679 18.4531 11.9263C18.648 11.7682 18.8169 11.5737 18.9419 11.3537C19.0925 11.0833 19.1667 10.7792 19.1667 10.4583C19.1667 10.0442 18.9309 9.70833 18.6042 9.70833C18.3425 9.70833 18.0872 9.82396 17.9063 10.0255C17.7237 10.2303 17.6667 10.5002 17.625 10.75C17.5833 11.1642 17.2475 11.5 16.8333 11.5C16.4191 11.5 16.0833 11.1642 16.0833 10.75C16.0833 10.1667 16.3125 9.63542 16.6771 9.25521C17.0417 8.875 17.525 8.63542 18.0417 8.63542C18.901 8.63542 19.6667 9.20313 19.99 10.01" fill="currentColor"/>
+    </svg>
+  );
+});
+HeadingSixIcon.displayName = 'HeadingSixIcon';
+
+export const ListIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path fillRule="evenodd" clipRule="evenodd" d="M7 6C7 5.44772 7.44772 5 8 5H21C21.5523 5 22 5.44772 22 6C22 6.55228 21.5523 7 21 7H8C7.44772 7 7 6.55228 7 6Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M7 12C7 11.4477 7.44772 11 8 11H21C21.5523 11 22 11.4477 22 12C22 12.5523 21.5523 13 21 13H8C7.44772 13 7 12.5523 7 12Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M7 18C7 17.4477 7.44772 17 8 17H21C21.5523 17 22 17.4477 22 18C22 18.5523 21.5523 19 21 19H8C7.44772 19 7 18.5523 7 18Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M2 6C2 5.44772 2.44772 5 3 5H3.01C3.56228 5 4.01 5.44772 4.01 6C4.01 6.55228 3.56228 7 3.01 7H3C2.44772 7 2 6.55228 2 6Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M2 12C2 11.4477 2.44772 11 3 11H3.01C3.56228 11 4.01 11.4477 4.01 12C4.01 12.5523 3.56228 13 3.01 13H3C2.44772 13 2 12.5523 2 12Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M2 18C2 17.4477 2.44772 17 3 17H3.01C3.56228 17 4.01 17.4477 4.01 18C4.01 18.5523 3.56228 19 3.01 19H3C2.44772 19 2 18.5523 2 18Z" fill="currentColor"/>
+    </svg>
+  );
+});
+ListIcon.displayName = 'ListIcon';
+
+export const ListOrderedIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M3 6C3 5.44772 3.44772 5 4 5H5C5.55228 5 6 5.44772 6 6C6 6.55228 5.55228 7 5 7H4C3.44772 7 3 6.55228 3 6Z" fill="currentColor"/>
+      <path d="M7 6C7 5.44771 7.44771 5 8 5H21C21.5523 5 22 5.44771 22 6C22 6.55229 21.5523 7 21 7H8C7.44771 7 7 6.55229 7 6Z" fill="currentColor"/>
+      <path d="M4 11C4 10.4477 4.44772 10 5 10H5.01C5.56228 10 6.01 10.4477 6.01 11C6.01 11.5523 5.56228 12 5.01 12H5C4.44772 12 4 11.5523 4 11Z" fill="currentColor"/>
+      <path d="M7 11C7 10.4477 7.44772 10 8 10H21C21.5523 10 22 10.4477 22 11C22 11.5523 21.5523 12 21 12H8C7.44772 12 7 11.5523 7 11Z" fill="currentColor"/>
+      <path d="M3 17C3 16.4477 3.44772 16 4 16H5C5.55228 16 6 16.4477 6 17C6 17.5523 5.55228 18 5 18H4C3.44772 18 3 17.5523 3 17Z" fill="currentColor"/>
+      <path d="M7 17C7 16.4477 7.44772 16 8 16H21C21.5523 16 22 16.4477 22 17C22 17.5523 21.5523 18 21 18H8C7.44772 18 7 17.5523 7 17Z" fill="currentColor"/>
+    </svg>
+  );
+});
+ListOrderedIcon.displayName = 'ListOrderedIcon';
+
+export const ListTodoIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path fillRule="evenodd" clipRule="evenodd" d="M6 4C5.44772 4 5 4.44772 5 5C5 5.55228 5.44772 6 6 6H8C8.55228 6 9 5.55228 9 5C9 4.44772 8.55228 4 8 4H6ZM5 10C5 9.44772 5.44772 9 6 9H8C8.55228 9 9 9.44772 9 10C9 10.5523 8.55228 11 8 11H6C5.44772 11 5 10.5523 5 10ZM6 14C5.44772 14 5 14.4477 5 15C5 15.5523 5.44772 16 6 16H8C8.55228 16 9 15.5523 9 15C9 14.4477 8.55228 14 8 14H6Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M12 5C11.4477 5 11 5.44772 11 6C11 6.55228 11.4477 7 12 7H21C21.5523 7 22 6.55228 22 6C22 5.44772 21.5523 5 21 5H12ZM11 10C11 9.44772 11.4477 9 12 9H21C21.5523 9 22 9.44772 22 10C22 10.5523 21.5523 11 21 11H12C11.4477 11 11 10.5523 11 10ZM12 15C11.4477 15 11 15.4477 11 16C11 16.5523 11.4477 17 12 17H21C21.5523 17 22 16.5523 22 16C22 15.4477 21.5523 15 21 15H12Z" fill="currentColor"/>
+    </svg>
+  );
+});
+ListTodoIcon.displayName = 'ListTodoIcon';
+
+export const BlockquoteIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path fillRule="evenodd" clipRule="evenodd" d="M8 6C8 5.44772 8.44772 5 9 5H16C16.5523 5 17 5.44772 17 6C17 6.55228 16.5523 7 16 7H9C8.44772 7 8 6.55228 8 6Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M4 3C4.55228 3 5 3.44772 5 4L5 20C5 20.5523 4.55229 21 4 21C3.44772 21 3 20.5523 3 20L3 4C3 3.44772 3.44772 3 4 3Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M8 12C8 11.4477 8.44772 11 9 11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H9C8.44772 13 8 12.5523 8 12Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M8 18C8 17.4477 8.44772 17 9 17H16C16.5523 17 17 17.4477 17 18C17 18.5523 16.5523 19 16 19H9C8.44772 19 8 18.5523 8 18Z" fill="currentColor"/>
+    </svg>
+  );
+});
+BlockquoteIcon.displayName = 'BlockquoteIcon';
+
+export const CodeBlockIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path fillRule="evenodd" clipRule="evenodd" d="M6.70711 2.29289C7.09763 2.68342 7.09763 3.31658 6.70711 3.70711L4.41421 6L6.70711 8.29289C7.09763 8.68342 7.09763 9.31658 6.70711 9.70711C6.31658 10.0976 5.68342 10.0976 5.29289 9.70711L2.29289 6.70711C1.90237 6.31658 1.90237 5.68342 2.29289 5.29289L5.29289 2.29289C5.68342 1.90237 6.31658 1.90237 6.70711 2.29289Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M10.2929 2.29289C10.6834 1.90237 11.3166 1.90237 11.7071 2.29289L14.7071 5.29289C15.0976 5.68342 15.0976 6.31658 14.7071 6.70711L11.7071 9.70711C11.3166 10.0976 10.6834 10.0976 10.2929 9.70711C9.90237 9.31658 9.90237 8.68342 10.2929 8.29289L12.5858 6L10.2929 3.70711C9.90237 3.31658 9.90237 2.68342 10.2929 2.29289Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M17 4C17 3.44772 17.4477 3 18 3H19C20.6569 3 22 4.34315 22 6V18C22 19.6569 20.6569 21 19 21H5C3.34315 21 2 19.6569 2 18V12C2 11.4477 2.44772 11 3 11C3.55228 11 4 11.4477 4 12V18C4 18.5523 4.44772 19 5 19H19C19.5523 19 20 18.5523 20 18V6C20 5.44772 19.5523 5 19 5H18C17.4477 5 17 4.55228 17 4Z" fill="currentColor"/>
+    </svg>
+  );
+});
+CodeBlockIcon.displayName = 'CodeBlockIcon';
+
+export const ImagePlusIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M13 2H7C5.89543 2 5 2.89543 5 4V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V13H17V20H7V4H13V2Z" fill="currentColor"/>
+      <path d="M19 5V10H24V12H19V17H17V12H12V10H17V5H19Z" fill="currentColor"/>
+      <circle cx="11" cy="11" r="2" fill="currentColor"/>
+    </svg>
+  );
+});
+ImagePlusIcon.displayName = 'ImagePlusIcon';
+
+export const LinkIconTiptap = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M16.9958 1.06669C15.4226 1.05302 13.907 1.65779 12.7753 2.75074L12.765 2.76086L11.045 4.47086C10.6534 4.86024 10.6515 5.49341 11.0409 5.88507C11.4303 6.27673 12.0634 6.27858 12.4551 5.88919L14.1697 4.18456C14.9236 3.45893 15.9319 3.05752 16.9784 3.06662C18.0272 3.07573 19.0304 3.49641 19.772 4.23804C20.5137 4.97967 20.9344 5.98292 20.9435 7.03171C20.9526 8.07776 20.5515 9.08563 19.8265 9.83941L16.833 12.8329C16.4274 13.2386 15.9393 13.5524 15.4019 13.7529C14.8645 13.9533 14.2903 14.0359 13.7181 13.9949C13.146 13.9539 12.5894 13.7904 12.0861 13.5154C11.5827 13.2404 11.1444 12.8604 10.8008 12.401C10.47 11.9588 9.84333 11.8685 9.40108 12.1993C8.95883 12.5301 8.86849 13.1568 9.1993 13.599C9.71464 14.288 10.3721 14.858 11.1272 15.2705C11.8822 15.683 12.7171 15.9283 13.5753 15.9898C14.4334 16.0513 15.2948 15.9274 16.1009 15.6267C16.907 15.326 17.639 14.8555 18.2473 14.247L21.2472 11.2471L21.2593 11.2347C22.3523 10.1031 22.9571 8.58751 22.9434 7.01433C22.9297 5.44115 22.2987 3.93628 21.1863 2.82383C20.0738 1.71138 18.5689 1.08036 16.9958 1.06669Z" fill="currentColor"/>
+      <path d="M10.4247 8.0102C9.56657 7.94874 8.70522 8.07256 7.89911 8.37326C7.09305 8.67395 6.36096 9.14458 5.75272 9.753L2.75285 12.7529L2.74067 12.7653C1.64772 13.8969 1.04295 15.4125 1.05662 16.9857C1.07029 18.5589 1.70131 20.0637 2.81376 21.1762C3.9262 22.2886 5.43108 22.9196 7.00426 22.9333C8.57744 22.947 10.0931 22.3422 11.2247 21.2493L11.2371 21.2371L12.9471 19.5271C13.3376 19.1366 13.3376 18.5034 12.9471 18.1129C12.5565 17.7223 11.9234 17.7223 11.5328 18.1129L9.82932 19.8164C9.07555 20.5414 8.06768 20.9425 7.02164 20.9334C5.97285 20.9243 4.9696 20.5036 4.22797 19.762C3.48634 19.0203 3.06566 18.0171 3.05655 16.9683C3.04746 15.9222 3.44851 14.9144 4.17355 14.1606L7.16719 11.167C7.5727 10.7613 8.06071 10.4476 8.59811 10.2471C9.13552 10.0467 9.70976 9.96412 10.2819 10.0051C10.854 10.0461 11.4106 10.2096 11.9139 10.4846C12.4173 10.7596 12.8556 11.1397 13.1992 11.599C13.53 12.0412 14.1567 12.1316 14.5989 11.8007C15.0412 11.4699 15.1315 10.8433 14.8007 10.401C14.2854 9.71205 13.6279 9.14198 12.8729 8.72948C12.1178 8.31697 11.2829 8.07166 10.4247 8.0102Z" fill="currentColor"/>
+    </svg>
+  );
+});
+LinkIconTiptap.displayName = 'LinkIconTiptap';
+
+export const ExternalLinkIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path fillRule="evenodd" clipRule="evenodd" d="M18.5355 5.53553C18.9261 5.12621 19.5592 5.12621 19.9497 5.53553L21.121 6.70685C21.8002 7.38604 22.2002 8.33579 22.2002 9.33533V19C22.2002 20.9882 20.6218 22.5667 18.6335 22.5667H5.56671C3.57843 22.5667 2 21.0219 2 19.0335V6.23421C2 4.28288 3.57843 2.8 5.56671 2.8H14.6648C15.6643 2.8 16.6141 3.2 17.293 3.87916L18.5355 5.53553ZM17.7641 7.30737L16.6928 6.236C16.5232 6.06638 16.2772 6.06638 16.1076 6.236L4.62327 17.7203C4.45365 17.8899 4.45365 18.1359 4.62327 18.3055L5.69456 19.3768C5.86418 19.5464 6.11014 19.5464 6.27976 19.3768L17.7641 7.89233C17.9337 7.72271 17.9337 7.47675 17.7641 7.30713V7.30737ZM20.4002 9.33533C20.4002 8.93579 20.2002 8.57053 19.8788 8.37228L19.0497 7.54315C18.8514 7.34489 18.4861 7.34489 18.2879 7.54315L5.27217 20.5589C5.07391 20.7571 5.07391 21.1224 5.27217 21.3207L6.10129 22.1498C6.29955 22.348 6.66481 22.348 6.86307 22.1498L19.8788 9.13403C20.2002 8.93577 20.4002 8.57052 20.4002 8.17097V9.33533Z" fill="currentColor"/>
+    </svg>
+  );
+});
+ExternalLinkIcon.displayName = 'ExternalLinkIcon';
+
+export const Undo2Icon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M3 7v6h6M3.29 13.5A9 9 0 0 0 20.94 5M3.12 11.5A9 9 0 0 1 20.94 8.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </svg>
+  );
+});
+Undo2Icon.displayName = 'Undo2Icon';
+
+export const Redo2Icon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M21 7v6h-6M20.71 13.5A9 9 0 0 1 3.06 5M20.88 11.5A9 9 0 0 0 3.06 8.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </svg>
+  );
+});
+Redo2Icon.displayName = 'Redo2Icon';
+
+export const CornerDownLeftIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M9 6L3 12M3 12L9 18M3 12H18C19.6569 12 21 10.6569 21 9V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </svg>
+  );
+});
+CornerDownLeftIcon.displayName = 'CornerDownLeftIcon';
+
+export const Code2Icon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M15.4545 4.2983C15.6192 3.77115 15.3254 3.21028 14.7983 3.04554C14.2712 2.88081 13.7103 3.1746 13.5455 3.70175L8.54554 19.7017C8.38081 20.2289 8.6746 20.7898 9.20175 20.9545C9.72889 21.1192 10.2898 20.8254 10.4545 20.2983L15.4545 4.2983Z" fill="currentColor"/>
+      <path d="M6.70711 7.29289C7.09763 7.68342 7.09763 8.31658 6.70711 8.70711L3.41421 12L6.70711 15.2929C7.09763 15.6834 7.09763 16.3166 6.70711 16.7071C6.31658 17.0976 5.68342 17.0976 5.29289 16.7071L1.29289 12.7071C0.902369 12.3166 0.902369 11.6834 1.29289 11.2929L5.29289 7.29289C5.68342 6.90237 6.31658 6.90237 6.70711 7.29289Z" fill="currentColor"/>
+      <path d="M17.2929 7.29289C17.6834 6.90237 18.3166 6.90237 18.7071 7.29289L22.7071 11.2929C23.0976 11.6834 23.0976 12.3166 22.7071 12.7071L18.7071 16.7071C18.3166 17.0976 17.6834 17.0976 17.2929 16.7071C16.9024 16.3166 16.9024 15.6834 17.2929 15.2929L20.5858 12L17.2929 8.70711C16.9024 8.31658 16.9024 7.68342 17.2929 7.29289Z" fill="currentColor"/>
+    </svg>
+  );
+});
+Code2Icon.displayName = 'Code2Icon';
+
+export const BanIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none"/>
+      <line x1="4.22" y1="4.22" x2="19.78" y2="19.78" stroke="currentColor" strokeWidth="2"/>
+    </svg>
+  );
+});
+BanIcon.displayName = 'BanIcon';
+
+export const ChevronDownIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </svg>
+  );
+});
+ChevronDownIcon.displayName = 'ChevronDownIcon';
+
+export const MoonStarIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M12 3V1M12 23V21M5 5L3.86 3.86M20.14 20.14L19 19M3 12H1M23 12H21M5 19L3.86 20.14M20.14 3.86L19 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none"/>
+      <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="2" fill="none"/>
+    </svg>
+  );
+});
+MoonStarIcon.displayName = 'MoonStarIcon';
+
+export const SunIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="2" fill="none"/>
+      <path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none"/>
+    </svg>
+  );
+});
+SunIcon.displayName = 'SunIcon';
+
+export const TrashIcon = memo(({ className, ...props }: SvgProps) => {
+  return (
+    <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M3 6H5H21M10 11V17M14 11V17M5 6L6 19C6 20.1046 6.89543 21 8 21H16C17.1046 21 18 20.1046 18 19L19 6M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </svg>
+  );
+});
+TrashIcon.displayName = 'TrashIcon';

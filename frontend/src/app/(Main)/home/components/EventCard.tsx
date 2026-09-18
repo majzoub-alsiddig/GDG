@@ -1,6 +1,6 @@
 // app/home/components/EventCard.tsx
 import type { EventItem } from "../types";
-import { CalendarIcon, PinIcon } from "./icons";
+import { CalendarIcon, PinIcon } from "@/components/icons";
 
 function formatDate(iso: string) {
   const date = new Date(iso);

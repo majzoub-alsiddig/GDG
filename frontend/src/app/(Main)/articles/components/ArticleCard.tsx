@@ -1,7 +1,7 @@
 // app/articles/components/ArticleCard.tsx
 import Link from "next/link";
 import type { Article } from "../types";
-import { ClockIcon } from "./icons";
+import { ClockIcon } from "@/components/icons";
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", {

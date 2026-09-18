@@ -1,5 +1,5 @@
 // app/home/components/SectionHeader.tsx
-import { ArrowRightIcon } from "./icons";
+import { ArrowRightIcon } from "@/components/icons";
 
 type Props = {
   eyebrow: string;

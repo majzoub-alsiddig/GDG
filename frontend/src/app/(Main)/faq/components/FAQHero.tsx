@@ -1,6 +1,6 @@
 // app/faq/components/FAQHero.tsx
 import coverImg from "@/../assets/cover.jpg";
-import { ArrowRightIcon, HelpCircleIcon } from "./icons";
+import { ArrowRightIcon, HelpCircleIcon } from "@/components/icons";
 
 export default function FAQHero() {
   return (

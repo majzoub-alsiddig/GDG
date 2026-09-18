@@ -1,6 +1,6 @@
 // app/courses/components/CoursesHero.tsx
 import coverImg from "@/../assets/cover.jpg";
-import { ArrowRightIcon, PlayIcon } from "./icons";
+import { ArrowRightIcon, PlayIcon } from "@/components/icons";
 
 export default function CoursesHero() {
   return (

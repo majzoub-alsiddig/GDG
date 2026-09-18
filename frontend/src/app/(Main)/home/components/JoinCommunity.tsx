@@ -1,5 +1,5 @@
 // app/home/components/JoinCommunity.tsx
-import { ArrowRightIcon } from "./icons";
+import { ArrowRightIcon } from "@/components/icons";
 
 export default function JoinCommunity() {
   return (

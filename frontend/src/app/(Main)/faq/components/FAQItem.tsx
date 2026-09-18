@@ -3,7 +3,7 @@
 
 import { useId, useState } from "react";
 import type { FAQItem as FAQItemType } from "../types";
-import { ChevronDownIcon } from "./icons";
+import { ChevronDownIcon } from "@/components/icons";
 
 type Props = {
   item: FAQItemType;

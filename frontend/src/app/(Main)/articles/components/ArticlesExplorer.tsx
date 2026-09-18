@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import type { Article, ArticleCategory } from "../types";
 import ArticleCard from "./ArticleCard";
 import ArticlesEmptyState from "./ArticlesEmptyState";
-import { CloseIcon, SearchIcon } from "./icons";
+import { CloseIcon, SearchIcon } from "@/components/icons";
 
 const ALL = "All" as const;
 

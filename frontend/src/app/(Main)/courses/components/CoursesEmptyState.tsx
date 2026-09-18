@@ -1,5 +1,5 @@
 // app/courses/components/CoursesEmptyState.tsx
-import { BookIcon } from "./icons";
+import { BookIcon } from "@/components/icons";
 
 export default function CoursesEmptyState() {
   return (

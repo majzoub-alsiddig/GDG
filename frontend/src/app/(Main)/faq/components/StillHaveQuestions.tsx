@@ -1,5 +1,5 @@
 // app/faq/components/StillHaveQuestions.tsx
-import { ArrowRightIcon, MessageIcon } from "./icons";
+import { ArrowRightIcon, MessageIcon } from "@/components/icons";
 
 export default function StillHaveQuestions() {
   return (

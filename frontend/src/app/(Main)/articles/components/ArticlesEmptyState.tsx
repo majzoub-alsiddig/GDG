@@ -1,5 +1,5 @@
 // app/articles/components/ArticlesEmptyState.tsx
-import { BookOpenIcon } from "./icons";
+import { BookOpenIcon } from "@/components/icons";
 
 type Props = {
   title?: string;

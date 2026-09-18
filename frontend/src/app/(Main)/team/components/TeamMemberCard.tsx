@@ -7,7 +7,7 @@ import {
   InstagramIcon,
   LinkedInIcon,
   TwitterIcon,
-} from "./icons";
+} from "@/components/icons";
 
 type IconType = (props: { className?: string }) => JSX.Element;
 

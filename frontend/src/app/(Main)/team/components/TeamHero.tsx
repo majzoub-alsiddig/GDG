@@ -1,6 +1,6 @@
 // app/team/components/TeamHero.tsx
 import coverImg from "@/../assets/contact-cover.jpg";
-import { ArrowRightIcon, UsersIcon } from "./icons";
+import { ArrowRightIcon, UsersIcon } from "@/components/icons";
 
 export default function TeamHero() {
   return (

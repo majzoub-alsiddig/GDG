@@ -3,7 +3,7 @@ import type { EventItem } from "../types";
 import EventCard from "./EventCard";
 import SectionHeader from "./SectionHeader";
 import EmptyState from "./EmptyState";
-import { CalendarIcon } from "./icons";
+import { CalendarIcon } from "@/components/icons";
 
 export default function UpcomingEvents({ events }: { events: EventItem[] }) {
   return (

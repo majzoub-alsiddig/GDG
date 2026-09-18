@@ -1,5 +1,5 @@
 // app/team/components/TeamEmptyState.tsx
-import { UsersIcon } from "./icons";
+import { UsersIcon } from "@/components/icons";
 
 export default function TeamEmptyState() {
   return (

@@ -1,5 +1,5 @@
 // app/courses/components/LearningCTA.tsx
-import { YouTubeIcon } from "./icons";
+import { YouTubeIcon } from "@/components/icons";
 
 export default function LearningCTA() {
   return (

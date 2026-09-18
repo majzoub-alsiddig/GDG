@@ -1,7 +1,7 @@
 // app/home/components/Hero.tsx
 import Image from "next/image";
 import heroImage from "@/../assets/backiee-195094-landscape.jpg";
-import { ArrowRightIcon, SparkleIcon } from "./icons";
+import { ArrowRightIcon, SparkleIcon } from "@/components/icons";
 
 export default function Hero() {
   return (

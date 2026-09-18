@@ -1,6 +1,6 @@
 // app/courses/components/CourseCard.tsx
 import type { Course } from "../types";
-import { PlayIcon } from "./icons";
+import { PlayIcon } from "@/components/icons";
 
 export default function CourseCard({ course }: { course: Course }) {
   return (

@@ -1,5 +1,5 @@
 // app/team/components/TeamCulture.tsx
-import { CodeIcon, LightbulbIcon, ShareIcon } from "./icons";
+import { CodeIcon, LightbulbIcon, ShareIcon } from "@/components/icons";
 
 const PILLARS = [
   {

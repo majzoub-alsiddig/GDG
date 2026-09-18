@@ -2,7 +2,7 @@
 import type { FeaturedCourse } from "../types";
 import SectionHeader from "./SectionHeader";
 import EmptyState from "./EmptyState";
-import { BookIcon, PlayIcon } from "./icons";
+import { BookIcon, PlayIcon } from "@/components/icons";
 
 export default function FeaturedCourses({ courses }: { courses: FeaturedCourse[] }) {
   return (

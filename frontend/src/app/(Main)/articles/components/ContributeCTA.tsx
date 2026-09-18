@@ -1,5 +1,5 @@
 // app/articles/components/ContributeCTA.tsx
-import { ArrowRightIcon, PenIcon } from "./icons";
+import { ArrowRightIcon, PenIcon } from "@/components/icons";
 
 export default function ContributeCTA() {
   return (

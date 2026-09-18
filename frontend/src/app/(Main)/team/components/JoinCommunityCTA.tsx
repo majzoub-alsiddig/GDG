@@ -1,5 +1,5 @@
 // app/team/components/JoinCommunityCTA.tsx
-import { ArrowRightIcon } from "./icons";
+import { ArrowRightIcon } from "@/components/icons";
 
 export default function JoinCommunityCTA() {
   return (
