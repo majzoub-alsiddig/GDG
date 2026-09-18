@@ -4,7 +4,7 @@ import FAQHero from "./components/FAQHero";
 import FAQSection from "./components/FAQSection";
 import StillHaveQuestions from "./components/StillHaveQuestions";
 
-// SiteHeader is rendered by app/layout.tsx — do not include it here.
+// SiteHeader is rendered by app/layout.tsx  -  do not include it here.
 
 export default function FAQ() {
   return (

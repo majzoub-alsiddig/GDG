@@ -20,7 +20,7 @@ mapfile -t FILES < <(
 )
 
 if [[ ${#FILES[@]} -eq 0 ]]; then
-  echo "✓ Nothing to fix — no broken imports found."
+  echo "✓ Nothing to fix  -  no broken imports found."
   exit 0
 fi
 

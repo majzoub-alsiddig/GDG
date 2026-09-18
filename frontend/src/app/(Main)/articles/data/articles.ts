@@ -6,7 +6,7 @@ export const articles: Article[] = [
     id: "ai-workshop-recap",
     title: "Recap: Our First GenAI Workshop",
     description:
-      "Over 100 students joined us to build their first Gemini-powered chatbot. Here’s what we covered and what’s coming next.",
+      "Over 100 students joined us to build their first Gemini-powered chatbot. Here's what we covered and what's coming next.",
     author: "GDG Team",
     authorRole: "Community",
     createdAt: "2026-02-20",
@@ -34,7 +34,7 @@ export const articles: Article[] = [
     id: "intro-to-cloud-2026",
     title: "Getting Started with Google Cloud Platform",
     description:
-      "Learn how students can start building scalable applications using Google Cloud — from your first project to your first deploy.",
+      "Learn how students can start building scalable applications using Google Cloud  -  from your first project to your first deploy.",
     author: "Baboshi",
     authorRole: "Cloud Contributor",
     createdAt: "2026-02-10",
@@ -66,7 +66,7 @@ export const articles: Article[] = [
     id: "flutter-vs-react-native",
     title: "Flutter or React Native in 2026?",
     description:
-      "A practical comparison of the two leading cross-platform frameworks — performance, ecosystem, and which one to pick for your next project.",
+      "A practical comparison of the two leading cross-platform frameworks  -  performance, ecosystem, and which one to pick for your next project.",
     author: "Sarah Dev",
     authorRole: "Mobile Developer",
     createdAt: "2026-02-12",
@@ -95,7 +95,7 @@ export const articles: Article[] = [
     id: "solution-challenge-tips",
     title: "Winning the 2026 Solution Challenge",
     description:
-      "A field guide for GDG UofK teams entering the Solution Challenge — from problem selection to demo day.",
+      "A field guide for GDG UofK teams entering the Solution Challenge  -  from problem selection to demo day.",
     author: "Lead Amir",
     authorRole: "Events Lead",
     createdAt: "2026-02-14",

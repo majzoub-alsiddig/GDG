@@ -102,7 +102,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Explore — centered flex row on mobile, vertical list on desktop */}
+          {/* Explore  -  centered flex row on mobile, vertical list on desktop */}
           <div className="flex flex-col items-center text-center md:items-start md:text-left">
             <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">
               Explore
@@ -121,7 +121,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Community — same pattern */}
+          {/* Community  -  same pattern */}
           <div className="flex flex-col items-center text-center md:items-start md:text-left">
             <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">
               Community
@@ -140,7 +140,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Connect — icons centered on mobile, vertical list on desktop */}
+          {/* Connect  -  icons centered on mobile, vertical list on desktop */}
           <div className="flex flex-col items-center text-center md:items-start md:text-left">
             <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">
               Connect
@@ -164,7 +164,7 @@ export default function Footer() {
               ))}
             </ul>
 
-            {/* Email — centered on mobile, left-aligned on desktop */}
+            {/* Email  -  centered on mobile, left-aligned on desktop */}
             <a
               href={`mailto:${EMAIL}`}
               className="mt-5 inline-flex items-center gap-2 rounded text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] md:mt-4"

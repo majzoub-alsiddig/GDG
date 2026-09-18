@@ -67,7 +67,7 @@ export default function FAQSection() {
           </p>
         </div>
 
-        {/* Category filter — hidden when only one category */}
+        {/* Category filter  -  hidden when only one category */}
         {categories.length > 0 && (
           <div className="mt-8 flex flex-wrap justify-center gap-2">
             {categories.map((category) => {

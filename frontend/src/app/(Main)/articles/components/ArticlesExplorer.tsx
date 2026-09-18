@@ -99,7 +99,7 @@ export default function ArticlesExplorer({ articles }: { articles: Article[] }) 
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search articles..."
-                  className="w-full rounded-full border border-gray-200 bg-white py-3.5 pl-11 pr-11 text-sm text-gray-900 placeholder:text-gray-400 shadow-sm transition-colors focus:border-[#1a73e8] focus:outline-none focus:ring-2 focus:ring-[#1a73e8]/20"
+                  className="w-full rounded-full border border-gray-200 bg-white py-3.5 pl-11 pr-11 text-sm text-gray-900 placeholder:text-gray-400 shadow-sm transition-colors focus:border-[#1a73e8] focus:outline-none focus:ring-2 focus:ring-[#1a73e8]/20 [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-ms-clear]:hidden"
                 />
                 {query.length > 0 && (
                   <button
@@ -117,7 +117,7 @@ export default function ArticlesExplorer({ articles }: { articles: Article[] }) 
         </div>
       </section>
 
-      {/* CATEGORIES */}
+      {/* CATEGORIES
       {categories.length > 0 && (
         <section className="border-y border-gray-100 bg-gray-50/60">
           <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
@@ -135,11 +135,10 @@ export default function ArticlesExplorer({ articles }: { articles: Article[] }) 
                       type="button"
                       onClick={() => setActiveCategory(category)}
                       aria-pressed={isActive}
-                      className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-2 ${
-                        isActive
+                      className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-2 ${isActive
                           ? "border-gray-900 bg-gray-900 text-white"
                           : "border-gray-200 bg-white text-gray-600 hover:border-gray-300 hover:text-gray-900"
-                      }`}
+                        }`}
                     >
                       {category}
                     </button>
@@ -149,7 +148,7 @@ export default function ArticlesExplorer({ articles }: { articles: Article[] }) 
             </div>
           </div>
         </section>
-      )}
+      )} */}  { /* TODO */ }
 
       {/* GRID */}
       <section className="mx-auto max-w-7xl px-4 pb-16 pt-14 sm:px-6 sm:pb-20 sm:pt-16 lg:px-8 lg:pb-24 lg:pt-20">
@@ -177,7 +176,7 @@ export default function ArticlesExplorer({ articles }: { articles: Article[] }) 
             message={
               isFiltering
                 ? "Try another keyword or explore a different category."
-                : "We’re preparing something interesting. Check back soon."
+                : "We're preparing something interesting. Check back soon."
             }
           />
         ) : (

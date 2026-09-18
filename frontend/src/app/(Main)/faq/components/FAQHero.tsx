@@ -36,7 +36,7 @@ export default function FAQHero() {
           />
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-gray-200 sm:text-lg">
-            Everything you need to know about GDG UofK — from who we are to how
+            Everything you need to know about GDG UofK  -  from who we are to how
             to get involved. Can&rsquo;t find your answer? Reach out to us
             below.
           </p>

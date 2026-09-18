@@ -29,7 +29,7 @@ export default function ContributeCTA() {
           <p className="relative mx-auto mt-4 max-w-xl text-sm leading-relaxed text-gray-300 sm:text-base">
             Write about a project, a technology you&rsquo;ve learned, or
             something you discovered along the way. GDG UofK is built by its
-            community — and that includes you.
+            community  -  and that includes you.
           </p>
 
           <div className="relative mt-9">

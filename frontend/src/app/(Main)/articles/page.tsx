@@ -5,7 +5,7 @@ import ContributeCTA from "./components/ContributeCTA";
 import { articles } from "./data/articles";
 
 export const metadata: Metadata = {
-  title: "Articles — GDG UofK",
+  title: "Articles  -  GDG UofK",
   description:
     "Technical tutorials, community stories, project insights, and practical knowledge from the GDG UofK community.",
 };

@@ -89,7 +89,7 @@ export default function TeamSection({ members, loading = false }: Props) {
                     </div>
                   )}
 
-                  {/* Centered flex-wrap grid — centers any count of cards */}
+                  {/* Centered flex-wrap grid  -  centers any count of cards */}
                   <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
                     {list.map((member) => (
                       <TeamMemberCard key={member.id} member={member} />

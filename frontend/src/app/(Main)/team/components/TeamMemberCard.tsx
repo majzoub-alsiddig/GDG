@@ -35,7 +35,7 @@ export default function TeamMemberCard({ member }: { member: TeamMember }) {
 
   return (
     <article className="group flex w-full flex-col rounded-2xl bg-white p-4 ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_32px_-12px_rgba(0,0,0,0.12)] sm:w-[280px] sm:p-5">
-      {/* Square image — fills padded width, rounded corners */}
+      {/* Square image  -  fills padded width, rounded corners */}
       <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-100">
         <img
           src={member.photo}
@@ -46,7 +46,7 @@ export default function TeamMemberCard({ member }: { member: TeamMember }) {
         />
       </div>
 
-      {/* Content — centered under the image */}
+      {/* Content  -  centered under the image */}
       <div className="mt-4 flex flex-col items-center text-center">
         <h3 className="text-base font-bold leading-snug text-gray-900 sm:text-[17px]">
           {member.name}

@@ -32,7 +32,7 @@ export async function generateMetadata({
   const article = articles.find((a) => a.id === id);
   if (!article) return {};
   return {
-    title: `${article.title} — GDG UofK`,
+    title: `${article.title}  -  GDG UofK`,
     description: article.description,
   };
 }

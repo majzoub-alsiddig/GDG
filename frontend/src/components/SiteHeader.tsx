@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { CloseIcon, MenuIcon } from "@/components/icons";
 
 /* ------------------------------------------------------------------ */
-/*  Logo mark — two chevron pairs, Google colours, bold outline       */
+/*  Logo mark  -  two chevron pairs, Google colours, bold outline       */
 /* ------------------------------------------------------------------ */
 
 function GDGMark({ className }: { className?: string }) {
@@ -111,8 +111,8 @@ function isActive(pathname: string, href: string) {
 /* --------------------------------------------------------------------  */
 /*  LanguageDropdown                                                     */
 /*                                                                       */
-/*  • "inline" — desktop chip, dropdown opens absolutely (right-aligned) */
-/*  • "block"  — mobile row, options expand INLINE in the flow so the    */
+/*  • "inline"  -  desktop chip, dropdown opens absolutely (right-aligned) */
+/*  • "block"   -  mobile row, options expand INLINE in the flow so the    */
 /*              parent's `overflow-hidden` animation doesn't clip them   */
 /* --------------------------------------------------------------------  */
 
@@ -126,7 +126,7 @@ function LanguageDropdown({ idPrefix, variant = "inline" }: DropdownProps) {
   const [current, setCurrent] = useState<Language>(LANGUAGES[0]);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  // Close on outside click / Escape — only needed for the floating (inline) variant.
+  // Close on outside click / Escape  -  only needed for the floating (inline) variant.
   // The block variant renders options inline, so there's nothing to dismiss.
   useEffect(() => {
     if (!open || variant !== "inline") return;
@@ -181,7 +181,7 @@ function LanguageDropdown({ idPrefix, variant = "inline" }: DropdownProps) {
         />
       </button>
 
-      {/* ---------------- INLINE / DESKTOP — floating menu ---------------- */}
+      {/* ---------------- INLINE / DESKTOP  -  floating menu ---------------- */}
       {open && !isBlock && (
         <ul
           role="listbox"
@@ -218,7 +218,7 @@ function LanguageDropdown({ idPrefix, variant = "inline" }: DropdownProps) {
         </ul>
       )}
 
-      {/* ---------------- BLOCK / MOBILE — inline expanded list ---------------- */}
+      {/* ---------------- BLOCK / MOBILE  -  inline expanded list ---------------- */}
       {open && isBlock && (
         <ul
           role="listbox"
@@ -374,7 +374,7 @@ export default function SiteHeader() {
             );
           })}
 
-          {/* Language selector — mobile */}
+          {/* Language selector  -  mobile */}
           <div className="mt-3 border-t border-gray-100 pt-4">
             <p className="mb-2 px-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-500">
               Language

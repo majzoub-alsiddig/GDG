@@ -934,7 +934,7 @@ export const articles: Article[] = [
     id: "ai-workshop-recap",
     title: "Recap: Our First GenAI Workshop",
     description:
-      "Over 100 students joined us to build their first Gemini-powered chatbot. Here’s what we covered and what’s coming next.",
+      "Over 100 students joined us to build their first Gemini-powered chatbot. Here's what we covered and what's coming next.",
     author: "GDG Team",
     authorRole: "Community",
     createdAt: "2026-02-20",
@@ -962,7 +962,7 @@ export const articles: Article[] = [
     id: "intro-to-cloud-2026",
     title: "Getting Started with Google Cloud Platform",
     description:
-      "Learn how students can start building scalable applications using Google Cloud — from your first project to your first deploy.",
+      "Learn how students can start building scalable applications using Google Cloud  -  from your first project to your first deploy.",
     author: "Baboshi",
     authorRole: "Cloud Contributor",
     createdAt: "2026-02-10",
@@ -994,7 +994,7 @@ export const articles: Article[] = [
     id: "flutter-vs-react-native",
     title: "Flutter or React Native in 2026?",
     description:
-      "A practical comparison of the two leading cross-platform frameworks — performance, ecosystem, and which one to pick for your next project.",
+      "A practical comparison of the two leading cross-platform frameworks  -  performance, ecosystem, and which one to pick for your next project.",
     author: "Sarah Dev",
     authorRole: "Mobile Developer",
     createdAt: "2026-02-12",
@@ -1023,7 +1023,7 @@ export const articles: Article[] = [
     id: "solution-challenge-tips",
     title: "Winning the 2026 Solution Challenge",
     description:
-      "A field guide for GDG UofK teams entering the Solution Challenge — from problem selection to demo day.",
+      "A field guide for GDG UofK teams entering the Solution Challenge  -  from problem selection to demo day.",
     author: "Lead Amir",
     authorRole: "Events Lead",
     createdAt: "2026-02-14",
@@ -1147,7 +1147,7 @@ export async function generateMetadata({
   const article = articles.find((a) => a.id === id);
   if (!article) return {};
   return {
-    title: `${article.title} — GDG UofK`,
+    title: `${article.title}  -  GDG UofK`,
     description: article.description,
   };
 }
@@ -1373,7 +1373,7 @@ export default function ContributeCTA() {
           <p className="relative mx-auto mt-4 max-w-xl text-sm leading-relaxed text-gray-300 sm:text-base">
             Write about a project, a technology you&rsquo;ve learned, or
             something you discovered along the way. GDG UofK is built by its
-            community — and that includes you.
+            community  -  and that includes you.
           </p>
 
           <div className="relative mt-9">
@@ -1607,7 +1607,7 @@ export default function ArticlesExplorer({ articles }: { articles: Article[] }) 
             message={
               isFiltering
                 ? "Try another keyword or explore a different category."
-                : "We’re preparing something interesting. Check back soon."
+                : "We're preparing something interesting. Check back soon."
             }
           />
         ) : (
@@ -1645,7 +1645,7 @@ export default function ArticleCard({ article }: { article: Article }) {
       href={`/articles/${article.id}`}
       className="group flex flex-col rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-4"
     >
-      {/* Cover — 16:9 */}
+      {/* Cover  -  16:9 */}
       <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-gray-100 ring-1 ring-black/5">
         <img
           src={article.cover}
@@ -1699,7 +1699,7 @@ import ContributeCTA from "./components/ContributeCTA";
 import { articles } from "./data/articles";
 
 export const metadata: Metadata = {
-  title: "Articles — GDG UofK",
+  title: "Articles  -  GDG UofK",
   description:
     "Technical tutorials, community stories, project insights, and practical knowledge from the GDG UofK community.",
 };
@@ -1777,7 +1777,7 @@ export const faqData: FAQItem[] = [
     id: "what-is-gdg",
     question: "What is GDG UofK?",
     answer:
-      "Google Developer Group University of Khartoum is a community of developers, designers, and tech enthusiasts who learn, share, and build together. We're part of the global Google Developer Groups network — run by students, for students.",
+      "Google Developer Group University of Khartoum is a community of developers, designers, and tech enthusiasts who learn, share, and build together. We're part of the global Google Developer Groups network  -  run by students, for students.",
     category: "About GDG",
   },
   {
@@ -1791,28 +1791,28 @@ export const faqData: FAQItem[] = [
     id: "how-to-join",
     question: "How can I join GDG UofK?",
     answer:
-      "You can join by attending our events, following our social media channels, and registering through our official website. Membership is free and there are no prerequisites — just bring your curiosity.",
+      "You can join by attending our events, following our social media channels, and registering through our official website. Membership is free and there are no prerequisites  -  just bring your curiosity.",
     category: "Joining",
   },
   {
     id: "time-commitment",
     question: "How much time do I need to commit?",
     answer:
-      "There's no minimum commitment. You can attend events as your schedule allows — whether it's a single workshop or a full study jam series. Everything we offer is designed to fit around your studies.",
+      "There's no minimum commitment. You can attend events as your schedule allows  -  whether it's a single workshop or a full study jam series. Everything we offer is designed to fit around your studies.",
     category: "Joining",
   },
   {
     id: "events-free",
     question: "Are GDG events free?",
     answer:
-      "Yes, all GDG events are free and open to anyone interested in technology. Our community workshops, talks, and study jams are always free — you'll never be asked to pay to attend.",
+      "Yes, all GDG events are free and open to anyone interested in technology. Our community workshops, talks, and study jams are always free  -  you'll never be asked to pay to attend.",
     category: "Events & Activities",
   },
   {
     id: "activities",
     question: "What kind of activities does GDG organize?",
     answer:
-      "We organize workshops, hackathons, study jams, speaker sessions, and networking events focused on Google technologies and beyond — covering topics from Android and Flutter to AI, web development, and cloud.",
+      "We organize workshops, hackathons, study jams, speaker sessions, and networking events focused on Google technologies and beyond  -  covering topics from Android and Flutter to AI, web development, and cloud.",
     category: "Events & Activities",
   },
 ];
@@ -1877,7 +1877,7 @@ export default function FAQHero() {
           />
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-gray-200 sm:text-lg">
-            Everything you need to know about GDG UofK — from who we are to how
+            Everything you need to know about GDG UofK  -  from who we are to how
             to get involved. Can&rsquo;t find your answer? Reach out to us
             below.
           </p>
@@ -2038,7 +2038,7 @@ export default function FAQSection() {
           </p>
         </div>
 
-        {/* Category filter — hidden when only one category */}
+        {/* Category filter  -  hidden when only one category */}
         {categories.length > 0 && (
           <div className="mt-8 flex flex-wrap justify-center gap-2">
             {categories.map((category) => {
@@ -2158,7 +2158,7 @@ import FAQHero from "./components/FAQHero";
 import FAQSection from "./components/FAQSection";
 import StillHaveQuestions from "./components/StillHaveQuestions";
 
-// SiteHeader is rendered by app/layout.tsx — do not include it here.
+// SiteHeader is rendered by app/layout.tsx  -  do not include it here.
 
 export default function FAQ() {
   return (
@@ -4016,7 +4016,7 @@ export default function TeamSection({ members, loading = false }: Props) {
                     </div>
                   )}
 
-                  {/* Centered flex-wrap grid — centers any count of cards */}
+                  {/* Centered flex-wrap grid  -  centers any count of cards */}
                   <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
                     {list.map((member) => (
                       <TeamMemberCard key={member.id} member={member} />
@@ -4105,7 +4105,7 @@ export default function TeamMemberCard({ member }: { member: TeamMember }) {
 
   return (
     <article className="group flex w-full flex-col rounded-2xl bg-white p-4 ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_32px_-12px_rgba(0,0,0,0.12)] sm:w-[280px] sm:p-5">
-      {/* Square image — fills padded width, rounded corners */}
+      {/* Square image  -  fills padded width, rounded corners */}
       <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-100">
         <img
           src={member.photo}
@@ -4116,7 +4116,7 @@ export default function TeamMemberCard({ member }: { member: TeamMember }) {
         />
       </div>
 
-      {/* Content — centered under the image */}
+      {/* Content  -  centered under the image */}
       <div className="mt-4 flex flex-col items-center text-center">
         <h3 className="text-base font-bold leading-snug text-gray-900 sm:text-[17px]">
           {member.name}
@@ -10560,7 +10560,7 @@ import { useEffect, useRef, useState } from "react";
 import { CloseIcon, MenuIcon } from "@/components/icons";
 
 /* ------------------------------------------------------------------ */
-/*  Logo mark — two chevron pairs, Google colours, bold outline       */
+/*  Logo mark  -  two chevron pairs, Google colours, bold outline       */
 /* ------------------------------------------------------------------ */
 
 function GDGMark({ className }: { className?: string }) {
@@ -10664,8 +10664,8 @@ function isActive(pathname: string, href: string) {
 /* --------------------------------------------------------------------  */
 /*  LanguageDropdown                                                     */
 /*                                                                       */
-/*  • "inline" — desktop chip, dropdown opens absolutely (right-aligned) */
-/*  • "block"  — mobile row, options expand INLINE in the flow so the    */
+/*  • "inline"  -  desktop chip, dropdown opens absolutely (right-aligned) */
+/*  • "block"   -  mobile row, options expand INLINE in the flow so the    */
 /*              parent's `overflow-hidden` animation doesn't clip them   */
 /* --------------------------------------------------------------------  */
 
@@ -10679,7 +10679,7 @@ function LanguageDropdown({ idPrefix, variant = "inline" }: DropdownProps) {
   const [current, setCurrent] = useState<Language>(LANGUAGES[0]);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  // Close on outside click / Escape — only needed for the floating (inline) variant.
+  // Close on outside click / Escape  -  only needed for the floating (inline) variant.
   // The block variant renders options inline, so there's nothing to dismiss.
   useEffect(() => {
     if (!open || variant !== "inline") return;
@@ -10734,7 +10734,7 @@ function LanguageDropdown({ idPrefix, variant = "inline" }: DropdownProps) {
         />
       </button>
 
-      {/* ---------------- INLINE / DESKTOP — floating menu ---------------- */}
+      {/* ---------------- INLINE / DESKTOP  -  floating menu ---------------- */}
       {open && !isBlock && (
         <ul
           role="listbox"
@@ -10771,7 +10771,7 @@ function LanguageDropdown({ idPrefix, variant = "inline" }: DropdownProps) {
         </ul>
       )}
 
-      {/* ---------------- BLOCK / MOBILE — inline expanded list ---------------- */}
+      {/* ---------------- BLOCK / MOBILE  -  inline expanded list ---------------- */}
       {open && isBlock && (
         <ul
           role="listbox"
@@ -10927,7 +10927,7 @@ export default function SiteHeader() {
             );
           })}
 
-          {/* Language selector — mobile */}
+          {/* Language selector  -  mobile */}
           <div className="mt-3 border-t border-gray-100 pt-4">
             <p className="mb-2 px-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-500">
               Language
@@ -12617,7 +12617,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Explore — centered flex row on mobile, vertical list on desktop */}
+          {/* Explore  -  centered flex row on mobile, vertical list on desktop */}
           <div className="flex flex-col items-center text-center md:items-start md:text-left">
             <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">
               Explore
@@ -12636,7 +12636,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Community — same pattern */}
+          {/* Community  -  same pattern */}
           <div className="flex flex-col items-center text-center md:items-start md:text-left">
             <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">
               Community
@@ -12655,7 +12655,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Connect — icons centered on mobile, vertical list on desktop */}
+          {/* Connect  -  icons centered on mobile, vertical list on desktop */}
           <div className="flex flex-col items-center text-center md:items-start md:text-left">
             <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">
               Connect
@@ -12679,7 +12679,7 @@ export default function Footer() {
               ))}
             </ul>
 
-            {/* Email — centered on mobile, left-aligned on desktop */}
+            {/* Email  -  centered on mobile, left-aligned on desktop */}
             <a
               href={`mailto:${EMAIL}`}
               className="mt-5 inline-flex items-center gap-2 rounded text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] md:mt-4"
