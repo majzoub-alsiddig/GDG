@@ -1,7 +1,6 @@
 // app/page.tsx
 import Hero from "./home/components/Hero";
 import CommunityStats from "./home/components/CommunityStats";
-import WhatWeDo from "./home/components/WhatWeDo";
 import UpcomingEvents from "./home/components/UpcomingEvents";
 import FeaturedCourses from "./home/components/FeaturedCourses";
 import JoinCommunity from "./home/components/JoinCommunity";
@@ -17,7 +16,6 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         {/* <CommunityStats stats={communityStats} /> */}
-        <WhatWeDo />
         <UpcomingEvents events={featuredEvents} />
         <FeaturedCourses courses={featuredCourses} />
         <JoinCommunity />
