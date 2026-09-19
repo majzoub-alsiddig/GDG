@@ -6,7 +6,7 @@ import SiteHeader from "@/components/SiteHeader";
 
 const poppins = Poppins({
   variable: "--font-poppins",
-  weight: "500",
+  weight: ["400", "500", "600", "700"],
 });
 
 const geistSans = Geist({
@@ -20,8 +20,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GDG",
-  description: "Google Developers Group",
+  title: {
+    default: "GDG UofK",
+    template: "%s | GDG UofK"
+  },
+  description: "Google Developer Group at the University of Khartoum. Learn, build, and connect.",
 };
 
 export default function RootLayout({

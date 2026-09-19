@@ -1,4 +1,3 @@
-// app/articles/page.tsx
 import type { Metadata } from "next";
 import ArticlesExplorer from "./components/ArticlesExplorer";
 import ContributeCTA from "./components/ContributeCTA";

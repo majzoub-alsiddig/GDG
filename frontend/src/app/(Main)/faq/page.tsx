@@ -1,5 +1,4 @@
 // app/faq/page.tsx
-import Footer from "@/components/Footer";
 import FAQHero from "./components/FAQHero";
 import FAQSection from "./components/FAQSection";
 import StillHaveQuestions from "./components/StillHaveQuestions";
@@ -14,7 +13,6 @@ export default function FAQ() {
         <FAQSection />
         <StillHaveQuestions />
       </main>
-
     </div>
   );
 }
