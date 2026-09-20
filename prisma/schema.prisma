@@ -57,3 +57,23 @@ model Course {
 
   @@index([published, order])
 }
+
+model Article {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String
+  content     Json
+  author      String
+  authorRole  String?
+  cover       String
+  category    String
+  readingTime Int      @default(5)
+  featured    Boolean  @default(false)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([published, createdAt])
+  @@index([category])
+}
