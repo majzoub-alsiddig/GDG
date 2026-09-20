@@ -22,3 +22,22 @@ model TeamMember {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Event {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  title       String
+  description String?
+  category    String
+  cover       String
+  date        DateTime
+  endDate     DateTime?
+  location    String
+  link        String
+  isFeatured  Boolean   @default(false)
+  published   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([published, date])
+}

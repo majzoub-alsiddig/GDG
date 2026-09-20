@@ -89,6 +89,72 @@ async function main() {
     await prisma.teamMember.create({ data: member })
   }
 
+  await prisma.event.deleteMany()
+
+  const events = [
+    {
+      slug: "android-with-compose",
+      title: "Building Modern Android Apps with Jetpack Compose",
+      description: "A hands-on workshop covering Compose fundamentals, state, and navigation.",
+      category: "Workshop",
+      cover: "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?auto=format&fit=crop&w=1200&q=80",
+      date: new Date("2026-10-02"),
+      location: "Online",
+      link: "/events/android-with-compose",
+      isFeatured: true,
+    },
+    {
+      slug: "intro-to-gemini",
+      title: "Getting Started with Gemini APIs",
+      description: "Build your first Gemini-powered app and learn how to integrate the API.",
+      category: "Talk",
+      cover: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80",
+      date: new Date("2026-10-12"),
+      location: "University of Khartoum",
+      link: "/events/intro-to-gemini",
+      isFeatured: true,
+    },
+    {
+      slug: "flutter-study-jam",
+      title: "Flutter Study Jam: From Zero to First App",
+      description: "A beginner-friendly series where you ship your first Flutter app.",
+      category: "Study Jam",
+      cover: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80",
+      date: new Date("2026-10-24"),
+      location: "Online",
+      link: "/events/flutter-study-jam",
+      isFeatured: true,
+    },
+    {
+      slug: "gcp-for-students",
+      title: "Google Cloud for Students",
+      description: "Deploy your first app to Google Cloud and understand the free tier.",
+      category: "Workshop",
+      cover: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80",
+      date: new Date("2026-11-05"),
+      location: "Online",
+      link: "/events/gcp-for-students",
+      isFeatured: false,
+    },
+    {
+      slug: "community-meetup-nov",
+      title: "Community Meetup: Show & Tell",
+      description: "Members share what they've been building. Casual, friendly, and open to all.",
+      category: "Meetup",
+      cover: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80",
+      date: new Date("2026-11-20"),
+      location: "University of Khartoum",
+      link: "/events/community-meetup-nov",
+      isFeatured: false,
+    },
+  ]
+
+  for (const event of events) {
+    await prisma.event.create({ data: event })
+  }
+
+  console.log(`✅ Seeded ${events.length} events`)
+
   console.log(`✅ Seeded ${teamMembers.length} team members`)
 }
 
