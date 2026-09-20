@@ -54,3 +54,5 @@ export default async function Home() {
     </div>
   );
 }
+
+// TODO: see the join community links, on head and footer
