@@ -9,7 +9,6 @@ const prisma = new PrismaClient({ adapter })
 
 async function main() {
   await prisma.teamMember.deleteMany()
-
   const teamMembers = [
     {
       name: "Dr. Sara Ahmed",
@@ -84,13 +83,11 @@ async function main() {
       linkedin: "https://linkedin.com",
     },
   ]
-
   for (const member of teamMembers) {
     await prisma.teamMember.create({ data: member })
   }
 
   await prisma.event.deleteMany()
-
   const events = [
     {
       slug: "android-with-compose",
@@ -148,10 +145,72 @@ async function main() {
       isFeatured: false,
     },
   ]
-
   for (const event of events) {
     await prisma.event.create({ data: event })
   }
+
+  await prisma.course.deleteMany()
+  const courses = [
+    {
+      slug: "google-workspace-essentials",
+      title: "Google Workspace Essentials",
+      description: "Learn how to effectively use Google Workspace tools for productivity, collaboration, and learning.",
+      cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80",
+      link: "https://youtube.com",
+      category: "Google Workspace",
+      order: 1,
+    },
+    {
+      slug: "intro-to-web-development",
+      title: "Introduction to Web Development",
+      description: "Build your first web pages with HTML, CSS, and JavaScript - from structure to styling to interactivity.",
+      cover: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80",
+      link: "https://youtube.com",
+      category: "Web",
+      order: 2,
+    },
+    {
+      slug: "android-with-kotlin",
+      title: "Android Development with Kotlin",
+      description: "Get started building native Android apps using Kotlin, Jetpack Compose, and modern Android tooling.",
+      cover: "https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?auto=format&fit=crop&q=80",
+      link: "https://youtube.com",
+      category: "Android",
+      order: 3,
+    },
+    {
+      slug: "flutter-fast-track",
+      title: "Flutter Fast Track",
+      description: "Create beautiful cross-platform mobile apps with Flutter and Dart, from widgets to state management.",
+      cover: "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&q=80",
+      link: "https://youtube.com",
+      category: "Flutter",
+      order: 4,
+    },
+    {
+      slug: "ml-foundations",
+      title: "Machine Learning Foundations",
+      description: "Understand the core concepts behind machine learning and train your first models with Python.",
+      cover: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80",
+      link: "https://youtube.com",
+      category: "AI",
+      order: 5,
+    },
+    {
+      slug: "career-in-tech",
+      title: "Building a Career in Tech",
+      description: "Practical guidance on CVs, portfolios, internships, and preparing for your first technical interview.",
+      cover: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80",
+      link: "https://youtube.com",
+      category: "Career",
+      order: 6,
+    },
+  ]
+  for (const course of courses) {
+    await prisma.course.create({ data: course })
+  }
+
+  console.log(`✅ Seeded ${courses.length} courses`)
 
   console.log(`✅ Seeded ${events.length} events`)
 
