@@ -17,7 +17,7 @@ export default async function EventsPage() {
     cover: e.cover,
     date: e.date.toISOString().split("T")[0],
     location: e.location,
-    link: e.link,
+    link: `/events/${e.slug}`,
   }));
 
   return (
