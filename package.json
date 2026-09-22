@@ -50,7 +50,7 @@
     "prisma": "^7.10.0",
     "sass": "^1.97.3",
     "tailwindcss": "^4",
-    "tsx": "^4.23.14",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   },
   "prisma": {

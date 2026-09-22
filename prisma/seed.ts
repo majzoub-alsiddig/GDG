@@ -14,10 +14,11 @@ async function main() {
       name: "Dr. Sara Ahmed",
       role: "Chapter Lead",
       about: "Leads GDG UofK with a passion for community building and empowering students through technology.",
-      photo: "https://imags.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+      photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
       category: "Leadership",
       linkedin: "https://linkedin.com",
       twitter: "https://x.com",
+      order: 1,
     },
     {
       name: "Mohammed Ali",
@@ -27,6 +28,7 @@ async function main() {
       category: "Leadership",
       linkedin: "https://linkedin.com",
       github: "https://github.com",
+      order: 2,
     },
     {
       name: "Majzoub Al Siddig",
@@ -37,6 +39,7 @@ async function main() {
       github: "https://github.com",
       linkedin: "https://linkedin.com",
       website: "https://example.com",
+      order: 3,
     },
     {
       name: "Fatima Hassan",
@@ -46,6 +49,7 @@ async function main() {
       category: "Technical",
       github: "https://github.com",
       linkedin: "https://linkedin.com",
+      order: 4,
     },
     {
       name: "Omar Ibrahim",
@@ -55,6 +59,7 @@ async function main() {
       category: "Technical",
       github: "https://github.com",
       twitter: "https://x.com",
+      order: 5,
     },
     {
       name: "Layla Mohammed",
@@ -64,6 +69,7 @@ async function main() {
       category: "Media",
       instagram: "https://instagram.com",
       linkedin: "https://linkedin.com",
+      order: 6,
     },
     {
       name: "Youssef Ahmed",
@@ -73,6 +79,7 @@ async function main() {
       category: "Media",
       instagram: "https://instagram.com",
       website: "https://example.com",
+      order: 7,
     },
     {
       name: "Aisha Khalid",
@@ -81,6 +88,7 @@ async function main() {
       photo: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=800&q=80",
       category: "Operations",
       linkedin: "https://linkedin.com",
+      order: 8,
     },
   ]
   for (const member of teamMembers) {

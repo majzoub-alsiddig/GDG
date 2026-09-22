@@ -4,26 +4,28 @@ import TeamCulture from "./components/TeamCulture";
 import TeamSection from "./components/TeamSection";
 import JoinCommunityCTA from "./components/JoinCommunityCTA";
 import { prisma } from "@/lib/prisma";
-import type { TeamMember, TeamCategory } from "./types";
+import type { TeamMember } from "./types";
 
-const Team = async () => {
-  const dbMembers = await prisma.teamMember.findMany({
-    orderBy: { createdAt: "asc" },
+export const dynamic = "force-dynamic";
+
+export default async function Team() {
+  const members = await prisma.teamMember.findMany({
+    orderBy: [{ order: "asc" }, { createdAt: "asc" }],
   });
 
-  const teamMembers: TeamMember[] = dbMembers.map((m) => ({
+  const teamMembers: TeamMember[] = members.map((m) => ({
     id: m.id,
     name: m.name,
     role: m.role,
     about: m.about,
     photo: m.photo,
-    category: m.category as TeamCategory,
+    category: m.category as TeamMember["category"],
     socials: {
-      github: m.github || undefined,
-      linkedin: m.linkedin || undefined,
-      instagram: m.instagram || undefined,
-      twitter: m.twitter || undefined,
-      website: m.website || undefined,
+      github: m.github ?? undefined,
+      linkedin: m.linkedin ?? undefined,
+      instagram: m.instagram ?? undefined,
+      twitter: m.twitter ?? undefined,
+      website: m.website ?? undefined,
     },
   }));
 
@@ -38,6 +40,4 @@ const Team = async () => {
       </main>
     </div>
   );
-};
-
-export default Team;
+}
