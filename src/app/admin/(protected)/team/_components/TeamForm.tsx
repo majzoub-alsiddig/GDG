@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { TeamMember } from "@/generated/prisma/client";
-import ImageUpload from "./ImageUpload";
+import ImageUpload from "@/app/admin/_components/ImageUpload";
 
 const CATEGORIES = ["Leadership", "Technical", "Media", "Operations"] as const;
 
