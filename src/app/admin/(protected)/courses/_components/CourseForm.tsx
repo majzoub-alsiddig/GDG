@@ -6,20 +6,14 @@ import { useEffect, useState } from "react";
 import type { Course } from "@/generated/prisma/client";
 import ImageUpload from "@/app/admin/_components/ImageUpload";
 
-const CATEGORIES = [
-  "Web",
-  "Android",
-  "AI",
-  "Flutter",
-  "Google Workspace",
-  "Career",
-] as const;
-
 type Mode = "create" | "edit";
+
+type CategoryOption = { id: string; name: string };
 
 type Props = {
   mode: Mode;
   course?: Course;
+  categories: CategoryOption[];
 };
 
 type FormState = {
@@ -28,7 +22,7 @@ type FormState = {
   description: string;
   cover: string;
   link: string;
-  category: string;
+  categoryId: string;
   order: string;
   published: boolean;
 };
@@ -43,22 +37,25 @@ function slugify(input: string): string {
     .replace(/^-|-$/g, "");
 }
 
-function initialState(course?: Course): FormState {
+function initialState(
+  categories: CategoryOption[],
+  course?: Course
+): FormState {
   return {
     title: course?.title ?? "",
     slug: course?.slug ?? "",
     description: course?.description ?? "",
     cover: course?.cover ?? "",
     link: course?.link ?? "",
-    category: course?.category ?? "Web",
+    categoryId: course?.categoryId ?? categories[0]?.id ?? "",
     order: String(course?.order ?? 0),
     published: course?.published ?? true,
   };
 }
 
-export default function CourseForm({ mode, course }: Props) {
+export default function CourseForm({ mode, course, categories }: Props) {
   const router = useRouter();
-  const [form, setForm] = useState<FormState>(initialState(course));
+  const [form, setForm] = useState<FormState>(initialState(categories, course));
   const [slugTouched, setSlugTouched] = useState(mode === "edit");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -88,7 +85,7 @@ export default function CourseForm({ mode, course }: Props) {
       description: form.description.trim(),
       cover: form.cover.trim(),
       link: form.link.trim(),
-      category: form.category,
+      categoryId: form.categoryId,
       order: Number(form.order) || 0,
       published: form.published,
     };
@@ -133,7 +130,6 @@ export default function CourseForm({ mode, course }: Props) {
         />
       </div>
 
-      {/* Title + Slug */}
       <Field label="Title *" id="field-title">
         <input
           id="field-title"
@@ -162,7 +158,6 @@ export default function CourseForm({ mode, course }: Props) {
         </p>
       </Field>
 
-      {/* Description */}
       <Field label="Description *" id="field-description">
         <textarea
           id="field-description"
@@ -174,7 +169,6 @@ export default function CourseForm({ mode, course }: Props) {
         />
       </Field>
 
-      {/* Link + Category */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Field label="Link (YouTube, etc.) *" id="field-link">
           <input
@@ -190,20 +184,23 @@ export default function CourseForm({ mode, course }: Props) {
           <select
             id="field-category"
             required
-            value={form.category}
-            onChange={(e) => update("category", e.target.value)}
+            value={form.categoryId}
+            onChange={(e) => update("categoryId", e.target.value)}
             className={inputClass}
           >
-            {CATEGORIES.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
+            {categories.length === 0 ? (
+              <option value="">No categories available</option>
+            ) : (
+              categories.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
+                </option>
+              ))
+            )}
           </select>
         </Field>
       </div>
 
-      {/* Order + Published */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Field label="Sort order" id="field-order">
           <input
@@ -215,7 +212,7 @@ export default function CourseForm({ mode, course }: Props) {
           />
         </Field>
 
-         <div>
+        <div>
           <label className="mb-1.5 block text-sm font-medium text-gray-700">
             Visibility
           </label>
@@ -231,14 +228,11 @@ export default function CourseForm({ mode, course }: Props) {
             }`}
           >
             <span>{form.published ? "Published" : "Draft"}</span>
-
-            {/* Track — inline-block + flex-shrink-0 so it can't be squashed */}
             <span
               className={`relative inline-block h-5 w-9 flex-shrink-0 rounded-full transition-colors ${
                 form.published ? "bg-green-500" : "bg-gray-300"
               }`}
             >
-              {/* Knob — explicit left anchor + clean translate */}
               <span
                 className={`absolute left-0.5 top-0.5 h-4 w-4 rounded-full bg-white shadow-sm transition-transform ${
                   form.published ? "translate-x-4" : "translate-x-0"
@@ -249,7 +243,6 @@ export default function CourseForm({ mode, course }: Props) {
         </div>
       </div>
 
-      {/* Error */}
       {error && (
         <div
           role="alert"
@@ -259,7 +252,6 @@ export default function CourseForm({ mode, course }: Props) {
         </div>
       )}
 
-      {/* Actions */}
       <div className="flex items-center justify-end gap-3 border-t border-gray-100 pt-6">
         <button
           type="button"
@@ -270,7 +262,7 @@ export default function CourseForm({ mode, course }: Props) {
         </button>
         <button
           type="submit"
-          disabled={saving}
+          disabled={saving || categories.length === 0}
           className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-gray-800 disabled:opacity-60"
         >
           {saving
@@ -308,3 +300,4 @@ function Field({
     </div>
   );
 }
+

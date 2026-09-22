@@ -4,9 +4,20 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import type { Course } from "@/generated/prisma/client";
 
-type Props = { initialCourses: Course[] };
+type CourseRow = {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  cover: string;
+  link: string;
+  order: number;
+  published: boolean;
+  category: { id: string; name: string };
+};
+
+type Props = { initialCourses: CourseRow[] };
 
 export default function CourseManager({ initialCourses }: Props) {
   const router = useRouter();
@@ -32,7 +43,6 @@ export default function CourseManager({ initialCourses }: Props) {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
-      {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1a73e8]">
@@ -45,12 +55,20 @@ export default function CourseManager({ initialCourses }: Props) {
             Changes are published to the public courses page immediately.
           </p>
         </div>
-        <Link
-          href="/admin/courses/new"
-          className="inline-flex items-center justify-center gap-2 rounded-full bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-gray-800"
-        >
-          + Add course
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/admin/categories"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50"
+          >
+            Manage categories
+          </Link>
+          <Link
+            href="/admin/courses/new"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-gray-800"
+          >
+            + Add course
+          </Link>
+        </div>
       </div>
 
       {error && (
@@ -76,7 +94,6 @@ export default function CourseManager({ initialCourses }: Props) {
               key={c.id}
               className="flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white"
             >
-              {/* Cover */}
               <div className="relative aspect-video w-full overflow-hidden bg-gray-100">
                 {c.cover ? (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -91,7 +108,7 @@ export default function CourseManager({ initialCourses }: Props) {
                   </div>
                 )}
                 <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-gray-700 shadow-sm backdrop-blur-sm">
-                  {c.category}
+                  {c.category.name}
                 </span>
                 {!c.published && (
                   <span className="absolute right-3 top-3 rounded-full bg-gray-900 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-sm">
@@ -100,7 +117,6 @@ export default function CourseManager({ initialCourses }: Props) {
                 )}
               </div>
 
-              {/* Content */}
               <div className="flex flex-1 flex-col p-4">
                 <h3 className="text-base font-bold text-gray-900">{c.title}</h3>
                 <p className="mt-1 font-mono text-[11px] text-gray-400">

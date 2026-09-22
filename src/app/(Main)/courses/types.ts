@@ -1,17 +1,9 @@
-// app/courses/types.ts
-export type CourseCategory =
-  | "Web"
-  | "Android"
-  | "AI"
-  | "Flutter"
-  | "Google Workspace"
-  | "Career";
-
+// src/app/(Main)/courses/types.ts
 export type Course = {
   id: string;
   title: string;
   description: string;
   cover: string;
   link: string;
-  category: CourseCategory;
+  category: string;
 };

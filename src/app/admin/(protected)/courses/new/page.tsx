@@ -1,8 +1,16 @@
 // src/app/admin/(protected)/courses/new/page.tsx
 import Link from "next/link";
+import { prisma } from "@/lib/prisma";
 import CourseForm from "../_components/CourseForm";
 
-export default function NewCoursePage() {
+export default async function NewCoursePage() {
+  const categories = await prisma.courseCategory.findMany({
+    orderBy: [{ order: "asc" }, { createdAt: "asc" }],
+    select: { id: true, name: true },
+  });
+
+  const noCategories = categories.length === 0;
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
       <Link
@@ -17,9 +25,22 @@ export default function NewCoursePage() {
       <p className="mt-2 text-sm text-gray-500">
         Changes appear on the public courses page immediately after saving.
       </p>
-      <div className="mt-8 rounded-3xl border border-gray-200 bg-white p-6 sm:p-8">
-        <CourseForm mode="create" />
-      </div>
+
+      {noCategories ? (
+        <div className="mt-8 rounded-3xl border border-dashed border-amber-200 bg-amber-50 p-6 text-sm text-amber-800">
+          You need at least one category before you can create a course.{" "}
+          <Link
+            href="/admin/categories"
+            className="font-semibold underline hover:no-underline"
+          >
+            Add a category →
+          </Link>
+        </div>
+      ) : (
+        <div className="mt-8 rounded-3xl border border-gray-200 bg-white p-6 sm:p-8">
+          <CourseForm mode="create" categories={categories} />
+        </div>
+      )}
     </div>
   );
 }

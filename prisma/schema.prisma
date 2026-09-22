@@ -43,20 +43,32 @@ model Event {
   @@index([published, date])
 }
 
+model CourseCategory {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  order     Int      @default(0)
+  courses   Course[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Course {
-  id          String   @id @default(cuid())
-  slug        String   @unique
+  id          String          @id @default(cuid())
+  slug        String          @unique
   title       String
   description String
   cover       String
   link        String
-  category    String
-  order       Int      @default(0)
-  published   Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  categoryId  String
+  category    CourseCategory  @relation(fields: [categoryId], references: [id])
+  order       Int             @default(0)
+  published   Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
 
   @@index([published, order])
+  @@index([categoryId])
 }
 
 model Article {

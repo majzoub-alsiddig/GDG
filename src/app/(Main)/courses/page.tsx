@@ -11,6 +11,7 @@ export const dynamic = "force-dynamic";
 const Courses = async () => {
   const rows = await prisma.course.findMany({
     where: { published: true },
+    include: { category: true },
     orderBy: [{ order: "asc" }, { createdAt: "asc" }],
   });
 
@@ -20,7 +21,7 @@ const Courses = async () => {
     description: c.description,
     cover: c.cover,
     link: c.link,
-    category: c.category as Course["category"],
+    category: c.category.name,
   }));
 
   return (

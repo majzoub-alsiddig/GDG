@@ -11,6 +11,11 @@ export default async function EditCoursePage({ params }: Params) {
   const course = await prisma.course.findUnique({ where: { id } });
   if (!course) notFound();
 
+  const categories = await prisma.courseCategory.findMany({
+    orderBy: [{ order: "asc" }, { createdAt: "asc" }],
+    select: { id: true, name: true },
+  });
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
       <Link
@@ -26,7 +31,7 @@ export default async function EditCoursePage({ params }: Params) {
         Editing: <span className="font-medium text-gray-700">{course.title}</span>
       </p>
       <div className="mt-8 rounded-3xl border border-gray-200 bg-white p-6 sm:p-8">
-        <CourseForm mode="edit" course={course} />
+        <CourseForm mode="edit" course={course} categories={categories} />
       </div>
     </div>
   );

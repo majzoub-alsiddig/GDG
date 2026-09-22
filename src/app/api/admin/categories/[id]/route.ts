@@ -1,4 +1,4 @@
-// src/app/api/admin/courses/[id]/route.ts
+// src/app/api/admin/categories/[id]/route.ts
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
@@ -22,7 +22,7 @@ export async function PATCH(request: Request, { params }: Params) {
 
   const { id } = await params;
 
-  let body: Record<string, unknown>;
+  let body: { name?: unknown; order?: unknown };
   try {
     body = await request.json();
   } catch {
@@ -31,42 +31,41 @@ export async function PATCH(request: Request, { params }: Params) {
 
   const data: Record<string, unknown> = {};
 
-  const takeStr = (k: string) => {
-    if (k in body && typeof body[k] === "string") {
-      data[k] = (body[k] as string).trim();
+  if (typeof body.name === "string") {
+    const name = body.name.trim();
+    if (!name) {
+      return NextResponse.json({ error: "Name cannot be empty" }, { status: 400 });
     }
-  };
-
-  takeStr("title");
-  takeStr("description");
-  takeStr("cover");
-  takeStr("link");
-
-  if ("categoryId" in body && typeof body.categoryId === "string") {
-    const categoryId = body.categoryId.trim();
-    if (!categoryId) {
+    const slug = slugify(name);
+    if (!slug) {
       return NextResponse.json(
-        { error: "Category is required" },
+        { error: "Name must contain at least one letter or number" },
         { status: 400 }
       );
     }
-    const exists = await prisma.courseCategory.findUnique({
-      where: { id: categoryId },
-      select: { id: true },
+
+    // Check name / slug uniqueness (excluding this record)
+    const collision = await prisma.courseCategory.findFirst({
+      where: {
+        NOT: { id },
+        OR: [{ name }, { slug }],
+      },
+      select: { name: true, slug: true },
     });
-    if (!exists) {
+    if (collision) {
       return NextResponse.json(
-        { error: "Selected category does not exist" },
-        { status: 400 }
+        {
+          error:
+            collision.name === name
+              ? `Category "${name}" already exists`
+              : `Slug "${slug}" is already in use`,
+        },
+        { status: 409 }
       );
     }
-    data.categoryId = categoryId;
-  }
 
-  if ("slug" in body) {
-    const raw = typeof body.slug === "string" ? body.slug : "";
-    const slug = slugify(raw);
-    if (slug) data.slug = slug;
+    data.name = name;
+    data.slug = slug;
   }
 
   if ("order" in body) {
@@ -74,29 +73,15 @@ export async function PATCH(request: Request, { params }: Params) {
     data.order = Number.isFinite(n) ? n : 0;
   }
 
-  if ("published" in body) {
-    data.published = Boolean(body.published);
-  }
-
-  // Unique slug check (exclude this record)
-  if (typeof data.slug === "string") {
-    const collision = await prisma.course.findFirst({
-      where: { slug: data.slug, NOT: { id } },
-      select: { id: true },
-    });
-    if (collision) {
-      return NextResponse.json(
-        { error: `Slug "${data.slug}" is already in use` },
-        { status: 409 }
-      );
-    }
-  }
-
   try {
-    const course = await prisma.course.update({ where: { id }, data });
+    const category = await prisma.courseCategory.update({
+      where: { id },
+      data,
+    });
     revalidatePath("/courses");
+    revalidatePath("/admin/categories");
     revalidatePath("/admin/courses");
-    return NextResponse.json({ course });
+    return NextResponse.json({ category });
   } catch {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
@@ -107,9 +92,22 @@ export async function DELETE(_request: Request, { params }: Params) {
   if (guard) return guard;
 
   const { id } = await params;
+
+  // Refuse to delete if any courses still use this category
+  const count = await prisma.course.count({ where: { categoryId: id } });
+  if (count > 0) {
+    return NextResponse.json(
+      {
+        error: `Cannot delete: ${count} course${count === 1 ? "" : "s"} use this category. Reassign them first.`,
+      },
+      { status: 409 }
+    );
+  }
+
   try {
-    await prisma.course.delete({ where: { id } });
+    await prisma.courseCategory.delete({ where: { id } });
     revalidatePath("/courses");
+    revalidatePath("/admin/categories");
     revalidatePath("/admin/courses");
     return NextResponse.json({ ok: true });
   } catch {

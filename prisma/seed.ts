@@ -8,6 +8,7 @@ const adapter = new PrismaLibSql({
 const prisma = new PrismaClient({ adapter })
 
 async function main() {
+  // ================= Team =================
   await prisma.teamMember.deleteMany()
   const teamMembers = [
     {
@@ -95,6 +96,7 @@ async function main() {
     await prisma.teamMember.create({ data: member })
   }
 
+  // ================= Events =================
   await prisma.event.deleteMany()
   const events = [
     {
@@ -157,7 +159,26 @@ async function main() {
     await prisma.event.create({ data: event })
   }
 
+  // ================= Courses + Categories =================
+  // Order matters: delete courses first (FK), then categories
   await prisma.course.deleteMany()
+  await prisma.courseCategory.deleteMany()
+
+  const categoryData = [
+    { name: "Web", slug: "web", order: 1 },
+    { name: "Android", slug: "android", order: 2 },
+    { name: "AI", slug: "ai", order: 3 },
+    { name: "Flutter", slug: "flutter", order: 4 },
+    { name: "Google Workspace", slug: "google-workspace", order: 5 },
+    { name: "Career", slug: "career", order: 6 },
+  ]
+  for (const cat of categoryData) {
+    await prisma.courseCategory.create({ data: cat })
+  }
+
+  const allCategories = await prisma.courseCategory.findMany()
+  const catIdByName = Object.fromEntries(allCategories.map((c) => [c.name, c.id]))
+
   const courses = [
     {
       slug: "google-workspace-essentials",
@@ -165,7 +186,7 @@ async function main() {
       description: "Learn how to effectively use Google Workspace tools for productivity, collaboration, and learning.",
       cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80",
       link: "https://youtube.com",
-      category: "Google Workspace",
+      categoryId: catIdByName["Google Workspace"],
       order: 1,
     },
     {
@@ -174,7 +195,7 @@ async function main() {
       description: "Build your first web pages with HTML, CSS, and JavaScript - from structure to styling to interactivity.",
       cover: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80",
       link: "https://youtube.com",
-      category: "Web",
+      categoryId: catIdByName["Web"],
       order: 2,
     },
     {
@@ -183,7 +204,7 @@ async function main() {
       description: "Get started building native Android apps using Kotlin, Jetpack Compose, and modern Android tooling.",
       cover: "https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?auto=format&fit=crop&q=80",
       link: "https://youtube.com",
-      category: "Android",
+      categoryId: catIdByName["Android"],
       order: 3,
     },
     {
@@ -192,7 +213,7 @@ async function main() {
       description: "Create beautiful cross-platform mobile apps with Flutter and Dart, from widgets to state management.",
       cover: "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&q=80",
       link: "https://youtube.com",
-      category: "Flutter",
+      categoryId: catIdByName["Flutter"],
       order: 4,
     },
     {
@@ -201,7 +222,7 @@ async function main() {
       description: "Understand the core concepts behind machine learning and train your first models with Python.",
       cover: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80",
       link: "https://youtube.com",
-      category: "AI",
+      categoryId: catIdByName["AI"],
       order: 5,
     },
     {
@@ -210,7 +231,7 @@ async function main() {
       description: "Practical guidance on CVs, portfolios, internships, and preparing for your first technical interview.",
       cover: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80",
       link: "https://youtube.com",
-      category: "Career",
+      categoryId: catIdByName["Career"],
       order: 6,
     },
   ]
@@ -218,6 +239,7 @@ async function main() {
     await prisma.course.create({ data: course })
   }
 
+  // ================= Articles =================
   await prisma.article.deleteMany()
   const articles = [
     {
@@ -348,13 +370,11 @@ async function main() {
     await prisma.article.create({ data: article })
   }
 
-  console.log(`✅ Seeded ${articles.length} articles`)
-
+  console.log(`✅ Seeded ${categoryData.length} categories`)
   console.log(`✅ Seeded ${courses.length} courses`)
-
   console.log(`✅ Seeded ${events.length} events`)
-
   console.log(`✅ Seeded ${teamMembers.length} team members`)
+  console.log(`✅ Seeded ${articles.length} articles`)
 }
 
 main()
