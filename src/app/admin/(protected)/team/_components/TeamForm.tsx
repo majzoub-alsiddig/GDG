@@ -1,9 +1,9 @@
-// src/app/admin/(protected)/team/_components/TeamForm.tsx
 "use client";
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { TeamMember } from "@/generated/prisma/client";
+import ImageUpload from "./ImageUpload";
 
 const CATEGORIES = ["Leadership", "Technical", "Media", "Operations"] as const;
 
@@ -102,45 +102,15 @@ export default function TeamForm({ mode, member }: Props) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Photo preview + URL */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-[160px_1fr]">
-        <div className="aspect-square w-full max-w-[160px] overflow-hidden rounded-2xl border border-gray-200 bg-gray-100">
-          {form.photo ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={form.photo}
-              alt="Preview"
-              className="h-full w-full object-cover"
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).style.display = "none";
-              }}
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center text-xs text-gray-400">
-              Preview
-            </div>
-          )}
-        </div>
-        <div>
-          <label
-            htmlFor="field-photo"
-            className="mb-1.5 block text-sm font-medium text-gray-700"
-          >
-            Photo URL *
-          </label>
-          <input
-            id="field-photo"
-            type="url"
-            required
-            value={form.photo}
-            onChange={(e) => update("photo", e.target.value)}
-            placeholder="https://..."
-            className={inputClass}
-          />
-          <p className="mt-1.5 text-xs text-gray-400">
-            Use a public image URL. Real uploads come later.
-          </p>
-        </div>
+      {/* Photo uploader */}
+      <div>
+        <label className="mb-1.5 block text-sm font-medium text-gray-700">
+          Photo *
+        </label>
+        <ImageUpload
+          value={form.photo}
+          onChange={(url) => update("photo", url)}
+        />
       </div>
 
       {/* Name + Role */}
