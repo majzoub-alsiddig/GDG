@@ -1,3 +1,4 @@
+// src/app/(Main)/page.tsx
 import Hero from "./home/components/Hero";
 import CommunityStats from "./home/components/CommunityStats";
 import UpcomingEvents from "./home/components/UpcomingEvents";
@@ -5,7 +6,6 @@ import FeaturedCourses from "./home/components/FeaturedCourses";
 import JoinCommunity from "./home/components/JoinCommunity";
 import { prisma } from "@/lib/prisma";
 import type { EventItem, FeaturedCourse } from "./home/types";
-import type { Article, ArticleCategory } from "./articles/types";
 
 export const dynamic = "force-dynamic";
 
@@ -13,11 +13,13 @@ export default async function Home() {
   const [dbEvents, dbCourses] = await Promise.all([
     prisma.event.findMany({
       where: { published: true, isFeatured: true },
+      include: { category: true },
       orderBy: { date: "asc" },
       take: 3,
     }),
     prisma.course.findMany({
       where: { published: true },
+      include: { category: true },
       orderBy: [{ order: "asc" }, { createdAt: "asc" }],
       take: 3,
     }),
@@ -26,7 +28,7 @@ export default async function Home() {
   const featuredEvents: EventItem[] = dbEvents.map((e) => ({
     id: e.slug,
     title: e.title,
-    category: e.category as EventItem["category"],
+    category: e.category.name,
     cover: e.cover,
     date: e.date.toISOString().split("T")[0],
     location: e.location,
@@ -39,7 +41,7 @@ export default async function Home() {
     description: c.description,
     cover: c.cover,
     link: c.link,
-    category: c.category,
+    category: c.category.name,
   }));
 
   return (
@@ -54,5 +56,3 @@ export default async function Home() {
     </div>
   );
 }
-
-// TODO: see the join community links, on head and footer

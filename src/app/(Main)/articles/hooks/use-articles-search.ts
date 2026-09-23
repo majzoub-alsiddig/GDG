@@ -1,107 +1,81 @@
+// src/app/(Main)/articles/hooks/use-articles-search.ts
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { Article, ArticleCategory } from "../types";
+import type { Article } from "../types";
 
 const ALL = "All" as const;
-export type CategoryFilter = typeof ALL | ArticleCategory;
+export type CategoryFilter = typeof ALL | string;
 
-type DbArticle = {
-  slug: string;
-  title: string;
-  description: string;
-  content: unknown;
-  author: string;
-  authorRole: string | null;
-  cover: string;
-  category: string;
-  readingTime: number;
-  featured: boolean;
-  createdAt: string;
+type UseArticlesSearchArgs = {
+  initialArticles: Article[];
 };
 
-function mapDbArticle(a: DbArticle): Article {
-  return {
-    id: a.slug,
-    title: a.title,
-    description: a.description,
-    content: a.content as Article["content"],
-    author: a.author,
-    authorRole: a.authorRole ?? undefined,
-    createdAt: a.createdAt.split("T")[0],
-    category: a.category as ArticleCategory,
-    cover: a.cover,
-    readingTime: a.readingTime,
-    featured: a.featured,
-  };
-}
-
-type Options = {
-  initialArticles: Article[];
-  debounceMs?: number;
+type UseArticlesSearchResult = {
+  articles: Article[];
+  query: string;
+  setQuery: (q: string) => void;
+  clearSearch: () => void;
+  category: CategoryFilter;
+  setCategory: (c: CategoryFilter) => void;
+  isLoading: boolean;
+  error: string | null;
 };
 
 export function useArticlesSearch({
   initialArticles,
-  debounceMs = 300,
-}: Options) {
-  const [articles, setArticles] = useState<Article[]>(initialArticles);
-  const [query, setQuery] = useState("");
+}: UseArticlesSearchArgs): UseArticlesSearchResult {
+  const [query, setQueryState] = useState("");
   const [category, setCategory] = useState<CategoryFilter>(ALL);
+  const [articles, setArticles] = useState<Article[]>(initialArticles);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const abortRef = useRef<AbortController | null>(null);
-  const isFirstRender = useRef(true);
-
-  // Sync when the server sends fresh props (e.g. after a router.refresh)
-  useEffect(() => {
-    setArticles(initialArticles);
-  }, [initialArticles]);
-
-  useEffect(() => {
-    // Skip the first render — initialArticles already covers it
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-
-    const timer = setTimeout(() => {
-      // Cancel any in-flight request
-      abortRef.current?.abort();
-      const controller = new AbortController();
-      abortRef.current = controller;
-
-      const params = new URLSearchParams();
-      if (query.trim()) params.set("q", query.trim());
-      if (category !== ALL) params.set("category", category);
-
+  const runFilter = useCallback(
+    (q: string, cat: CategoryFilter) => {
       setIsLoading(true);
       setError(null);
 
-      fetch(`/api/articles?${params.toString()}`, {
-        signal: controller.signal,
-      })
-        .then((res) => {
-          if (!res.ok) throw new Error("Failed to fetch articles");
-          return res.json() as Promise<DbArticle[]>;
-        })
-        .then((data) => {
-          setArticles(data.map(mapDbArticle));
-        })
-        .catch((err: unknown) => {
-          if (err instanceof Error && err.name === "AbortError") return;
-          setError("Couldn't load articles. Please try again.");
-        })
-        .finally(() => {
-          setIsLoading(false);
+      // Simulated client-side filter — swap for a fetch() later if you
+      // move to server-side search.
+      try {
+        const trimmed = q.trim().toLowerCase();
+        const next = initialArticles.filter((a) => {
+          if (cat !== ALL && a.category !== cat) return false;
+          if (trimmed.length === 0) return true;
+          const haystack =
+            `${a.title} ${a.description} ${a.author} ${a.category}`.toLowerCase();
+          return haystack.includes(trimmed);
         });
-    }, debounceMs);
+        setArticles(next);
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "Something went wrong");
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [initialArticles]
+  );
 
-    return () => clearTimeout(timer);
-  }, [query, category, debounceMs]);
+  // Debounce the filter when the query or category changes
+  useEffect(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      runFilter(query, category);
+    }, 150);
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, [query, category, runFilter]);
 
-  const clearSearch = useCallback(() => setQuery(""), []);
+  const setQuery = useCallback((q: string) => {
+    setQueryState(q);
+  }, []);
+
+  const clearSearch = useCallback(() => {
+    setQueryState("");
+  }, []);
 
   return {
     articles,
