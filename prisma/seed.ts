@@ -239,8 +239,28 @@ async function main() {
     await prisma.course.create({ data: course })
   }
 
-  // ================= Articles =================
+  // ================= Articles + Categories =================
+  // Order matters: delete articles first (FK), then categories
   await prisma.article.deleteMany()
+  await prisma.articleCategory.deleteMany()
+
+  const articleCategoryData = [
+    { name: "Web Dev", slug: "web-dev", order: 1 },
+    { name: "Mobile", slug: "mobile", order: 2 },
+    { name: "AI/ML", slug: "ai-ml", order: 3 },
+    { name: "Cloud", slug: "cloud", order: 4 },
+    { name: "DevOps", slug: "devops", order: 5 },
+    { name: "Events", slug: "events", order: 6 },
+  ]
+  for (const cat of articleCategoryData) {
+    await prisma.articleCategory.create({ data: cat })
+  }
+
+  const allArticleCategories = await prisma.articleCategory.findMany()
+  const articleCatIdByName = Object.fromEntries(
+    allArticleCategories.map((c) => [c.name, c.id])
+  )
+
   const articles = [
     {
       slug: "ai-workshop-recap",
@@ -249,7 +269,7 @@ async function main() {
       author: "GDG Team",
       authorRole: "Community",
       cover: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1600&q=80",
-      category: "AI/ML",
+      categoryId: articleCatIdByName["AI/ML"],
       readingTime: 5,
       featured: true,
       content: {
@@ -271,7 +291,7 @@ async function main() {
       author: "Baboshi",
       authorRole: "Cloud Contributor",
       cover: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1600&q=80",
-      category: "Cloud",
+      categoryId: articleCatIdByName["Cloud"],
       readingTime: 6,
       featured: false,
       content: {
@@ -289,7 +309,7 @@ async function main() {
       author: "Sarah Dev",
       authorRole: "Mobile Developer",
       cover: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1600&q=80",
-      category: "Mobile",
+      categoryId: articleCatIdByName["Mobile"],
       readingTime: 7,
       featured: false,
       content: {
@@ -313,7 +333,7 @@ async function main() {
       author: "Lead Amir",
       authorRole: "Events Lead",
       cover: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=80",
-      category: "Events",
+      categoryId: articleCatIdByName["Events"],
       readingTime: 8,
       featured: false,
       content: {
@@ -331,7 +351,7 @@ async function main() {
       author: "Tech Team",
       authorRole: "Engineering",
       cover: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?auto=format&fit=crop&w=1600&q=80",
-      category: "DevOps",
+      categoryId: articleCatIdByName["DevOps"],
       readingTime: 5,
       featured: false,
       content: {
@@ -355,7 +375,7 @@ async function main() {
       author: "Baboshi",
       authorRole: "Web Developer",
       cover: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1600&q=80",
-      category: "Web Dev",
+      categoryId: articleCatIdByName["Web Dev"],
       readingTime: 9,
       featured: false,
       content: {
@@ -370,10 +390,11 @@ async function main() {
     await prisma.article.create({ data: article })
   }
 
-  console.log(`✅ Seeded ${categoryData.length} categories`)
+  console.log(`✅ Seeded ${categoryData.length} course categories`)
   console.log(`✅ Seeded ${courses.length} courses`)
   console.log(`✅ Seeded ${events.length} events`)
   console.log(`✅ Seeded ${teamMembers.length} team members`)
+  console.log(`✅ Seeded ${articleCategoryData.length} article categories`)
   console.log(`✅ Seeded ${articles.length} articles`)
 }
 

@@ -1,13 +1,5 @@
-// app/articles/types.ts
+// src/app/(Main)/articles/types.ts
 import type { JSONContent } from "@tiptap/core";
-
-export type ArticleCategory =
-  | "Web Dev"
-  | "Mobile"
-  | "AI/ML"
-  | "Cloud"
-  | "DevOps"
-  | "Events";
 
 export type Article = {
   id: string;
@@ -17,7 +9,7 @@ export type Article = {
   author: string;
   authorRole?: string;
   createdAt: string;
-  category: ArticleCategory;
+  category: string;
   cover: string;
   readingTime: number;
   featured?: boolean;

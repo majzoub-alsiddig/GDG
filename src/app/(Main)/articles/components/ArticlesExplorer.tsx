@@ -1,25 +1,23 @@
 "use client";
 
 import { useMemo } from "react";
-import type { Article, ArticleCategory } from "../types";
-import { useArticlesSearch, type CategoryFilter } from "../hooks/use-articles-search";
+import type { Article } from "../types";
+import {
+  useArticlesSearch,
+} from "../hooks/use-articles-search";
 import ArticleCard from "./ArticleCard";
 import ArticlesEmptyState from "./ArticlesEmptyState";
 import ArticlesSkeleton from "./ArticlesSkeleton";
 import { CloseIcon, SearchIcon } from "@/components/icons";
 
+
 const ALL = "All" as const;
 
-const CATEGORY_ORDER: ArticleCategory[] = [
-  "Web Dev",
-  "Mobile",
-  "AI/ML",
-  "Cloud",
-  "DevOps",
-  "Events",
-];
-
-export default function ArticlesExplorer({ articles: initialArticles }: { articles: Article[] }) {
+export default function ArticlesExplorer({
+  articles: initialArticles,
+}: {
+  articles: Article[];
+}) {
   const {
     articles,
     query,
@@ -34,28 +32,33 @@ export default function ArticlesExplorer({ articles: initialArticles }: { articl
   const categories = useMemo(() => {
     const present = new Set(initialArticles.map((a) => a.category));
     if (present.size <= 1) return [];
-    return [ALL, ...CATEGORY_ORDER.filter((c) => present.has(c))];
+    return [ALL, ...Array.from(present).sort()];
   }, [initialArticles]);
 
   const trimmedQuery = query.trim().toLowerCase();
   const isFiltering = trimmedQuery.length > 0 || category !== ALL;
 
-  const featured = useMemo(
-    () => (isFiltering ? null : articles.find((a) => a.featured) ?? null),
-    [articles, isFiltering]
-  );
-
+  // Featured first, then the rest in their original order
   const gridArticles = useMemo(() => {
-    if (featured) return articles.filter((a) => a.id !== featured.id);
-    return articles;
-  }, [articles, featured]);
+    return [...articles].sort((a, b) => {
+      const fa = a.featured ? 1 : 0;
+      const fb = b.featured ? 1 : 0;
+      return fb - fa;
+    });
+  }, [articles]);
 
   return (
     <>
       {/* HERO */}
       <section className="relative overflow-hidden bg-white">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-b from-blue-50/50 via-white to-white" />
-        <div aria-hidden="true" className="pointer-events-none absolute -top-32 -right-24 h-72 w-72 rounded-full bg-[#4285F4]/10 blur-3xl" />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-blue-50/50 via-white to-white"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-32 -right-24 h-72 w-72 rounded-full bg-[#4285F4]/10 blur-3xl"
+        />
 
         <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-14 sm:px-6 sm:pt-20 sm:pb-16 lg:px-8 lg:pt-24">
           <div className="mx-auto max-w-3xl text-center">
@@ -64,10 +67,14 @@ export default function ArticlesExplorer({ articles: initialArticles }: { articl
               <span className="text-[#1a73e8]"> &amp; Stories</span>
             </h1>
 
-            <span aria-hidden="true" className="mx-auto mt-6 block h-1 w-20 rounded-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#FBBC05]" />
+            <span
+              aria-hidden="true"
+              className="mx-auto mt-6 block h-1 w-20 rounded-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] to-[#FBBC05]"
+            />
 
             <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-gray-600 sm:text-lg">
-              Technical tutorials, community stories, project insights, and practical knowledge from the GDG UofK community.
+              Technical tutorials, community stories, project insights, and
+              practical knowledge from the GDG UofK community.
             </p>
 
             {/* Search */}
@@ -108,7 +115,7 @@ export default function ArticlesExplorer({ articles: initialArticles }: { articl
             <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
               {isFiltering
                 ? trimmedQuery
-                  ? `Results for “${query}”`
+                  ? `Results for "${query}"`
                   : `${category} articles`
                 : "Latest articles"}
             </h2>

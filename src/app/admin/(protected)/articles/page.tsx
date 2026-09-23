@@ -1,10 +1,27 @@
-export default function AdminArticlesPage() {
-  return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-      <h1 className="text-2xl font-bold text-gray-900">Articles</h1>
-      <p className="mt-2 text-sm text-gray-500">
-        Article management coming soon.
-      </p>
-    </div>
-  );
+// src/app/admin/(protected)/articles/page.tsx
+import { prisma } from "@/lib/prisma";
+import ArticleManager from "./_components/ArticleManager";
+
+export default async function AdminArticlesPage() {
+  const rows = await prisma.article.findMany({
+    include: { category: true },
+    orderBy: { createdAt: "desc" },
+  });
+
+  const articles = rows.map((a) => ({
+    id: a.id,
+    slug: a.slug,
+    title: a.title,
+    description: a.description,
+    cover: a.cover,
+    category: { id: a.category.id, name: a.category.name },
+    author: a.author,
+    authorRole: a.authorRole,
+    readingTime: a.readingTime,
+    featured: a.featured,
+    published: a.published,
+    createdAt: a.createdAt.toISOString(),
+  }));
+
+  return <ArticleManager initialArticles={articles} />;
 }

@@ -4,20 +4,55 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-type CategoryRow = {
+export type CategoryRow = {
   id: string;
   name: string;
   slug: string;
   order: number;
-  courseCount: number;
+  count: number;
 };
 
-type Props = { initialCategories: CategoryRow[] };
+type Kind = "courses" | "articles";
 
-export default function CategoryManager({ initialCategories }: Props) {
+type Props = {
+  initialCourseCategories: CategoryRow[];
+  initialArticleCategories: CategoryRow[];
+};
+
+export default function CategoryManager({
+  initialCourseCategories,
+  initialArticleCategories,
+}: Props) {
   const router = useRouter();
-  const [categories, setCategories] = useState(initialCategories);
-  const [error, setError] = useState<string | null>(null);
+  const [kind, setKind] = useState<Kind>("courses");
+
+  const endpoints = {
+    courses: {
+      base: "/api/admin/categories",
+      label: "Course categories",
+      itemLabel: "course",
+      itemLabelPlural: "courses",
+    },
+    articles: {
+      base: "/api/admin/article-categories",
+      label: "Article categories",
+      itemLabel: "article",
+      itemLabelPlural: "articles",
+    },
+  } as const;
+
+  // Keep two independent lists; the manager swaps them based on tab
+  const [courseCategories, setCourseCategories] = useState(
+    initialCourseCategories
+  );
+  const [articleCategories, setArticleCategories] = useState(
+    initialArticleCategories
+  );
+
+  const categories = kind === "courses" ? courseCategories : articleCategories;
+  const setCategories =
+    kind === "courses" ? setCourseCategories : setArticleCategories;
+  const endpoint = endpoints[kind];
 
   // New category form
   const [newName, setNewName] = useState("");
@@ -30,13 +65,15 @@ export default function CategoryManager({ initialCategories }: Props) {
   const [editOrder, setEditOrder] = useState("0");
   const [busyId, setBusyId] = useState<string | null>(null);
 
+  const [error, setError] = useState<string | null>(null);
+
   async function handleCreate(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
     setCreating(true);
 
     try {
-      const res = await fetch("/api/admin/categories", {
+      const res = await fetch(endpoint.base, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -54,10 +91,7 @@ export default function CategoryManager({ initialCategories }: Props) {
         throw new Error(data.error ?? "Create failed");
       }
 
-      setCategories((prev) => [
-        ...prev,
-        { ...data.category!, courseCount: 0 },
-      ]);
+      setCategories((prev) => [...prev, { ...data.category!, count: 0 }]);
       setNewName("");
       setNewOrder("0");
       router.refresh();
@@ -85,7 +119,7 @@ export default function CategoryManager({ initialCategories }: Props) {
     setBusyId(id);
     setError(null);
     try {
-      const res = await fetch(`/api/admin/categories/${id}`, {
+      const res = await fetch(`${endpoint.base}/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -106,7 +140,12 @@ export default function CategoryManager({ initialCategories }: Props) {
       setCategories((prev) =>
         prev.map((c) =>
           c.id === id
-            ? { ...c, name: data.category!.name, slug: data.category!.slug, order: data.category!.order }
+            ? {
+                ...c,
+                name: data.category!.name,
+                slug: data.category!.slug,
+                order: data.category!.order,
+              }
             : c
         )
       );
@@ -124,9 +163,7 @@ export default function CategoryManager({ initialCategories }: Props) {
     setBusyId(id);
     setError(null);
     try {
-      const res = await fetch(`/api/admin/categories/${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(`${endpoint.base}/${id}`, { method: "DELETE" });
       const data = (await res.json().catch(() => ({}))) as { error?: string };
       if (!res.ok) throw new Error(data.error ?? "Delete failed");
       setCategories((prev) => prev.filter((c) => c.id !== id));
@@ -140,22 +177,55 @@ export default function CategoryManager({ initialCategories }: Props) {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
-      {/* Header */}
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1a73e8]">
           Content
         </p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900">
-          Course Categories
+          Categories
         </h1>
         <p className="mt-2 text-sm text-gray-500">
-          Categories appear as filters on the public courses page. Deleting a
-          category that still has courses is blocked — reassign the courses
-          first.
+          Categories appear as filters on the public pages. Deleting a category
+          that still has items is blocked — reassign them first.
         </p>
       </div>
 
-      {/* Error */}
+      {/* Tabs */}
+      <div className="mt-6 inline-flex rounded-full border border-gray-200 bg-white p-1">
+        <button
+          type="button"
+          onClick={() => {
+            setKind("courses");
+            cancelEdit();
+            setError(null);
+          }}
+          aria-pressed={kind === "courses"}
+          className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+            kind === "courses"
+              ? "bg-gray-900 text-white"
+              : "text-gray-600 hover:text-gray-900"
+          }`}
+        >
+          Course categories
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setKind("articles");
+            cancelEdit();
+            setError(null);
+          }}
+          aria-pressed={kind === "articles"}
+          className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+            kind === "articles"
+              ? "bg-gray-900 text-white"
+              : "text-gray-600 hover:text-gray-900"
+          }`}
+        >
+          Article categories
+        </button>
+      </div>
+
       {error && (
         <div
           role="alert"
@@ -165,7 +235,7 @@ export default function CategoryManager({ initialCategories }: Props) {
         </div>
       )}
 
-      {/* New category form */}
+      {/* New category */}
       <form
         onSubmit={handleCreate}
         className="mt-8 flex flex-col gap-3 rounded-2xl border border-gray-200 bg-white p-4 sm:flex-row sm:items-end sm:gap-3 sm:p-5"
@@ -175,7 +245,7 @@ export default function CategoryManager({ initialCategories }: Props) {
             htmlFor="new-cat-name"
             className="mb-1.5 block text-sm font-medium text-gray-700"
           >
-            New category
+            New {kind === "courses" ? "course" : "article"} category
           </label>
           <input
             id="new-cat-name"
@@ -219,7 +289,8 @@ export default function CategoryManager({ initialCategories }: Props) {
               No categories yet
             </h3>
             <p className="mt-2 text-sm text-gray-500">
-              Add your first category above.
+              Add your first {kind === "courses" ? "course" : "article"}{" "}
+              category above.
             </p>
           </div>
         ) : (
@@ -285,7 +356,8 @@ export default function CategoryManager({ initialCategories }: Props) {
 
                       <div className="flex items-center gap-2">
                         <span className="text-xs text-gray-500">
-                          {c.courseCount} course{c.courseCount === 1 ? "" : "s"}
+                          {c.count} {endpoint.itemLabel}
+                          {c.count === 1 ? "" : "s"}
                         </span>
                         <button
                           type="button"
@@ -298,10 +370,10 @@ export default function CategoryManager({ initialCategories }: Props) {
                         <button
                           type="button"
                           onClick={() => handleDelete(c.id, c.name)}
-                          disabled={isBusy || c.courseCount > 0}
+                          disabled={isBusy || c.count > 0}
                           title={
-                            c.courseCount > 0
-                              ? "Reassign courses before deleting"
+                            c.count > 0
+                              ? `Reassign ${endpoint.itemLabelPlural} before deleting`
                               : "Delete category"
                           }
                           className="rounded-full px-3 py-1.5 text-xs font-semibold text-red-600 transition-colors hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-40"

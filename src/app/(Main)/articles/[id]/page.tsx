@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { generateHTML } from "@tiptap/html";
-import StarterKit from "@tiptap/starter-kit";
+import type { JSONContent } from "@tiptap/core";
 import ArticleCard from "../components/ArticleCard";
+import ArticleBody from "../components/ArticleBody";
 import { prisma } from "@/lib/prisma";
-import type { Article, ArticleCategory } from "../types";
+import type { Article } from "../types";
 import {
   ArrowLeftIcon,
   ClockIcon,
@@ -14,6 +14,7 @@ import {
   TwitterIcon,
   WhatsAppIcon,
 } from "@/components/icons";
+import "./article-content.css";
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", {
@@ -24,17 +25,20 @@ function formatDate(iso: string) {
 }
 
 async function getArticleBySlug(slug: string): Promise<Article | null> {
-  const a = await prisma.article.findUnique({ where: { slug } });
+  const a = await prisma.article.findUnique({
+    where: { slug },
+    include: { category: true },
+  });
   if (!a || !a.published) return null;
   return {
     id: a.slug,
     title: a.title,
     description: a.description,
-    content: a.content as Article["content"],
+    content: a.content as JSONContent,
     author: a.author,
     authorRole: a.authorRole ?? undefined,
     createdAt: a.createdAt.toISOString().split("T")[0],
-    category: a.category as ArticleCategory,
+    category: a.category.name,
     cover: a.cover,
     readingTime: a.readingTime,
     featured: a.featured,
@@ -63,18 +67,15 @@ export default async function FullArticlePage({
   const { id } = await params;
   const article = await getArticleBySlug(id);
 
-  if (!article) {
-    notFound();
-  }
-
-  const htmlContent = generateHTML(article.content, [StarterKit]);
+  if (!article) notFound();
 
   const relatedDb = await prisma.article.findMany({
     where: {
       published: true,
-      category: article.category,
-      NOT: { slug: article.id },
+      slug: { not: article.id },
+      category: { name: article.category },
     },
+    include: { category: true },
     orderBy: { createdAt: "desc" },
     take: 3,
   });
@@ -83,11 +84,11 @@ export default async function FullArticlePage({
     id: a.slug,
     title: a.title,
     description: a.description,
-    content: a.content as Article["content"],
+    content: a.content as JSONContent,
     author: a.author,
     authorRole: a.authorRole ?? undefined,
     createdAt: a.createdAt.toISOString().split("T")[0],
-    category: a.category as ArticleCategory,
+    category: a.category.name,
     cover: a.cover,
     readingTime: a.readingTime,
     featured: a.featured,
@@ -98,15 +99,16 @@ export default async function FullArticlePage({
 
   return (
     <main className="bg-white pb-20">
-      {/* BREADCRUMB */}
       <div className="mx-auto max-w-3xl px-4 pt-10 sm:px-6 lg:px-8">
-        <Link  href="/articles"  className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-2 rounded-md">
+        <Link
+          href="/articles"
+          className="inline-flex items-center gap-1.5 rounded-md text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-2"
+        >
           <ArrowLeftIcon className="h-4 w-4" />
           All articles
         </Link>
       </div>
 
-      {/* HEADER */}
       <header className="mx-auto max-w-3xl px-4 pt-8 sm:px-6 lg:px-8">
         <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#1a73e8]">
           <span>{article.category}</span>
@@ -132,7 +134,10 @@ export default async function FullArticlePage({
               )}
             </div>
           </div>
-          <span aria-hidden="true" className="hidden h-4 w-px bg-gray-200 sm:block" />
+          <span
+            aria-hidden="true"
+            className="hidden h-4 w-px bg-gray-200 sm:block"
+          />
           <span className="text-sm text-gray-500">
             {formatDate(article.createdAt)}
           </span>
@@ -144,42 +149,64 @@ export default async function FullArticlePage({
         </div>
       </header>
 
-      {/* COVER */}
       <figure className="mx-auto mt-10 max-w-5xl px-4 sm:px-6 lg:px-8">
         <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-gray-100 ring-1 ring-black/5">
-          <img src={article.cover} alt={`Cover image for ${article.title}`} className="h-full w-full object-cover"/>
+          <img
+            src={article.cover}
+            alt={`Cover image for ${article.title}`}
+            className="h-full w-full object-cover"
+          />
         </div>
       </figure>
 
-      {/* BODY */}
       <article className="mx-auto mt-12 max-w-3xl px-4 sm:px-6 lg:px-8">
-        <div className="prose prose-lg prose-slate max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-a:text-[#1a73e8] prose-a:no-underline hover:prose-a:underline prose-code:rounded prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-[0.9em] prose-code:font-medium prose-code:text-gray-800 prose-code:before:content-none prose-code:after:content-none" dangerouslySetInnerHTML={{ __html: htmlContent }}/>
+        <ArticleBody content={article.content} />
       </article>
 
-      {/* SHARE */}
       <div className="mx-auto mt-14 max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-gray-100 bg-gray-50/60 px-5 py-4">
           <span className="text-sm font-semibold text-gray-700">
             Share this article
           </span>
           <div className="ml-auto flex items-center gap-1">
-            <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-500 transition hover:bg-white hover:text-[#0a66c2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8]">
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share on LinkedIn"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-500 transition hover:bg-white hover:text-[#0a66c2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8]"
+            >
               <LinkedInIcon className="h-4 w-4" />
             </a>
-            <a href={`https://twitter.com/intent/tweet?text=${shareText}&url=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noopener noreferrer" aria-label="Share on X" className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-500 transition hover:bg-white hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8]">
+            <a
+              href={`https://twitter.com/intent/tweet?text=${shareText}&url=${encodeURIComponent(shareUrl)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share on X"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-500 transition hover:bg-white hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8]"
+            >
               <TwitterIcon className="h-4 w-4" />
             </a>
-            <a href={`https://wa.me/?text=${shareText}%20${encodeURIComponent(shareUrl)}`} target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp" className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-500 transition hover:bg-white hover:text-[#25D366] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8]">
+            <a
+              href={`https://wa.me/?text=${shareText}%20${encodeURIComponent(shareUrl)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share on WhatsApp"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-500 transition hover:bg-white hover:text-[#25D366] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8]"
+            >
               <WhatsAppIcon className="h-4 w-4" />
             </a>
-            <a href={shareUrl} aria-label="Copy link" className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-500 transition hover:bg-white hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8]">
+            <a
+              href={shareUrl}
+              aria-label="Copy link"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-500 transition hover:bg-white hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8]"
+            >
               <LinkIcon className="h-4 w-4" />
             </a>
           </div>
         </div>
       </div>
 
-      {/* RELATED */}
       {related.length > 0 && (
         <section className="mx-auto mt-20 max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-8 flex items-center gap-4">

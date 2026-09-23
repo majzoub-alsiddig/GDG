@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { EditorContent, EditorContext, useEditor } from "@tiptap/react";
+import type { JSONContent } from "@tiptap/core";
 
 // --- Tiptap Core Extensions ---
 import { StarterKit } from "@tiptap/starter-kit";
@@ -186,7 +187,15 @@ const MobileToolbarContent = ({
   </>
 );
 
-export function SimpleEditor() {
+type SimpleEditorProps = {
+  
+  initialContent?: JSONContent;
+  
+  onChange?: (json: JSONContent) => void;
+};
+
+export function SimpleEditor({ initialContent, onChange }: SimpleEditorProps = {}) {
+  
   const isMobile = useIsBreakpoint();
   const { height } = useWindowSize();
   const [mobileView, setMobileView] = useState<"main" | "highlighter" | "link">(
@@ -195,7 +204,12 @@ export function SimpleEditor() {
   const toolbarRef = useRef<HTMLDivElement>(null);
 
   const editor = useEditor({
-    immediatelyRender: false,
+  immediatelyRender: false,
+  content: initialContent ?? (content as JSONContent),
+  onUpdate: ({ editor }) => {
+    onChange?.(editor.getJSON());
+	},
+    
     editorProps: {
       attributes: {
         autocomplete: "off",
