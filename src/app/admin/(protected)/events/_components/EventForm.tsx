@@ -1,4 +1,4 @@
-// src/app/admin/(protected)/articles/_components/ArticleForm.tsx
+// src/app/admin/(protected)/events/_components/EventForm.tsx
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -15,24 +15,25 @@ import { RichTextEditor } from "@/components/editor";
 
 type CategoryOption = { id: string; name: string };
 
-export type ArticleFormInitial = {
+export type EventFormInitial = {
   id?: string;
   title: string;
   slug: string;
   description: string;
   content: JSONContent;
-  author: string;
-  authorRole: string;
   cover: string;
   categoryId: string;
-  readingTime: number;
-  featured: boolean;
+  date: string; // datetime-local string: YYYY-MM-DDTHH:mm
+  endDate: string; // datetime-local string, may be empty
+  location: string;
+  link: string;
+  isFeatured: boolean;
   published: boolean;
 };
 
 type Props = {
   mode: "create" | "edit";
-  initial: ArticleFormInitial;
+  initial: EventFormInitial;
   categories: CategoryOption[];
 };
 
@@ -46,19 +47,20 @@ function slugify(input: string): string {
     .replace(/^-|-$/g, "");
 }
 
-export default function ArticleForm({ mode, initial, categories }: Props) {
+export default function EventForm({ mode, initial, categories }: Props) {
   const router = useRouter();
 
   const [form, setForm] = useState({
     title: initial.title,
     slug: initial.slug,
     description: initial.description,
-    author: initial.author,
-    authorRole: initial.authorRole,
     cover: initial.cover,
     categoryId: initial.categoryId || categories[0]?.id || "",
-    readingTime: String(initial.readingTime),
-    featured: initial.featured,
+    date: initial.date,
+    endDate: initial.endDate,
+    location: initial.location,
+    link: initial.link,
+    isFeatured: initial.isFeatured,
     published: initial.published,
   });
 
@@ -71,7 +73,11 @@ export default function ArticleForm({ mode, initial, categories }: Props) {
     if (slugTouched) return;
     const auto = slugify(form.title);
     if (auto !== form.slug) {
-      setForm((prev) => ({ ...prev, slug: auto }));
+      setForm((prev) => ({
+        ...prev,
+        slug: auto,
+        link: prev.link || (auto ? `/events/${auto}` : ""),
+      }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form.title, slugTouched]);
@@ -93,19 +99,20 @@ export default function ArticleForm({ mode, initial, categories }: Props) {
       slug: slugify(form.slug || form.title),
       description: form.description.trim(),
       content,
-      author: form.author.trim(),
-      authorRole: form.authorRole.trim() || null,
       cover: form.cover.trim(),
       categoryId: form.categoryId,
-      readingTime: Number(form.readingTime) || 5,
-      featured: form.featured,
+      date: form.date,
+      endDate: form.endDate || null,
+      location: form.location.trim(),
+      link: form.link.trim(),
+      isFeatured: form.isFeatured,
       published: form.published,
     };
 
     const url =
       mode === "create"
-        ? "/api/admin/articles"
-        : `/api/admin/articles/${initial.id}`;
+        ? "/api/admin/events"
+        : `/api/admin/events/${initial.id}`;
 
     try {
       const res = await fetch(url, {
@@ -121,7 +128,7 @@ export default function ArticleForm({ mode, initial, categories }: Props) {
         throw new Error(data.error ?? "Save failed");
       }
 
-      router.push("/admin/articles");
+      router.push("/admin/events");
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
@@ -130,14 +137,15 @@ export default function ArticleForm({ mode, initial, categories }: Props) {
   }
 
   const categoryName =
-    categories.find((c) => c.id === form.categoryId)?.name ?? "Article";
+    categories.find((c) => c.id === form.categoryId)?.name ?? "Event";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
+      {/* ============ METADATA ============ */}
       <section className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8">
         <h2 className="text-base font-bold text-gray-900">Details</h2>
         <p className="mt-1 text-sm text-gray-500">
-          Basic information shown on cards and the article header.
+          Basic information shown on the event card and header.
         </p>
 
         <div className="mt-6 space-y-6">
@@ -189,29 +197,6 @@ export default function ArticleForm({ mode, initial, categories }: Props) {
           </FormField>
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <FormField label="Author *" id="field-author">
-              <input
-                id="field-author"
-                type="text"
-                required
-                value={form.author}
-                onChange={(e) => update("author", e.target.value)}
-                className={inputClass}
-              />
-            </FormField>
-            <FormField label="Author role" id="field-authorRole">
-              <input
-                id="field-authorRole"
-                type="text"
-                value={form.authorRole}
-                onChange={(e) => update("authorRole", e.target.value)}
-                placeholder="e.g. Community Contributor"
-                className={inputClass}
-              />
-            </FormField>
-          </div>
-
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <FormField label="Category *" id="field-category">
               <select
                 id="field-category"
@@ -231,23 +216,65 @@ export default function ArticleForm({ mode, initial, categories }: Props) {
                 )}
               </select>
             </FormField>
-            <FormField label="Reading time (min)" id="field-readingTime">
+            <FormField label="Location *" id="field-location">
               <input
-                id="field-readingTime"
-                type="number"
-                min={1}
-                value={form.readingTime}
-                onChange={(e) => update("readingTime", e.target.value)}
+                id="field-location"
+                type="text"
+                required
+                value={form.location}
+                onChange={(e) => update("location", e.target.value)}
+                placeholder="Online or University of Khartoum"
                 className={inputClass}
               />
             </FormField>
           </div>
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <FormField label="Starts at *" id="field-date">
+              <input
+                id="field-date"
+                type="datetime-local"
+                required
+                value={form.date}
+                onChange={(e) => update("date", e.target.value)}
+                className={inputClass}
+              />
+            </FormField>
+            <FormField
+              label="Ends at"
+              id="field-endDate"
+              hint="Optional. Leave blank for single-session events."
+            >
+              <input
+                id="field-endDate"
+                type="datetime-local"
+                value={form.endDate}
+                onChange={(e) => update("endDate", e.target.value)}
+                className={inputClass}
+              />
+            </FormField>
+          </div>
+
+          <FormField
+            label="Link *"
+            id="field-link"
+            hint="Where attendees go — an internal detail page (/events/your-slug) or an external registration URL."
+          >
+            <input
+              id="field-link"
+              type="text"
+              required
+              value={form.link}
+              onChange={(e) => update("link", e.target.value)}
+              className={inputClass}
+            />
+          </FormField>
+
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <FormToggle
               label="Featured"
-              on={form.featured}
-              onChange={(v) => update("featured", v)}
+              on={form.isFeatured}
+              onChange={(v) => update("isFeatured", v)}
               onLabel="Featured"
               offLabel="Not featured"
               onClasses="border-amber-200 bg-amber-50 text-amber-800"
@@ -266,16 +293,22 @@ export default function ArticleForm({ mode, initial, categories }: Props) {
         </div>
       </section>
 
+      {/* ============ EDITOR ============ */}
       <section className="rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
         <div className="mb-4">
           <h2 className="text-base font-bold text-gray-900">Content</h2>
           <p className="mt-1 text-sm text-gray-500">
-            Rich text — add headings, images, videos, links, lists, and more.
+            Full description with headings, images, links, lists, and more.
           </p>
         </div>
-        <RichTextEditor value={content} onChange={setContent} minHeight="480px" />
+        <RichTextEditor
+          value={content}
+          onChange={setContent}
+          minHeight="480px"
+        />
       </section>
 
+      {/* ============ PREVIEW ============ */}
       <ContentPreviewPane
         title={form.title}
         description={form.description}
@@ -283,21 +316,9 @@ export default function ArticleForm({ mode, initial, categories }: Props) {
         cover={form.cover}
         meta={
           <>
-            <div className="flex items-center gap-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-900 text-[10px] font-bold text-white">
-                {(form.author || "A")[0]}
-              </span>
-              <div className="leading-tight">
-                <p className="font-semibold text-gray-900">
-                  {form.author || "Author"}
-                </p>
-                {form.authorRole && (
-                  <p className="text-[11px] text-gray-500">{form.authorRole}</p>
-                )}
-              </div>
-            </div>
+            <span>{form.date || "Date"}</span>
             <span aria-hidden="true" className="h-1 w-1 rounded-full bg-gray-300" />
-            <span>{form.readingTime || 5} min read</span>
+            <span>{form.location || "Location"}</span>
           </>
         }
         content={content}
@@ -328,7 +349,7 @@ export default function ArticleForm({ mode, initial, categories }: Props) {
           {saving
             ? "Saving…"
             : mode === "create"
-              ? "Create article"
+              ? "Create event"
               : "Save changes"}
         </button>
       </div>

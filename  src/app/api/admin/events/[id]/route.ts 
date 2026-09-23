@@ -1,0 +1,167 @@
+// src/app/api/admin/events/[id]/route.ts
+import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
+import { prisma } from "@/lib/prisma";
+import { requireAdmin } from "@/lib/admin-auth";
+
+type Params = { params: Promise<{ id: string }> };
+
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function isTiptapDoc(v: unknown): boolean {
+  return !!v && typeof v === "object" && (v as { type?: unknown }).type === "doc";
+}
+
+export async function GET(_request: Request, { params }: Params) {
+  const guard = await requireAdmin();
+  if (guard) return guard;
+
+  const { id } = await params;
+  const event = await prisma.event.findUnique({
+    where: { id },
+    include: { category: true },
+  });
+  if (!event) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+  return NextResponse.json({ event });
+}
+
+export async function PATCH(request: Request, { params }: Params) {
+  const guard = await requireAdmin();
+  if (guard) return guard;
+
+  const { id } = await params;
+
+  let body: Record<string, unknown>;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
+
+  const data: Record<string, unknown> = {};
+  const takeStr = (k: string) => {
+    if (k in body && typeof body[k] === "string") {
+      data[k] = (body[k] as string).trim();
+    }
+  };
+
+  takeStr("title");
+  takeStr("description");
+  takeStr("cover");
+  takeStr("location");
+  takeStr("link");
+
+  if ("categoryId" in body && typeof body.categoryId === "string") {
+    const categoryId = body.categoryId.trim();
+    if (!categoryId) {
+      return NextResponse.json(
+        { error: "Category is required" },
+        { status: 400 }
+      );
+    }
+    const exists = await prisma.eventCategory.findUnique({
+      where: { id: categoryId },
+      select: { id: true },
+    });
+    if (!exists) {
+      return NextResponse.json(
+        { error: "Selected category does not exist" },
+        { status: 400 }
+      );
+    }
+    data.categoryId = categoryId;
+  }
+
+  if ("slug" in body) {
+    const raw = typeof body.slug === "string" ? body.slug : "";
+    const slug = slugify(raw);
+    if (slug) data.slug = slug;
+  }
+
+  if ("content" in body) {
+    if (!isTiptapDoc(body.content)) {
+      return NextResponse.json({ error: "Invalid content" }, { status: 400 });
+    }
+    data.content = body.content as object;
+  }
+
+  if ("date" in body && typeof body.date === "string") {
+    const d = new Date(body.date.trim());
+    if (Number.isNaN(d.getTime())) {
+      return NextResponse.json({ error: "Invalid date" }, { status: 400 });
+    }
+    data.date = d;
+  }
+
+  if ("endDate" in body) {
+    const raw = typeof body.endDate === "string" ? body.endDate.trim() : "";
+    if (!raw) {
+      data.endDate = null;
+    } else {
+      const d = new Date(raw);
+      if (Number.isNaN(d.getTime())) {
+        return NextResponse.json(
+          { error: "Invalid end date" },
+          { status: 400 }
+        );
+      }
+      data.endDate = d;
+    }
+  }
+
+  if ("isFeatured" in body) {
+    data.isFeatured = Boolean(body.isFeatured);
+  }
+  if ("published" in body) {
+    data.published = Boolean(body.published);
+  }
+
+  if (typeof data.slug === "string") {
+    const collision = await prisma.event.findFirst({
+      where: { slug: data.slug, NOT: { id } },
+      select: { id: true },
+    });
+    if (collision) {
+      return NextResponse.json(
+        { error: `Slug "${data.slug}" is already in use` },
+        { status: 409 }
+      );
+    }
+  }
+
+  try {
+    const event = await prisma.event.update({ where: { id }, data });
+    revalidatePath("/events");
+    revalidatePath("/admin/events");
+    revalidatePath("/");
+    return NextResponse.json({ event });
+  } catch {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+}
+
+export async function DELETE(_request: Request, { params }: Params) {
+  const guard = await requireAdmin();
+  if (guard) return guard;
+
+  const { id } = await params;
+  try {
+    await prisma.event.delete({ where: { id } });
+    revalidatePath("/events");
+    revalidatePath("/admin/events");
+    revalidatePath("/");
+    return NextResponse.json({ ok: true });
+  } catch {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+}

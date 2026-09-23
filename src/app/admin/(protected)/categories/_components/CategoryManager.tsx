@@ -12,16 +12,18 @@ export type CategoryRow = {
   count: number;
 };
 
-type Kind = "courses" | "articles";
+type Kind = "courses" | "articles" | "events";
 
 type Props = {
   initialCourseCategories: CategoryRow[];
   initialArticleCategories: CategoryRow[];
+  initialEventCategories: CategoryRow[];
 };
 
 export default function CategoryManager({
   initialCourseCategories,
   initialArticleCategories,
+  initialEventCategories,
 }: Props) {
   const router = useRouter();
   const [kind, setKind] = useState<Kind>("courses");
@@ -29,43 +31,60 @@ export default function CategoryManager({
   const endpoints = {
     courses: {
       base: "/api/admin/categories",
-      label: "Course categories",
       itemLabel: "course",
       itemLabelPlural: "courses",
     },
     articles: {
       base: "/api/admin/article-categories",
-      label: "Article categories",
       itemLabel: "article",
       itemLabelPlural: "articles",
     },
+    events: {
+      base: "/api/admin/event-categories",
+      itemLabel: "event",
+      itemLabelPlural: "events",
+    },
   } as const;
 
-  // Keep two independent lists; the manager swaps them based on tab
   const [courseCategories, setCourseCategories] = useState(
     initialCourseCategories
   );
   const [articleCategories, setArticleCategories] = useState(
     initialArticleCategories
   );
+  const [eventCategories, setEventCategories] = useState(
+    initialEventCategories
+  );
 
-  const categories = kind === "courses" ? courseCategories : articleCategories;
+  const categories =
+    kind === "courses"
+      ? courseCategories
+      : kind === "articles"
+        ? articleCategories
+        : eventCategories;
+
   const setCategories =
-    kind === "courses" ? setCourseCategories : setArticleCategories;
+    kind === "courses"
+      ? setCourseCategories
+      : kind === "articles"
+        ? setArticleCategories
+        : setEventCategories;
+
   const endpoint = endpoints[kind];
 
-  // New category form
   const [newName, setNewName] = useState("");
   const [newOrder, setNewOrder] = useState("0");
   const [creating, setCreating] = useState(false);
 
-  // Inline edit state
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editName, setEditName] = useState("");
   const [editOrder, setEditOrder] = useState("0");
   const [busyId, setBusyId] = useState<string | null>(null);
 
   const [error, setError] = useState<string | null>(null);
+
+  const kindSingular =
+    kind === "courses" ? "course" : kind === "articles" ? "article" : "event";
 
   async function handleCreate(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -190,40 +209,30 @@ export default function CategoryManager({
         </p>
       </div>
 
-      {/* Tabs */}
-      <div className="mt-6 inline-flex rounded-full border border-gray-200 bg-white p-1">
-        <button
-          type="button"
-          onClick={() => {
-            setKind("courses");
-            cancelEdit();
-            setError(null);
-          }}
-          aria-pressed={kind === "courses"}
-          className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
-            kind === "courses"
-              ? "bg-gray-900 text-white"
-              : "text-gray-600 hover:text-gray-900"
-          }`}
-        >
-          Course categories
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            setKind("articles");
-            cancelEdit();
-            setError(null);
-          }}
-          aria-pressed={kind === "articles"}
-          className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
-            kind === "articles"
-              ? "bg-gray-900 text-white"
-              : "text-gray-600 hover:text-gray-900"
-          }`}
-        >
-          Article categories
-        </button>
+      <div className="mt-6 inline-flex flex-wrap rounded-full border border-gray-200 bg-white p-1">
+        {(["courses", "articles", "events"] as const).map((k) => (
+          <button
+            key={k}
+            type="button"
+            onClick={() => {
+              setKind(k);
+              cancelEdit();
+              setError(null);
+            }}
+            aria-pressed={kind === k}
+            className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+              kind === k
+                ? "bg-gray-900 text-white"
+                : "text-gray-600 hover:text-gray-900"
+            }`}
+          >
+            {k === "courses"
+              ? "Course categories"
+              : k === "articles"
+                ? "Article categories"
+                : "Event categories"}
+          </button>
+        ))}
       </div>
 
       {error && (
@@ -235,7 +244,6 @@ export default function CategoryManager({
         </div>
       )}
 
-      {/* New category */}
       <form
         onSubmit={handleCreate}
         className="mt-8 flex flex-col gap-3 rounded-2xl border border-gray-200 bg-white p-4 sm:flex-row sm:items-end sm:gap-3 sm:p-5"
@@ -245,7 +253,7 @@ export default function CategoryManager({
             htmlFor="new-cat-name"
             className="mb-1.5 block text-sm font-medium text-gray-700"
           >
-            New {kind === "courses" ? "course" : "article"} category
+            New {kindSingular} category
           </label>
           <input
             id="new-cat-name"
@@ -281,7 +289,6 @@ export default function CategoryManager({
         </button>
       </form>
 
-      {/* List */}
       <div className="mt-8">
         {categories.length === 0 ? (
           <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-gray-200 bg-white px-6 py-16 text-center">
@@ -289,8 +296,7 @@ export default function CategoryManager({
               No categories yet
             </h3>
             <p className="mt-2 text-sm text-gray-500">
-              Add your first {kind === "courses" ? "course" : "article"}{" "}
-              category above.
+              Add your first {kindSingular} category above.
             </p>
           </div>
         ) : (

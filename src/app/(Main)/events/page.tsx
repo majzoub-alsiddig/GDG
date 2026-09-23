@@ -1,3 +1,4 @@
+// src/app/(Main)/events/page.tsx
 import EventCard from "../home/components/EventCard";
 import { prisma } from "@/lib/prisma";
 import type { EventItem } from "../home/types";
@@ -7,17 +8,18 @@ export const dynamic = "force-dynamic";
 export default async function EventsPage() {
   const dbEvents = await prisma.event.findMany({
     where: { published: true },
+    include: { category: true },
     orderBy: { date: "asc" },
   });
 
   const events: EventItem[] = dbEvents.map((e) => ({
     id: e.slug,
     title: e.title,
-    category: e.category as EventItem["category"],
+    category: e.category.name,
     cover: e.cover,
     date: e.date.toISOString().split("T")[0],
     location: e.location,
-    link: `/events/${e.slug}`,
+    link: e.link,
   }));
 
   return (
@@ -31,15 +33,27 @@ export default async function EventsPage() {
             Explore what&apos;s happening at GDG UofK
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-slate-600">
-            From workshops and talks to study jams and collaborations, we build learning experiences for students and developers.
+            From workshops and talks to study jams and collaborations, we build
+            learning experiences for students and developers.
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {events.map((event) => (
-            <EventCard key={event.id} event={event} />
-          ))}
-        </div>
+        {events.length === 0 ? (
+          <div className="mt-12 rounded-3xl border border-dashed border-gray-200 bg-gray-50/60 px-6 py-16 text-center">
+            <h3 className="text-lg font-bold text-gray-900">
+              No upcoming events
+            </h3>
+            <p className="mt-2 text-sm text-gray-500">
+              Follow us to stay updated when the next event is announced.
+            </p>
+          </div>
+        ) : (
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {events.map((event) => (
+              <EventCard key={event.id} event={event} />
+            ))}
+          </div>
+        )}
       </section>
     </main>
   );

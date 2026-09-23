@@ -5,7 +5,7 @@ import CategoryManager, {
 } from "./_components/CategoryManager";
 
 export default async function AdminCategoriesPage() {
-  const [courseCats, articleCats] = await Promise.all([
+  const [courseCats, articleCats, eventCats] = await Promise.all([
     prisma.courseCategory.findMany({
       orderBy: [{ order: "asc" }, { createdAt: "asc" }],
       include: { _count: { select: { courses: true } } },
@@ -13,6 +13,10 @@ export default async function AdminCategoriesPage() {
     prisma.articleCategory.findMany({
       orderBy: [{ order: "asc" }, { createdAt: "asc" }],
       include: { _count: { select: { articles: true } } },
+    }),
+    prisma.eventCategory.findMany({
+      orderBy: [{ order: "asc" }, { createdAt: "asc" }],
+      include: { _count: { select: { events: true } } },
     }),
   ]);
 
@@ -32,10 +36,19 @@ export default async function AdminCategoriesPage() {
     count: c._count.articles,
   }));
 
+  const eventCategories: CategoryRow[] = eventCats.map((c) => ({
+    id: c.id,
+    name: c.name,
+    slug: c.slug,
+    order: c.order,
+    count: c._count.events,
+  }));
+
   return (
     <CategoryManager
       initialCourseCategories={courseCategories}
       initialArticleCategories={articleCategories}
+      initialEventCategories={eventCategories}
     />
   );
 }

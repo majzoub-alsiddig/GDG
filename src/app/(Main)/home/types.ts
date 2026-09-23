@@ -1,10 +1,10 @@
-// app/home/types.ts
+// src/app/(Main)/home/types.ts
 export type EventItem = {
   id: string;
   title: string;
-  category: "Workshop" | "Talk" | "Study Jam" | "Meetup";
+  category: string;
   cover: string;
-  date: string; // ISO date
+  date: string;
   location: string;
   link: string;
 };

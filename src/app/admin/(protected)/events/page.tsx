@@ -1,10 +1,26 @@
-export default function AdminEventsPage() {
-  return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-      <h1 className="text-2xl font-bold text-gray-900">Events</h1>
-      <p className="mt-2 text-sm text-gray-500">
-        Event management coming soon.
-      </p>
-    </div>
-  );
+// src/app/admin/(protected)/events/page.tsx
+import { prisma } from "@/lib/prisma";
+import EventManager from "./_components/EventManager";
+
+export default async function AdminEventsPage() {
+  const rows = await prisma.event.findMany({
+    include: { category: true },
+    orderBy: { date: "desc" },
+  });
+
+  const events = rows.map((e) => ({
+    id: e.id,
+    slug: e.slug,
+    title: e.title,
+    description: e.description,
+    cover: e.cover,
+    category: { id: e.category.id, name: e.category.name },
+    date: e.date.toISOString(),
+    location: e.location,
+    isFeatured: e.isFeatured,
+    published: e.published,
+    createdAt: e.createdAt.toISOString(),
+  }));
+
+  return <EventManager initialEvents={events} />;
 }

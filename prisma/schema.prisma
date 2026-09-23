@@ -24,23 +24,36 @@ model TeamMember {
   updatedAt DateTime @updatedAt
 }
 
+model EventCategory {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  order     Int      @default(0)
+  events    Event[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Event {
-  id          String    @id @default(cuid())
-  slug        String    @unique
+  id          String        @id @default(cuid())
+  slug        String        @unique
   title       String
-  description String?
-  category    String
+  description String
+  content     Json
+  categoryId  String
+  category    EventCategory @relation(fields: [categoryId], references: [id])
   cover       String
   date        DateTime
   endDate     DateTime?
   location    String
   link        String
-  isFeatured  Boolean   @default(false)
-  published   Boolean   @default(true)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  isFeatured  Boolean       @default(false)
+  published   Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 
   @@index([published, date])
+  @@index([categoryId])
 }
 
 model CourseCategory {

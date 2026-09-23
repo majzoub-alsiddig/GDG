@@ -96,16 +96,40 @@ async function main() {
     await prisma.teamMember.create({ data: member })
   }
 
-  // ================= Events =================
+  // ================= Events + Categories =================
   await prisma.event.deleteMany()
+  await prisma.eventCategory.deleteMany()
+
+  const eventCategoryData = [
+    { name: "Workshop", slug: "workshop", order: 1 },
+    { name: "Talk", slug: "talk", order: 2 },
+    { name: "Study Jam", slug: "study-jam", order: 3 },
+    { name: "Meetup", slug: "meetup", order: 4 },
+  ]
+  for (const cat of eventCategoryData) {
+    await prisma.eventCategory.create({ data: cat })
+  }
+
+  const allEventCategories = await prisma.eventCategory.findMany()
+  const eventCatIdByName = Object.fromEntries(
+    allEventCategories.map((c) => [c.name, c.id])
+  )
+
   const events = [
     {
       slug: "android-with-compose",
       title: "Building Modern Android Apps with Jetpack Compose",
       description: "A hands-on workshop covering Compose fundamentals, state, and navigation.",
-      category: "Workshop",
+      content: {
+        type: "doc",
+        content: [
+          { type: "heading", attrs: { level: 2 }, content: [{ type: "text", text: "What you'll learn" }] },
+          { type: "paragraph", content: [{ type: "text", text: "Compose fundamentals, state management, and navigation between screens." }] },
+        ],
+      },
+      categoryId: eventCatIdByName["Workshop"],
       cover: "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?auto=format&fit=crop&w=1200&q=80",
-      date: new Date("2026-10-02"),
+      date: new Date("2026-10-02T14:00:00"),
       location: "Online",
       link: "/events/android-with-compose",
       isFeatured: true,
@@ -114,9 +138,15 @@ async function main() {
       slug: "intro-to-gemini",
       title: "Getting Started with Gemini APIs",
       description: "Build your first Gemini-powered app and learn how to integrate the API.",
-      category: "Talk",
+      content: {
+        type: "doc",
+        content: [
+          { type: "paragraph", content: [{ type: "text", text: "In this talk we'll walk through authentication, prompt design, and streaming responses with the Gemini API." }] },
+        ],
+      },
+      categoryId: eventCatIdByName["Talk"],
       cover: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80",
-      date: new Date("2026-10-12"),
+      date: new Date("2026-10-12T17:30:00"),
       location: "University of Khartoum",
       link: "/events/intro-to-gemini",
       isFeatured: true,
@@ -125,9 +155,15 @@ async function main() {
       slug: "flutter-study-jam",
       title: "Flutter Study Jam: From Zero to First App",
       description: "A beginner-friendly series where you ship your first Flutter app.",
-      category: "Study Jam",
+      content: {
+        type: "doc",
+        content: [
+          { type: "paragraph", content: [{ type: "text", text: "Hands-on study jam spanning three sessions. Bring a laptop and we'll build together." }] },
+        ],
+      },
+      categoryId: eventCatIdByName["Study Jam"],
       cover: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80",
-      date: new Date("2026-10-24"),
+      date: new Date("2026-10-24T16:00:00"),
       location: "Online",
       link: "/events/flutter-study-jam",
       isFeatured: true,
@@ -136,9 +172,15 @@ async function main() {
       slug: "gcp-for-students",
       title: "Google Cloud for Students",
       description: "Deploy your first app to Google Cloud and understand the free tier.",
-      category: "Workshop",
+      content: {
+        type: "doc",
+        content: [
+          { type: "paragraph", content: [{ type: "text", text: "We'll cover Cloud Run, Firestore, and how to keep within the student free tier." }] },
+        ],
+      },
+      categoryId: eventCatIdByName["Workshop"],
       cover: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80",
-      date: new Date("2026-11-05"),
+      date: new Date("2026-11-05T15:00:00"),
       location: "Online",
       link: "/events/gcp-for-students",
       isFeatured: false,
@@ -147,9 +189,15 @@ async function main() {
       slug: "community-meetup-nov",
       title: "Community Meetup: Show & Tell",
       description: "Members share what they've been building. Casual, friendly, and open to all.",
-      category: "Meetup",
+      content: {
+        type: "doc",
+        content: [
+          { type: "paragraph", content: [{ type: "text", text: "Bring a project, a question, or just yourself. Snacks provided." }] },
+        ],
+      },
+      categoryId: eventCatIdByName["Meetup"],
       cover: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80",
-      date: new Date("2026-11-20"),
+      date: new Date("2026-11-20T18:00:00"),
       location: "University of Khartoum",
       link: "/events/community-meetup-nov",
       isFeatured: false,
@@ -392,7 +440,7 @@ async function main() {
 
   console.log(`✅ Seeded ${categoryData.length} course categories`)
   console.log(`✅ Seeded ${courses.length} courses`)
-  console.log(`✅ Seeded ${events.length} events`)
+  console.log(`✅ Seeded ${eventCategoryData.length} event categories`)
   console.log(`✅ Seeded ${teamMembers.length} team members`)
   console.log(`✅ Seeded ${articleCategoryData.length} article categories`)
   console.log(`✅ Seeded ${articles.length} articles`)

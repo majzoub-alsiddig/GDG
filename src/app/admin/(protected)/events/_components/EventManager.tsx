@@ -1,4 +1,4 @@
-// src/app/admin/(protected)/articles/_components/ArticleManager.tsx
+// src/app/admin/(protected)/events/_components/EventManager.tsx
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -10,24 +10,23 @@ import {
   AdminPageHeader,
 } from "@/app/admin/_components/AdminUI";
 import AdminContentCard from "@/app/admin/_components/AdminContentCard";
-import { ClockIcon } from "@/components/icons";
+import { CalendarIcon } from "@/components/icons";
 
-export type AdminArticleRow = {
+export type AdminEventRow = {
   id: string;
   slug: string;
   title: string;
   description: string;
   cover: string;
   category: { id: string; name: string };
-  author: string;
-  authorRole: string | null;
-  readingTime: number;
-  featured: boolean;
+  date: string;
+  location: string;
+  isFeatured: boolean;
   published: boolean;
   createdAt: string;
 };
 
-type Props = { initialArticles: AdminArticleRow[] };
+type Props = { initialEvents: AdminEventRow[] };
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", {
@@ -37,9 +36,9 @@ function formatDate(iso: string) {
   });
 }
 
-export default function ArticleManager({ initialArticles }: Props) {
+export default function EventManager({ initialEvents }: Props) {
   const router = useRouter();
-  const [articles, setArticles] = useState(initialArticles);
+  const [events, setEvents] = useState(initialEvents);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -48,11 +47,11 @@ export default function ArticleManager({ initialArticles }: Props) {
     setBusyId(id);
     setError(null);
     try {
-      const res = await fetch(`/api/admin/articles/${id}`, {
+      const res = await fetch(`/api/admin/events/${id}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Delete failed");
-      setArticles((prev) => prev.filter((a) => a.id !== id));
+      setEvents((prev) => prev.filter((e) => e.id !== id));
       router.refresh();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Something went wrong");
@@ -65,56 +64,55 @@ export default function ArticleManager({ initialArticles }: Props) {
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
       <AdminPageHeader
         eyebrow="Content"
-        title="Articles"
-        description="Changes are published to the public articles page immediately."
+        title="Events"
+        description="Changes are published to the public events page immediately."
       >
         <AdminButton href="/admin/categories" variant="outline">
           Manage categories
         </AdminButton>
-        <AdminButton href="/admin/articles/new">+ Add article</AdminButton>
+        <AdminButton href="/admin/events/new">+ Add event</AdminButton>
       </AdminPageHeader>
 
       <AdminErrorBanner message={error} />
 
-      {articles.length === 0 ? (
+      {events.length === 0 ? (
         <AdminEmptyState
-          title="No articles yet"
-          message="Click “Add article” to create the first one."
-          action={{ label: "Add article", href: "/admin/articles/new" }}
+          title="No events yet"
+          message="Click “Add event” to create the first one."
+          action={{ label: "Add event", href: "/admin/events/new" }}
         />
       ) : (
         <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {articles.map((a) => (
+          {events.map((e) => (
             <AdminContentCard
-              key={a.id}
-              cover={a.cover}
-              title={a.title}
-              slug={a.slug}
-              description={a.description}
-              categoryLabel={a.category.name}
+              key={e.id}
+              cover={e.cover}
+              title={e.title}
+              slug={e.slug}
+              description={e.description}
+              categoryLabel={e.category.name}
               topRightBadges={[
-                ...(a.featured
+                ...(e.isFeatured
                   ? [{ label: "Featured", className: "bg-[#FBBC05] text-white" }]
                   : []),
-                ...(!a.published
+                ...(!e.published
                   ? [{ label: "Draft", className: "bg-gray-900 text-white" }]
                   : []),
               ]}
               meta={
                 <>
-                  <span className="font-medium text-gray-700">{a.author}</span>
-                  <span aria-hidden="true">·</span>
                   <span className="inline-flex items-center gap-1">
-                    <ClockIcon className="h-3.5 w-3.5" />
-                    {a.readingTime} min read
+                    <CalendarIcon className="h-3.5 w-3.5" />
+                    {formatDate(e.date)}
                   </span>
-                  <span aria-hidden="true">·</span>
-                  <span>{formatDate(a.createdAt)}</span>
+                  <span className="inline-flex items-center gap-1">
+                    {e.location}
+                  </span>
                 </>
               }
-              editHref={`/admin/articles/${a.id}/edit`}
-              onDelete={() => handleDelete(a.id, a.title)}
-              deleting={busyId === a.id}
+              editHref={`/admin/events/${e.id}/edit`}
+              onDelete={() => handleDelete(e.id, e.title)}
+              deleting={busyId === e.id}
             />
           ))}
         </ul>
