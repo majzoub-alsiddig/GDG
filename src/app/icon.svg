@@ -1,31 +1,6 @@
-<svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" fill="none">
-  <g transform="translate(0, 14)">
-    <g
-      stroke="#18181b"
-      stroke-width="2.5"
-      stroke-linejoin="round"
-      stroke-linecap="round"
-    >
-      <rect
-        x="-5.5" y="-5.5" width="28" height="11" rx="5.5"
-        fill="#EA4335"
-        transform="translate(15, 22) rotate(-40)"
-      />
-      <rect
-        x="-5.5" y="-5.5" width="28" height="11" rx="5.5"
-        fill="#4285F4"
-        transform="translate(15, 22) rotate(40)"
-      />
-      <rect
-        x="-22.5" y="-5.5" width="28" height="11" rx="5.5"
-        fill="#FBBC05"
-        transform="translate(57, 22) rotate(-40)"
-      />
-      <rect
-        x="-22.5" y="-5.5" width="28" height="11" rx="5.5"
-        fill="#34A853"
-        transform="translate(57, 22) rotate(40)"
-      />
-    </g>
+<svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <g stroke="#18181b" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="-5.5" y="-5.5" width="28" height="11" rx="5.5" fill="#EA4335" transform="translate(22, 22) rotate(-40)" />
+    <rect x="-5.5" y="-5.5" width="28" height="11" rx="5.5" fill="#4285F4" transform="translate(22, 22) rotate(40)" />
   </g>
 </svg>
