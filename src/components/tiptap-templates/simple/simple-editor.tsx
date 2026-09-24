@@ -62,11 +62,6 @@ import { LinkIconTiptap as LinkIcon } from "@/components/icons";
 
 // --- Hooks ---
 import { useIsBreakpoint } from "@/hooks/use-is-breakpoint";
-import { useWindowSize } from "@/hooks/use-window-size";
-import { useCursorVisibility } from "@/hooks/use-cursor-visibility";
-
-// --- Components ---
-import { ThemeToggle } from "@/components/tiptap-templates/simple/theme-toggle";
 
 // --- Lib ---
 import { handleImageUpload, MAX_FILE_SIZE } from "@/lib/tiptap-utils";
@@ -147,13 +142,6 @@ const MainToolbarContent = ({
       <Spacer />
 
       {isMobile && <ToolbarSeparator />}
-
-      {
-        //Night mode toggle
-        // <ToolbarGroup>
-        //   <ThemeToggle />
-        // </ToolbarGroup>
-      }
     </>
   );
 };
@@ -188,28 +176,26 @@ const MobileToolbarContent = ({
 );
 
 type SimpleEditorProps = {
-  
   initialContent?: JSONContent;
-  
   onChange?: (json: JSONContent) => void;
 };
 
-export function SimpleEditor({ initialContent, onChange }: SimpleEditorProps = {}) {
-  
+export function SimpleEditor({
+  initialContent,
+  onChange,
+}: SimpleEditorProps = {}) {
   const isMobile = useIsBreakpoint();
-  const { height } = useWindowSize();
   const [mobileView, setMobileView] = useState<"main" | "highlighter" | "link">(
-    "main",
+    "main"
   );
   const toolbarRef = useRef<HTMLDivElement>(null);
 
   const editor = useEditor({
-  immediatelyRender: false,
-  content: initialContent ?? (content as JSONContent),
-  onUpdate: ({ editor }) => {
-    onChange?.(editor.getJSON());
-	},
-    
+    immediatelyRender: false,
+    content: initialContent ?? (content as JSONContent),
+    onUpdate: ({ editor }) => {
+      onChange?.(editor.getJSON());
+    },
     editorProps: {
       attributes: {
         autocomplete: "off",
@@ -247,10 +233,18 @@ export function SimpleEditor({ initialContent, onChange }: SimpleEditorProps = {
     ],
   });
 
-  const rect = useCursorVisibility({
-    editor,
-    overlayHeight: toolbarRef.current?.getBoundingClientRect().height ?? 0,
-  });
+  // Chrome loses caret rendering when an element enters/leaves fullscreen.
+  // Re-focusing on the next frame restores it.
+  useEffect(() => {
+    if (!editor) return;
+    const handler = () => {
+      requestAnimationFrame(() => {
+        editor.commands.focus();
+      });
+    };
+    document.addEventListener("fullscreenchange", handler);
+    return () => document.removeEventListener("fullscreenchange", handler);
+  }, [editor]);
 
   useEffect(() => {
     if (!isMobile && mobileView !== "main") {
@@ -261,16 +255,7 @@ export function SimpleEditor({ initialContent, onChange }: SimpleEditorProps = {
   return (
     <div className="simple-editor-wrapper">
       <EditorContext.Provider value={{ editor }}>
-        <Toolbar
-          ref={toolbarRef}
-          style={{
-            ...(isMobile
-              ? {
-                  bottom: `calc(100% - ${height - rect.y}px)`,
-                }
-              : {}),
-          }}
-        >
+        <Toolbar ref={toolbarRef}>
           {mobileView === "main" ? (
             <MainToolbarContent
               onHighlighterClick={() => setMobileView("highlighter")}

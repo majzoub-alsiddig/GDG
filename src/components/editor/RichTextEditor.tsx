@@ -57,7 +57,6 @@ export default function RichTextEditor({
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fullscreenSupported, setFullscreenSupported] = useState(true);
 
-  // Check API availability on mount
   useEffect(() => {
     setFullscreenSupported(
       typeof document !== "undefined" &&
@@ -65,7 +64,6 @@ export default function RichTextEditor({
     );
   }, []);
 
-  // Sync state with the browser's fullscreen state
   useEffect(() => {
     function handleChange() {
       setIsFullscreen(

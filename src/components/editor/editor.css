@@ -16,14 +16,31 @@
   box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
 }
 
-/* ---------- Neutralize the template's max-width / centering ---------- */
+/* ---------- Neutralize the template's 100vh / 100% sizing ---------- */
+/* The Tiptap template's SCSS assumes a full-page editor. We're embedding it
+   in a form, so undo the full-page sizing to prevent the caret from being
+   positioned inside a huge invisible coordinate space. */
 .rich-text-editor .simple-editor-wrapper {
   max-width: none !important;
   width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
   margin: 0 !important;
   border-radius: 0 !important;
   padding: 0 !important;
   background: transparent !important;
+  overflow: visible !important;
+}
+
+.rich-text-editor .simple-editor-content {
+  max-width: none !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  overflow: visible !important;
 }
 
 /* ---------- Toolbar: pinned to the top of the wrapper ---------- */
@@ -44,7 +61,7 @@
   background: #ffffff;
   box-shadow: none !important;
   z-index: 10;
-  padding: 0.375rem 0.5rem;
+  padding: 0.375rem 3rem 0.375rem 0.5rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -63,14 +80,8 @@
 }
 
 /* ---------- Content area ---------- */
-.rich-text-editor .simple-editor-content {
-  max-width: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
 .rich-text-editor .tiptap.simple-editor,
-.rich-text-editor .simple-editor {
+.rich-text-editor .tiptap.ProseMirror {
   max-width: none !important;
   margin: 0 !important;
   padding: 1.25rem 1.5rem !important;
@@ -79,6 +90,16 @@
   color: #111827;
   font-size: 1rem;
   line-height: 1.7;
+
+  /* Explicit caret so it can never be accidentally hidden by an inherited
+     `caret-color: transparent` from another stylesheet. */
+  caret-color: #1a73e8 !important;
+}
+
+/* Ensure the caret always has a real line to render into, even on an
+   empty first paragraph. */
+.rich-text-editor .tiptap.simple-editor > p:first-child {
+  min-height: 1.7em;
 }
 
 .rich-text-editor .tiptap.simple-editor:focus {
@@ -193,18 +214,6 @@
   margin-top: 0.35em;
 }
 
-/* ---------- Mobile ---------- */
-@media (max-width: 768px) {
-  .rich-text-editor .tiptap-toolbar {
-    position: sticky !important;
-    top: 0 !important;
-    bottom: auto !important;
-    left: auto !important;
-    right: auto !important;
-    width: 100% !important;
-  }
-}
-
 /* ================================================================ */
 /*  Fullscreen button                                                */
 /* ================================================================ */
@@ -244,11 +253,6 @@
   box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
 }
 
-/* Leave a gap on the right of the toolbar so the button doesn't sit over the last tool */
-.rich-text-editor .tiptap-toolbar {
-  padding-right: 3rem !important;
-}
-
 /* ================================================================ */
 /*  Fullscreen layout                                                */
 /* ================================================================ */
@@ -261,30 +265,50 @@
   border: none;
   border-radius: 0;
   background: #ffffff;
+  overflow: hidden;
 }
 
+/* Restore full-height flex layout ONLY in fullscreen. */
 .rich-text-editor[data-fullscreen="true"] .simple-editor-wrapper {
   display: flex;
   flex-direction: column;
   flex: 1;
   min-height: 0;
-  overflow: hidden;
+  height: auto !important;
+  overflow: hidden !important;
 }
 
 .rich-text-editor[data-fullscreen="true"] .simple-editor-content {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   min-height: 0;
-  overflow-y: auto;
+  height: auto !important;
+  overflow-y: auto !important;
 }
 
 .rich-text-editor[data-fullscreen="true"] .tiptap.simple-editor {
-  min-height: 100%;
-  padding: 2.5rem 3rem !important;
-  max-width: 56rem !important;
-  margin: 0 auto !important;
+  /* ProseMirror takes the full width and height of the fullscreen area.
+     This makes clicks anywhere in the empty space land on ProseMirror,
+     not on the surrounding container. */
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 2.5rem 1.5rem !important;
 }
 
-/* Keep the fullscreen button reachable in fullscreen (top-right of the viewport) */
+/* Constrain the reading column by limiting each block's width — NOT by
+   narrowing the ProseMirror itself. This preserves the clickable area
+   while keeping the text at a comfortable ~56rem reading width. */
+.rich-text-editor[data-fullscreen="true"] .tiptap.simple-editor > * {
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Keep the fullscreen button reachable */
 .rich-text-editor[data-fullscreen="true"] .rich-text-editor-fullscreen-btn {
   top: 0.5rem;
   right: 0.75rem;
@@ -292,7 +316,6 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-/* Optional nicety: fullscreen background color */
 .rich-text-editor[data-fullscreen="true"]::backdrop {
   background: #ffffff;
 }
