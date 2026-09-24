@@ -1,0 +1,37 @@
+{
+  "home": {
+    "hero": {
+      "badge": "GDG University of Khartoum",
+      "titleLearn": "Learn.",
+      "titleBuild": "Build.",
+      "titleConnect": "Connect.",
+      "description": "A student-led developer community at the University of Khartoum — exploring Google technologies, building real projects, and growing together.",
+      "exploreEvents": "Explore events",
+      "joinCommunity": "Join the community"
+    },
+    "upcomingEvents": {
+      "eyebrow": "What's happening",
+      "title": "Upcoming events",
+      "description": "Join our upcoming workshops, talks, and community activities.",
+      "action": "View all events",
+      "emptyTitle": "No upcoming events yet",
+      "emptyMessage": "Follow us to stay updated when the next event is announced.",
+      "cardCoverAlt": "Cover image for {title}"
+    },
+    "featuredCourses": {
+      "eyebrow": "Keep learning",
+      "title": "Featured courses",
+      "description": "Explore courses and resources created to help you grow your technical skills.",
+      "action": "Explore courses",
+      "emptyTitle": "No courses yet",
+      "emptyMessage": "We're preparing new learning resources. Check back soon.",
+      "cardCoverAlt": "Cover image for {title}"
+    },
+    "joinCommunity": {
+      "title": "Ready to build with us?",
+      "description": "Learn something new. Meet people who care about the same things. Build something meaningful together.",
+      "join": "Join the community",
+      "exploreEvents": "Explore events"
+    }
+  }
+}

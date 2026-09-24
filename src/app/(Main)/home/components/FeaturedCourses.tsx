@@ -1,25 +1,36 @@
-// app/home/components/FeaturedCourses.tsx
+"use client";
+
 import type { FeaturedCourse } from "../types";
 import SectionHeader from "./SectionHeader";
 import EmptyState from "./EmptyState";
 import { BookIcon, PlayIcon } from "@/components/icons";
+import { useTranslations } from "@/i18n";
 
-export default function FeaturedCourses({ courses }: { courses: FeaturedCourse[] }) {
+export default function FeaturedCourses({
+  courses,
+}: {
+  courses: FeaturedCourse[];
+}) {
+  const { t } = useTranslations();
+
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
       <SectionHeader
-        eyebrow="Keep learning"
-        title="Featured courses"
-        description="Explore courses and resources created to help you grow your technical skills."
-        action={{ label: "Explore courses", href: "/courses" }}
+        eyebrow={t("home.featuredCourses.eyebrow")}
+        title={t("home.featuredCourses.title")}
+        description={t("home.featuredCourses.description")}
+        action={{
+          label: t("home.featuredCourses.action"),
+          href: "/courses",
+        }}
       />
 
       <div className="mt-10 sm:mt-12">
         {courses.length === 0 ? (
           <EmptyState
             icon={<BookIcon className="h-6 w-6 text-[#1a73e8]" />}
-            title="No courses yet"
-            message="We're preparing new learning resources. Check back soon."
+            title={t("home.featuredCourses.emptyTitle")}
+            message={t("home.featuredCourses.emptyMessage")}
           />
         ) : (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
@@ -32,7 +43,9 @@ export default function FeaturedCourses({ courses }: { courses: FeaturedCourse[]
                 <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-gray-100 ring-1 ring-black/5">
                   <img
                     src={course.cover}
-                    alt={`Cover image for ${course.title}`}
+                    alt={t("home.featuredCourses.cardCoverAlt", {
+                      title: course.title,
+                    })}
                     loading="lazy"
                     decoding="async"
                     className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"

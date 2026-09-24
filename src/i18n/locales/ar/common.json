@@ -1,0 +1,42 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "about": "نبذة",
+    "articles": "المقالات",
+    "events": "الفعاليات",
+    "courses": "الدورات",
+    "team": "الفريق",
+    "faq": "الأسئلة الشائعة"
+  },
+  "language": {
+    "label": "اللغة",
+    "english": "English",
+    "arabic": "العربية",
+    "englishShort": "EN",
+    "arabicShort": "ع"
+  },
+  "header": {
+    "openMenu": "افتح القائمة",
+    "closeMenu": "أغلق القائمة"
+  },
+  "footer": {
+    "tagline": "مجتمع طلابي في جامعة الخرطوم يجتمع فيه المطورون والمصممون وعشّاق التقنية ليتعلّموا ويبنوا ويتواصلوا.",
+    "explore": "استكشف",
+    "community": "المجتمع",
+    "connect": "تواصل",
+    "meetTheTeam": "تعرّف على الفريق",
+    "upcomingEvents": "الفعاليات القادمة",
+    "contactUs": "تواصل معنا",
+    "copyright": "© {year} مجموعة مطوري جوجل - جامعة الخرطوم",
+    "signature": "تعلّم. ابنِ. تواصل.",
+    "follow": "تابع مجموعة مطوري جوجل - جامعة الخرطوم على {platform}",
+    "social": {
+      "instagram": "إنستغرام",
+      "linkedin": "لينكدإن",
+      "facebook": "فيسبوك",
+      "x": "منصة X",
+      "whatsapp": "واتساب",
+      "tiktok": "تيك توك"
+    }
+  }
+}

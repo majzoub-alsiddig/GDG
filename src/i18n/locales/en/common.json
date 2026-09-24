@@ -1,0 +1,42 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "articles": "Articles",
+    "events": "Events",
+    "courses": "Courses",
+    "team": "Team",
+    "faq": "FAQ"
+  },
+  "language": {
+    "label": "Language",
+    "english": "English",
+    "arabic": "العربية",
+    "englishShort": "EN",
+    "arabicShort": "AR"
+  },
+  "header": {
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "footer": {
+    "tagline": "A student-driven community at the University of Khartoum where developers, designers, and tech enthusiasts learn, build, and connect.",
+    "explore": "Explore",
+    "community": "Community",
+    "connect": "Connect",
+    "meetTheTeam": "Meet the Team",
+    "upcomingEvents": "Upcoming Events",
+    "contactUs": "Contact us",
+    "copyright": "© {year} GDG University of Khartoum",
+    "signature": "Learn. Build. Connect.",
+    "follow": "Follow GDG UofK on {platform}",
+    "social": {
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn",
+      "facebook": "Facebook",
+      "x": "X",
+      "whatsapp": "WhatsApp",
+      "tiktok": "TikTok"
+    }
+  }
+}

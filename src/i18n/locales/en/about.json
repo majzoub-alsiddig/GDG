@@ -1,0 +1,59 @@
+{
+  "about": {
+    "preview": {
+      "eyebrow": "Who are we",
+      "title": "A student-led community at UofK",
+      "body": "We are students from the University of Khartoum — from different faculties, skill sets, and interests — united by our passion for Google technologies and the wider world of tech.",
+      "cta": "Meet the team",
+      "imageAlt": "GDG UofK members during a community meetup"
+    },
+    "mission": {
+      "title": "Our mission",
+      "body": "To spread knowledge of Google technologies — and technology more broadly — throughout the tech community in Sudan and the Arab world."
+    },
+    "whatWeDo": {
+      "eyebrow": "What we do",
+      "title": "More than a club",
+      "description": "Three things shape everything we do at GDG UofK.",
+      "pillars": {
+        "learn": {
+          "title": "Learn",
+          "description": "Explore courses, workshops, talks, and practical resources built for students.",
+          "cta": "Explore courses"
+        },
+        "build": {
+          "title": "Build",
+          "description": "Turn knowledge into real projects through challenges, hackathons, and collaboration.",
+          "cta": "See activities"
+        },
+        "connect": {
+          "title": "Connect",
+          "description": "Meet developers, speakers, and people who share your passion for technology.",
+          "cta": "Meet the team"
+        }
+      }
+    },
+    "story": {
+      "eyebrow": "Our story",
+      "title": "From 2021 to today",
+      "description": "A short timeline of how GDG UofK grew from an idea into a community.",
+      "milestones": {
+        "founded": {
+          "marker": "2021",
+          "title": "GDG UofK founded",
+          "description": "One of the first Google Developer Groups established in Sudan, founded in August 2021."
+        },
+        "events": {
+          "marker": "200+",
+          "title": "Online events hosted",
+          "description": "Workshops, talks, and study jams delivered to students across Sudan and the Arab world."
+        },
+        "today": {
+          "marker": "Today",
+          "title": "Still learning, still building",
+          "description": "Continuing to grow our community, our skills, and the opportunities we create together."
+        }
+      }
+    }
+  }
+}

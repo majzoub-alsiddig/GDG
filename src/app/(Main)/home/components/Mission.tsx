@@ -1,11 +1,15 @@
+"use client";
+
+import { useTranslations } from "@/i18n";
 
 export default function Mission() {
+  const { t } = useTranslations();
+
   return (
     <section className="bg-gray-50/60">
       <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-
         <h2 className="mt-6 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-          Our mission
+          {t("about.mission.title")}
         </h2>
 
         <span
@@ -14,8 +18,7 @@ export default function Mission() {
         />
 
         <p className="mt-6 text-lg leading-relaxed text-gray-700 sm:text-xl">
-          To spread knowledge of Google technologies - and technology more
-          broadly - throughout the tech community in Sudan and the Arab world.
+          {t("about.mission.body")}
         </p>
       </div>
     </section>

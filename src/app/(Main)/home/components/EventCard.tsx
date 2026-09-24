@@ -1,17 +1,17 @@
-// app/home/components/EventCard.tsx
+"use client";
+
 import type { EventItem } from "../types";
 import { CalendarIcon, PinIcon } from "@/components/icons";
-
-function formatDate(iso: string) {
-  const date = new Date(iso);
-  return date.toLocaleDateString("en-US", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
-}
+import { useTranslations, LOCALE_TAGS } from "@/i18n";
 
 export default function EventCard({ event }: { event: EventItem }) {
+  const { t, locale } = useTranslations();
+
+  const formattedDate = new Date(event.date).toLocaleDateString(
+    LOCALE_TAGS[locale],
+    { day: "numeric", month: "short", year: "numeric" }
+  );
+
   return (
     <a
       href={event.link}
@@ -20,12 +20,12 @@ export default function EventCard({ event }: { event: EventItem }) {
       <div className="relative aspect-video w-full overflow-hidden bg-gray-100">
         <img
           src={event.cover}
-          alt={`Cover image for ${event.title}`}
+          alt={t("home.upcomingEvents.cardCoverAlt", { title: event.title })}
           loading="lazy"
           decoding="async"
           className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
         />
-        <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-gray-800 shadow-sm backdrop-blur-sm">
+        <span className="absolute start-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-gray-800 shadow-sm backdrop-blur-sm">
           {event.category}
         </span>
       </div>
@@ -38,7 +38,7 @@ export default function EventCard({ event }: { event: EventItem }) {
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-medium text-gray-500">
           <span className="inline-flex items-center gap-1.5">
             <CalendarIcon className="h-3.5 w-3.5" />
-            {formatDate(event.date)}
+            {formattedDate}
           </span>
           <span className="inline-flex items-center gap-1.5">
             <PinIcon className="h-3.5 w-3.5" />

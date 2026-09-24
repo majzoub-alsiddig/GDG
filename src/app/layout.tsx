@@ -1,10 +1,26 @@
+// src/app/layout.tsx
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Poppins } from "next/font/google";
+import { Cairo, Geist, Geist_Mono, Poppins } from "next/font/google";
+import { cookies } from "next/headers";
 import "./globals.css";
+import {
+  DEFAULT_LOCALE,
+  LOCALE_COOKIE,
+  dirFor,
+  isValidLocale,
+} from "@/i18n/config";
+import { LocaleProvider } from "@/i18n/LocaleProvider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
   weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+});
+
+const cairo = Cairo({
+  variable: "--font-cairo",
+  weight: ["400", "500", "600", "700"],
+  subsets: ["arabic", "latin"],
 });
 
 const geistSans = Geist({
@@ -20,24 +36,28 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: {
     default: "GDG UofK",
-    template: "%s | GDG UofK"
+    template: "%s | GDG UofK",
   },
-  description: "Google Developer Group at the University of Khartoum. Learn, build, and connect.",
+  description:
+    "Google Developer Group at the University of Khartoum. Learn, build, and connect.",
 };
 
-// TODO: add the gdg icon on the page metadata
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const rawLocale = cookieStore.get(LOCALE_COOKIE)?.value;
+  const locale = isValidLocale(rawLocale) ? rawLocale : DEFAULT_LOCALE;
+  const dir = dirFor(locale);
+
   return (
-    <html lang="en">
+    <html lang={locale} dir={dir}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} bg-white antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${cairo.variable} bg-white antialiased`}
       >
-        {children}
+        <LocaleProvider initialLocale={locale}>{children}</LocaleProvider>
       </body>
     </html>
   );
