@@ -1,0 +1,41 @@
+{
+  "articles": {
+    "hero": {
+      "titleLine1": "أفكار ودروس",
+      "titleLine2": "وقصص",
+      "description": "دروس تقنية وقصص مجتمعية ورؤى من المشاريع ومعرفة عملية من مجتمع مجموعة مطوري جوجل - جامعة الخرطوم.",
+      "searchLabel": "ابحث في المقالات",
+      "searchPlaceholder": "ابحث في المقالات...",
+      "clearSearch": "مسح البحث"
+    },
+    "grid": {
+      "resultsFor": "نتائج البحث عن \"{query}\"",
+      "categoryArticles": "مقالات {category}",
+      "latestArticles": "أحدث المقالات",
+      "countSingular": "عُثر على مقالة واحدة",
+      "countPlural": "عُثر على {count} مقالات"
+    },
+    "card": {
+      "minRead": "قراءة {minutes} دقيقة",
+      "coverAlt": "صورة غلاف لـ {title}"
+    },
+    "featured": {
+      "badge": "مقالة مميزة",
+      "minRead": "قراءة {minutes} دقيقة",
+      "readArticle": "اقرأ المقالة",
+      "coverAlt": "صورة غلاف لـ {title}"
+    },
+    "empty": {
+      "searchTitle": "لا توجد مقالات مطابقة",
+      "searchMessage": "جرّب كلمة مفتاحية أخرى أو استكشف تصنيفاً مختلفاً.",
+      "noArticlesTitle": "لا توجد مقالات بعد",
+      "noArticlesMessage": "نحضّر شيئاً مميزاً. تحقق مرة أخرى قريباً."
+    },
+    "contribute": {
+      "title": "لديك ما تشاركه؟",
+      "description": "اكتب عن مشروع، أو تقنية تعلمتها، أو شيء اكتشفته في طريقك. مجموعة مطوري جوجل - جامعة الخرطوم يبنيها مجتمعها — وأنت جزء منه.",
+      "cta": "شارك معرفتك"
+    },
+    "error": "حدث خطأ أثناء تحميل المقالات."
+  }
+}

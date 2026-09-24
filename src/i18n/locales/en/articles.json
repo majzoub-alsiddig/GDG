@@ -1,0 +1,41 @@
+{
+  "articles": {
+    "hero": {
+      "titleLine1": "Ideas, Tutorials",
+      "titleLine2": "& Stories",
+      "description": "Technical tutorials, community stories, project insights, and practical knowledge from the GDG UofK community.",
+      "searchLabel": "Search articles",
+      "searchPlaceholder": "Search articles...",
+      "clearSearch": "Clear search"
+    },
+    "grid": {
+      "resultsFor": "Results for \"{query}\"",
+      "categoryArticles": "{category} articles",
+      "latestArticles": "Latest articles",
+      "countSingular": "{count} article found",
+      "countPlural": "{count} articles found"
+    },
+    "card": {
+      "minRead": "{minutes} min read",
+      "coverAlt": "Cover image for {title}"
+    },
+    "featured": {
+      "badge": "Featured article",
+      "minRead": "{minutes} min read",
+      "readArticle": "Read article",
+      "coverAlt": "Cover image for {title}"
+    },
+    "empty": {
+      "searchTitle": "No articles found",
+      "searchMessage": "Try another keyword or explore a different category.",
+      "noArticlesTitle": "No articles yet",
+      "noArticlesMessage": "We're preparing something interesting. Check back soon."
+    },
+    "contribute": {
+      "title": "Have something to share?",
+      "description": "Write about a project, a technology you've learned, or something you discovered along the way. GDG UofK is built by its community — and that includes you.",
+      "cta": "Share your knowledge"
+    },
+    "error": "Something went wrong loading articles."
+  }
+}

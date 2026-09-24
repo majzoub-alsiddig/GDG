@@ -1,27 +1,28 @@
-// app/articles/components/ArticleCard.tsx
+"use client";
+
 import Link from "next/link";
 import type { Article } from "../types";
 import { ClockIcon } from "@/components/icons";
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-}
+import { useTranslations, LOCALE_TAGS } from "@/i18n";
 
 export default function ArticleCard({ article }: { article: Article }) {
+  const { t, locale } = useTranslations();
+
+  const formattedDate = new Date(article.createdAt).toLocaleDateString(
+    LOCALE_TAGS[locale],
+    { month: "short", day: "numeric", year: "numeric" }
+  );
+
   return (
     <Link
       href={`/articles/${article.id}`}
       className="group flex flex-col rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-4"
     >
-      {/* Cover  -  16:9 */}
+      {/* Cover — 16:9 */}
       <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-gray-100 ring-1 ring-black/5">
         <img
           src={article.cover}
-          alt={`Cover image for ${article.title}`}
+          alt={t("articles.card.coverAlt", { title: article.title })}
           loading="lazy"
           decoding="async"
           className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
@@ -35,7 +36,7 @@ export default function ArticleCard({ article }: { article: Article }) {
           <span aria-hidden="true" className="h-1 w-1 rounded-full bg-gray-300" />
           <span className="inline-flex items-center gap-1 text-gray-500">
             <ClockIcon className="h-3 w-3" />
-            {article.readingTime} min read
+            {t("articles.card.minRead", { minutes: article.readingTime })}
           </span>
         </div>
 
@@ -53,7 +54,7 @@ export default function ArticleCard({ article }: { article: Article }) {
           </span>
           <span className="font-medium text-gray-700">{article.author}</span>
           <span aria-hidden="true">·</span>
-          <span>{formatDate(article.createdAt)}</span>
+          <span>{formattedDate}</span>
         </div>
       </div>
     </Link>

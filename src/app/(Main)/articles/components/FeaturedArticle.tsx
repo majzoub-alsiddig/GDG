@@ -1,23 +1,24 @@
-// src/app/(Main)/articles/components/FeaturedArticle.tsx
+"use client";
+
 import Link from "next/link";
 import type { Article } from "../types";
 import { ArrowRightIcon, ClockIcon } from "@/components/icons";
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-}
+import { useTranslations, LOCALE_TAGS } from "@/i18n";
 
 export default function FeaturedArticle({ article }: { article: Article }) {
+  const { t, locale } = useTranslations();
+
+  const formattedDate = new Date(article.createdAt).toLocaleDateString(
+    LOCALE_TAGS[locale],
+    { month: "long", day: "numeric", year: "numeric" }
+  );
+
   return (
     <article>
       <div className="mb-6 flex items-center gap-3">
         <span className="inline-flex items-center gap-2 rounded-full bg-[#FBBC05]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[#B08000]">
           <span className="h-1.5 w-1.5 rounded-full bg-[#FBBC05]" />
-          Featured article
+          {t("articles.featured.badge")}
         </span>
         <span aria-hidden="true" className="h-px flex-1 bg-gray-100" />
       </div>
@@ -30,7 +31,7 @@ export default function FeaturedArticle({ article }: { article: Article }) {
         <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100 lg:aspect-auto lg:h-full lg:min-h-[380px]">
           <img
             src={article.cover}
-            alt={`Cover image for ${article.title}`}
+            alt={t("articles.featured.coverAlt", { title: article.title })}
             loading="lazy"
             decoding="async"
             className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
@@ -44,7 +45,9 @@ export default function FeaturedArticle({ article }: { article: Article }) {
             <span aria-hidden="true" className="h-1 w-1 rounded-full bg-gray-300" />
             <span className="inline-flex items-center gap-1 text-gray-500">
               <ClockIcon className="h-3 w-3" />
-              {article.readingTime} min read
+              {t("articles.featured.minRead", {
+                minutes: article.readingTime,
+              })}
             </span>
           </div>
 
@@ -65,15 +68,15 @@ export default function FeaturedArticle({ article }: { article: Article }) {
                 {article.author}
               </p>
               <p className="text-xs">
-                {formatDate(article.createdAt)}
+                {formattedDate}
                 {article.authorRole ? ` · ${article.authorRole}` : ""}
               </p>
             </div>
           </div>
 
           <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-[#1a73e8]">
-            Read article
-            <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            {t("articles.featured.readArticle")}
+            <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />
           </span>
         </div>
       </Link>
