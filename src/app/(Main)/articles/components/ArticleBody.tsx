@@ -8,6 +8,8 @@ type Props = {
   className?: string;
 };
 
+// TODO: events main image is stupid also 
+
 export default function ArticleBody({ content, className = "" }: Props) {
   let html = "";
   try {

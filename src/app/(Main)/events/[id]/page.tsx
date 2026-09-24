@@ -154,27 +154,6 @@ export default async function FullEventPage({
             {event.location}
           </span>
         </div>
-
-        {/* CTA - external link vs internal */}
-        <div className="mt-8">
-          <a
-            href={event.link}
-            {...(isExternal
-              ? { target: "_blank", rel: "noopener noreferrer" }
-              : {})}
-            className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
-              isPast
-                ? "border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 focus-visible:ring-[#1a73e8]"
-                : "bg-gray-900 text-white hover:bg-gray-800 focus-visible:ring-gray-900"
-            }`}
-          >
-            {isPast
-              ? "View event details"
-              : isExternal
-                ? "Register / Learn more"
-                : "View event page"}
-          </a>
-        </div>
       </header>
 
       {/* COVER */}

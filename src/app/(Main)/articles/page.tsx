@@ -39,7 +39,7 @@ export default async function ArticlesPage() {
     <div className="flex min-h-screen flex-col bg-white font-poppins">
       <main className="flex-1">
         <ArticlesExplorer articles={articles} />
-        <ContributeCTA />
+        {/* <ContributeCTA />  Restore if you want it */}
       </main>
     </div>
   );

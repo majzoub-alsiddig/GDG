@@ -1,35 +1,8 @@
 // components/Footer.tsx
 import Link from "next/link";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  LinkedInIcon,
-  XIcon,
-  WhatsAppIcon,
-  TikTokIcon,
-  MailIcon,
-} from "./icons";
+import { FacebookIcon, InstagramIcon, LinkedInIcon, XIcon, WhatsAppIcon, TikTokIcon, MailIcon, GDGMark } from "./icons";
 
 type IconProps = { className?: string };
-
-function GDGMark({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 72 44" className={className} aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g stroke="#18181b" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round">
-      <rect x="-5.5" y="-5.5" width="28" height="11" rx="5.5" fill="#EA4335" transform="translate(15, 22) rotate(-40)" />
-      <rect x="-5.5" y="-5.5" width="28" height="11" rx="5.5" fill="#4285F4" transform="translate(15, 22) rotate(40)" />
-
-      <rect x="-22.5" y="-5.5" width="28" height="11" rx="5.5" fill="#FBBC05" transform="translate(57, 22) rotate(-40)" />
-      <rect x="-22.5" y="-5.5" width="28" height="11" rx="5.5" fill="#34A853" transform="translate(57, 22) rotate(40)" />
-    </g>
-  </svg>
-  );
-}
-
-
-/* ------------------------------------------------------------------ */
-/*  Data                                                               */
-/* ------------------------------------------------------------------ */
 
 const EXPLORE_LINKS = [
   { label: "Home", href: "/" },
@@ -52,8 +25,7 @@ type SocialLink = {
   Icon: (props: IconProps) => React.ReactElement;
 };
 
-// NOTE: TikTok href is a placeholder. Replace with the real TikTok URL
-// or remove the entry from SOCIAL_LINKS entirely.
+// TODO: add the real links
 const SOCIAL_LINKS: SocialLink[] = [
   { label: "Instagram", href: "https://www.instagram.com/gdg_uofk", Icon: InstagramIcon },
   {
@@ -79,7 +51,7 @@ const EMAIL = "contact@gdguofk.club";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-200 bg-white text-gray-600">
+    <footer id="pagefooter" className="border-t border-gray-200 bg-white text-gray-600">
       {/* ---------- Main footer ---------- */}
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
         <div className="grid grid-cols-1 gap-y-10 md:grid-cols-4 md:gap-16">

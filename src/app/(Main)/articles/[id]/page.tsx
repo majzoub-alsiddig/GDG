@@ -16,6 +16,9 @@ import {
 } from "@/components/icons";
 import "./article-content.css";
 
+// TODO: the article pic is so large
+// TODO: the article links at the very end need some working
+
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", {
     month: "long",

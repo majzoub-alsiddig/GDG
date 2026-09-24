@@ -28,9 +28,9 @@ const Courses = async () => {
     <div className="flex min-h-screen flex-col bg-white font-poppins">
       <main className="flex-1">
         <CoursesHero />
-        <CoursesIntroduction />
+        {/* <CoursesIntroduction /> Restore if you need it or want*/}
         <CoursesSection courses={courses} />
-        <LearningCTA />
+        {/* <LearningCTA /> Restore if you need it or want*/}
       </main>
     </div>
   );

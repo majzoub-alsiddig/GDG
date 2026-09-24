@@ -33,10 +33,10 @@ export default async function Team() {
     <div className="flex min-h-screen flex-col bg-white font-poppins">
       <main className="flex-1">
         <TeamHero />
-        <TeamIntroduction />
-        <TeamCulture />
+        {/* <TeamIntroduction /> Restore if you need it or want*/}
+        {/* <TeamCulture /> Restore if you need it or want*/}
         <TeamSection members={teamMembers} />
-        <JoinCommunityCTA />
+        <JoinCommunityCTA /> {/* TODO: add community join link */}
       </main>
     </div>
   );

@@ -53,7 +53,8 @@ export default function CoursesHero() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-5 py-3 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
-            >
+              >
+              {/* TODO: add the channesl linlk*/}
               <PlayIcon className="h-3.5 w-3.5" />
               Watch on YouTube
             </a>
