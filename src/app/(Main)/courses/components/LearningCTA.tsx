@@ -1,7 +1,12 @@
-// app/courses/components/LearningCTA.tsx
+// src/app/(Main)/courses/components/LearningCTA.tsx
+"use client";
+
 import { YouTubeIcon } from "@/components/icons";
+import { useTranslations } from "@/i18n";
 
 export default function LearningCTA() {
+  const { t } = useTranslations();
+
   return (
     <section className="px-4 pb-20 sm:px-6 sm:pb-24 lg:px-8 lg:pb-28">
       <div className="mx-auto max-w-7xl">
@@ -21,12 +26,11 @@ export default function LearningCTA() {
           />
 
           <h2 className="relative text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl">
-            Keep learning with GDG
+            {t("courses.cta.title")}
           </h2>
 
           <p className="relative mx-auto mt-4 max-w-xl text-sm leading-relaxed text-gray-300 sm:text-base">
-            Discover more talks, tutorials, and technical content on our
-            YouTube channel.
+            {t("courses.cta.description")}
           </p>
 
           <div className="relative mt-9">
@@ -37,7 +41,7 @@ export default function LearningCTA() {
               className="inline-flex items-center gap-2.5 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-gray-900 transition hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
             >
               <YouTubeIcon className="h-5 w-5 text-[#FF0000]" />
-              Visit our YouTube channel
+              {t("courses.cta.visitYoutube")}
             </a>
           </div>
         </div>

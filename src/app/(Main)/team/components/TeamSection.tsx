@@ -1,4 +1,4 @@
-// app/team/components/TeamSection.tsx
+// src/app/(Main)/team/components/TeamSection.tsx
 "use client";
 
 import { useMemo } from "react";
@@ -6,6 +6,7 @@ import type { TeamCategory, TeamMember } from "../types";
 import TeamMemberCard from "./TeamMemberCard";
 import TeamEmptyState from "./TeamEmptyState";
 import TeamSkeleton from "./TeamSkeleton";
+import { useTranslations } from "@/i18n";
 
 type Props = {
   members: TeamMember[];
@@ -20,6 +21,14 @@ const CATEGORY_ORDER: TeamCategory[] = [
 ];
 
 export default function TeamSection({ members, loading = false }: Props) {
+  const { t } = useTranslations();
+
+  // Translate a DB category value; fall back to the raw value for unknowns.
+  const categoryLabel = (category: string) =>
+    t(`team.categories.${category}`) === `team.categories.${category}`
+      ? category
+      : t(`team.categories.${category}`);
+
   const grouped = useMemo(() => {
     const map = new Map<TeamCategory, TeamMember[]>();
     for (const member of members) {
@@ -51,14 +60,13 @@ export default function TeamSection({ members, loading = false }: Props) {
         {/* Centered section header */}
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1a73e8]">
-            Our team
+            {t("team.section.eyebrow")}
           </span>
           <h2 className="mt-3 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-            The people behind GDG
+            {t("team.section.title")}
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-gray-600 sm:text-base">
-            Meet the organizers, developers, designers, and volunteers who make
-            our community possible.
+            {t("team.section.description")}
           </p>
         </div>
 
@@ -75,11 +83,17 @@ export default function TeamSection({ members, loading = false }: Props) {
                   {showCategoryHeadings && (
                     /* Centered category heading with flanking rules */
                     <div className="mb-8 flex items-center justify-center gap-4 sm:mb-10">
-                      <span aria-hidden="true" className="h-px w-8 bg-gray-200 sm:w-12" />
+                      <span
+                        aria-hidden="true"
+                        className="h-px w-8 bg-gray-200 sm:w-12"
+                      />
                       <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-gray-500">
-                        {category}
+                        {categoryLabel(category)}
                       </h3>
-                      <span aria-hidden="true" className="h-px w-8 bg-gray-200 sm:w-12" />
+                      <span
+                        aria-hidden="true"
+                        className="h-px w-8 bg-gray-200 sm:w-12"
+                      />
                     </div>
                   )}
 

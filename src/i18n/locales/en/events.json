@@ -1,0 +1,17 @@
+{
+  "events": {
+    "list": {
+      "eyebrow": "Community events",
+      "title": "Explore what's happening at GDG UofK",
+      "description": "From workshops and talks to study jams and collaborations, we build learning experiences for students and developers.",
+      "emptyTitle": "No upcoming events",
+      "emptyMessage": "Follow us to stay updated when the next event is announced."
+    },
+    "detail": {
+      "breadcrumb": "All events",
+      "pastEvent": "Past event",
+      "relatedTitle": "More {category} events",
+      "coverAlt": "Cover image for {title}"
+    }
+  }
+}

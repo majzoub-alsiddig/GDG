@@ -1,8 +1,13 @@
-// app/courses/components/CoursesHero.tsx
+// src/app/(Main)/courses/components/CoursesHero.tsx
+"use client";
+
 import coverImg from "@/../assets/cover.jpg";
 import { ArrowRightIcon, PlayIcon } from "@/components/icons";
+import { useTranslations } from "@/i18n";
 
 export default function CoursesHero() {
+  const { t } = useTranslations();
+
   return (
     <section className="relative isolate flex min-h-[440px] items-center overflow-hidden bg-gray-900 sm:min-h-[500px] lg:min-h-[560px]">
       {/* Background */}
@@ -22,11 +27,11 @@ export default function CoursesHero() {
         <div className="max-w-3xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/90 backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-[#34A853]" />
-            GDG UofK · Learning
+            {t("courses.hero.badge")}
           </span>
 
           <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Courses
+            {t("courses.hero.title")}
           </h1>
 
           {/* Google-colour accent rule */}
@@ -36,8 +41,7 @@ export default function CoursesHero() {
           />
 
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-gray-200 sm:text-lg">
-            Explore the courses and learning sessions created by our community
-            to help students learn, build, and grow.
+            {t("courses.hero.description")}
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
@@ -45,18 +49,18 @@ export default function CoursesHero() {
               href="#courses"
               className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-gray-900 transition hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
             >
-              Browse courses
-              <ArrowRightIcon className="h-4 w-4" />
+              {t("courses.hero.browse")}
+              <ArrowRightIcon className="h-4 w-4 rtl:rotate-180" />
             </a>
             <a
               href="https://youtube.com"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-5 py-3 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
-              >
-              {/* TODO: add the channesl linlk*/}
+            >
+              {/* TODO: add the channel link */}
               <PlayIcon className="h-3.5 w-3.5" />
-              Watch on YouTube
+              {t("courses.hero.watchOnYoutube")}
             </a>
           </div>
         </div>

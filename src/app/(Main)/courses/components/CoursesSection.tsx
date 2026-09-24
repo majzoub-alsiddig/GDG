@@ -1,4 +1,4 @@
-// app/courses/components/CoursesSection.tsx
+// src/app/(Main)/courses/components/CoursesSection.tsx
 "use client";
 
 import { useMemo, useState } from "react";
@@ -6,15 +6,18 @@ import type { Course } from "../types";
 import CourseCard from "./CourseCard";
 import CoursesEmptyState from "./CoursesEmptyState";
 import CoursesSkeleton from "./CoursesSkeleton";
+import { useTranslations } from "@/i18n";
 
 type Props = {
   courses: Course[];
   loading?: boolean;
 };
 
-const ALL = "All";
+// Internal sentinel — never displayed, so a real DB category named "All" can't collide.
+const ALL = "__ALL__";
 
 export default function CoursesSection({ courses, loading = false }: Props) {
+  const { t } = useTranslations();
   const [activeCategory, setActiveCategory] = useState<string>(ALL);
 
   const categories = useMemo(() => {
@@ -30,6 +33,12 @@ export default function CoursesSection({ courses, loading = false }: Props) {
     [courses, activeCategory]
   );
 
+  const count = visibleCourses.length;
+  const countLabel =
+    count === 1
+      ? t("courses.section.courseCount", { count })
+      : t("courses.section.courseCountPlural", { count });
+
   return (
     <section
       id="courses"
@@ -40,19 +49,15 @@ export default function CoursesSection({ courses, loading = false }: Props) {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-              Explore all courses
+              {t("courses.section.title")}
             </h2>
             <p className="mt-2 max-w-xl text-sm leading-relaxed text-gray-600 sm:text-base">
-              Pick a topic and start learning right away - every course opens
-              on our YouTube channel.
+              {t("courses.section.description")}
             </p>
           </div>
 
           {!loading && visibleCourses.length > 0 && (
-            <p className="shrink-0 text-sm text-gray-500">
-              {visibleCourses.length} course
-              {visibleCourses.length === 1 ? "" : "s"}
-            </p>
+            <p className="shrink-0 text-sm text-gray-500">{countLabel}</p>
           )}
         </div>
 
@@ -61,11 +66,13 @@ export default function CoursesSection({ courses, loading = false }: Props) {
           <div className="mt-8 -mx-4 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <div
               role="group"
-              aria-label="Filter courses by category"
+              aria-label={t("courses.section.filterAriaLabel")}
               className="flex w-max gap-2 sm:w-auto sm:flex-wrap"
             >
               {categories.map((category) => {
                 const isActive = category === activeCategory;
+                const label =
+                  category === ALL ? t("courses.section.all") : category;
                 return (
                   <button
                     key={category}
@@ -78,7 +85,7 @@ export default function CoursesSection({ courses, loading = false }: Props) {
                         : "border-gray-200 bg-white text-gray-600 hover:border-gray-300 hover:text-gray-900"
                     }`}
                   >
-                    {category}
+                    {label}
                   </button>
                 );
               })}

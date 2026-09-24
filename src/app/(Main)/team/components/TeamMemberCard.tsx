@@ -1,4 +1,6 @@
-// app/team/components/TeamMemberCard.tsx
+// src/app/(Main)/team/components/TeamMemberCard.tsx
+"use client";
+
 import type { JSX } from "react";
 import type { TeamMember } from "../types";
 import {
@@ -8,12 +10,14 @@ import {
   LinkedInIcon,
   TwitterIcon,
 } from "@/components/icons";
+import { useTranslations } from "@/i18n";
 
 type IconType = (props: { className?: string }) => JSX.Element;
 
 type SocialEntry = {
   key: string;
   href: string;
+  // Brand names stay literal; the "Website" label is translated at render.
   label: string;
   Icon: IconType;
 };
@@ -21,16 +25,27 @@ type SocialEntry = {
 function getSocials(member: TeamMember): SocialEntry[] {
   const { socials } = member;
   const entries: (SocialEntry | null)[] = [
-    socials.github ? { key: "github", href: socials.github, label: "GitHub", Icon: GitHubIcon } : null,
-    socials.linkedin ? { key: "linkedin", href: socials.linkedin, label: "LinkedIn", Icon: LinkedInIcon } : null,
-    socials.instagram ? { key: "instagram", href: socials.instagram, label: "Instagram", Icon: InstagramIcon } : null,
-    socials.twitter ? { key: "twitter", href: socials.twitter, label: "X", Icon: TwitterIcon } : null,
-    socials.website ? { key: "website", href: socials.website, label: "Website", Icon: GlobeIcon } : null,
+    socials.github
+      ? { key: "github", href: socials.github, label: "GitHub", Icon: GitHubIcon }
+      : null,
+    socials.linkedin
+      ? { key: "linkedin", href: socials.linkedin, label: "LinkedIn", Icon: LinkedInIcon }
+      : null,
+    socials.instagram
+      ? { key: "instagram", href: socials.instagram, label: "Instagram", Icon: InstagramIcon }
+      : null,
+    socials.twitter
+      ? { key: "twitter", href: socials.twitter, label: "X", Icon: TwitterIcon }
+      : null,
+    socials.website
+      ? { key: "website", href: socials.website, label: "__WEBSITE__", Icon: GlobeIcon }
+      : null,
   ];
   return entries.filter((entry): entry is SocialEntry => Boolean(entry));
 }
 
 export default function TeamMemberCard({ member }: { member: TeamMember }) {
+  const { t } = useTranslations();
   const socials = getSocials(member);
 
   return (
@@ -39,7 +54,7 @@ export default function TeamMemberCard({ member }: { member: TeamMember }) {
       <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-100">
         <img
           src={member.photo}
-          alt={`Portrait of ${member.name}`}
+          alt={t("team.card.portraitAlt", { name: member.name })}
           loading="lazy"
           decoding="async"
           className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
@@ -65,18 +80,27 @@ export default function TeamMemberCard({ member }: { member: TeamMember }) {
 
         {socials.length > 0 && (
           <div className="mt-4 flex flex-wrap items-center justify-center gap-1">
-            {socials.map(({ key, href, label, Icon }) => (
-              <a
-                key={key}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${label} profile of ${member.name}`}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-2"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
+            {socials.map(({ key, href, label, Icon }) => {
+              const displayLabel =
+                label === "__WEBSITE__"
+                  ? t("team.card.socials.website")
+                  : label;
+              return (
+                <a
+                  key={key}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={t("team.card.socialAriaLabel", {
+                    platform: displayLabel,
+                    name: member.name,
+                  })}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-2"
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              );
+            })}
           </div>
         )}
       </div>

@@ -1,0 +1,61 @@
+{
+  "team": {
+    "hero": {
+      "badge": "GDG UofK · Community",
+      "title": "Meet Our Team",
+      "description": "The people behind GDG UofK — a community of developers, designers, organizers, and technology enthusiasts working together to create opportunities for students to learn and grow.",
+      "meetTheTeam": "Meet the team"
+    },
+    "intro": {
+      "eyebrow": "Who we are",
+      "title": "Behind the community",
+      "description": "We are a community-driven team passionate about technology, learning, and creating opportunities for students. Every course, workshop, and event is made possible by people who volunteer their time to help others grow."
+    },
+    "culture": {
+      "eyebrow": "Our culture",
+      "title": "More than a team",
+      "description": "We are a community built around learning, collaboration, and sharing technology.",
+      "pillars": {
+        "learn": {
+          "title": "Learn",
+          "description": "Explore new technologies and expand your skills through curated resources and hands-on sessions."
+        },
+        "build": {
+          "title": "Build",
+          "description": "Turn ideas into real projects with the support of a community that cares about your growth."
+        },
+        "share": {
+          "title": "Share",
+          "description": "Teach, mentor, and grow together — because knowledge multiplies when it's shared."
+        }
+      }
+    },
+    "section": {
+      "eyebrow": "Our team",
+      "title": "The people behind GDG",
+      "description": "Meet the organizers, developers, designers, and volunteers who make our community possible."
+    },
+    "categories": {
+      "Core": "Core",
+      "Technical": "Technical",
+      "Media": "Media",
+      "Managment": "Management"
+    },
+    "card": {
+      "portraitAlt": "Portrait of {name}",
+      "socialAriaLabel": "{platform} profile of {name}",
+      "socials": {
+        "website": "Website"
+      }
+    },
+    "empty": {
+      "title": "Team information is coming soon",
+      "message": "We're putting together the profiles of our team members. Check back soon."
+    },
+    "cta": {
+      "title": "Want to be part of GDG?",
+      "description": "Join our community, attend events, learn with us, and build something meaningful together.",
+      "join": "Join the community"
+    }
+  }
+}

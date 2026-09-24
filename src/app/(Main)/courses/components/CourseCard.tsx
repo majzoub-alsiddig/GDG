@@ -1,8 +1,13 @@
-// app/courses/components/CourseCard.tsx
+// src/app/(Main)/courses/components/CourseCard.tsx
+"use client";
+
 import type { Course } from "../types";
 import { PlayIcon } from "@/components/icons";
+import { useTranslations } from "@/i18n";
 
 export default function CourseCard({ course }: { course: Course }) {
+  const { t } = useTranslations();
+
   return (
     <a
       href={course.link}
@@ -14,7 +19,7 @@ export default function CourseCard({ course }: { course: Course }) {
       <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-gray-100 ring-1 ring-black/5">
         <img
           src={course.cover}
-          alt={`Cover image for ${course.title}`}
+          alt={t("courses.card.coverAlt", { title: course.title })}
           loading="lazy"
           decoding="async"
           className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
@@ -29,7 +34,7 @@ export default function CourseCard({ course }: { course: Course }) {
         {/* Play affordance (desktop hover) */}
         <div className="pointer-events-none absolute inset-0 hidden items-center justify-center md:flex">
           <span className="flex h-12 w-12 scale-90 items-center justify-center rounded-full bg-white/90 opacity-0 shadow-lg backdrop-blur-sm transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
-            <PlayIcon className="h-5 w-5 translate-x-[1px] text-gray-900" />
+            <PlayIcon className="h-5 w-5 translate-x-[1px] text-gray-900 rtl:-translate-x-[1px]" />
           </span>
         </div>
       </div>
@@ -50,7 +55,7 @@ export default function CourseCard({ course }: { course: Course }) {
 
         <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-[#1a73e8]">
           <PlayIcon className="h-3 w-3" />
-          Watch on YouTube
+          {t("courses.card.watchOnYoutube")}
         </span>
       </div>
     </a>

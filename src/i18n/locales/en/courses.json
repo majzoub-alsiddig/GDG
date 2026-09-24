@@ -1,0 +1,37 @@
+{
+  "courses": {
+    "hero": {
+      "badge": "GDG UofK · Learning",
+      "title": "Courses",
+      "description": "Explore the courses and learning sessions created by our community to help students learn, build, and grow.",
+      "browse": "Browse courses",
+      "watchOnYoutube": "Watch on YouTube"
+    },
+    "intro": {
+      "eyebrow": "Our courses",
+      "title": "Learn with GDG",
+      "description": "Across our chapters, we have dedicated our time and effort to creating learning experiences that help students explore new technologies, strengthen their technical skills, and build practical knowledge."
+    },
+    "section": {
+      "title": "Explore all courses",
+      "description": "Pick a topic and start learning right away — every course opens on our YouTube channel.",
+      "filterAriaLabel": "Filter courses by category",
+      "all": "All",
+      "courseCount": "{count} course",
+      "courseCountPlural": "{count} courses"
+    },
+    "card": {
+      "coverAlt": "Cover image for {title}",
+      "watchOnYoutube": "Watch on YouTube"
+    },
+    "empty": {
+      "title": "No courses available yet",
+      "message": "We're preparing new learning resources for you. Check back soon."
+    },
+    "cta": {
+      "title": "Keep learning with GDG",
+      "description": "Discover more talks, tutorials, and technical content on our YouTube channel.",
+      "visitYoutube": "Visit our YouTube channel"
+    }
+  }
+}
