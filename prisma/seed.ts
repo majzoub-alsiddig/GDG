@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import { PrismaClient } from '../src/generated/prisma/client'
 import { PrismaLibSql } from '@prisma/adapter-libsql'
+import { hashPassword } from '../src/lib/passwords'
 
 const adapter = new PrismaLibSql({
   url: process.env.DATABASE_URL || 'file:./dev.db',
@@ -8,6 +9,27 @@ const adapter = new PrismaLibSql({
 const prisma = new PrismaClient({ adapter })
 
 async function main() {
+  // ================= Admin bootstrap =================
+  // Only runs when the Admin table is empty.
+  // Existing admins are preserved across reseeds.
+  const existingAdminCount = await prisma.admin.count()
+  if (existingAdminCount === 0) {
+    const username = process.env.ADMIN_USERNAME ?? "admin"
+    const password = process.env.ADMIN_PASSWORD ?? "admin"
+    const passwordHash = await hashPassword(password)
+    await prisma.admin.create({
+      data: {
+        username,
+        name: "Admin",
+        passwordHash,
+        active: true,
+      },
+    })
+    console.log(`✅ Bootstrapped admin "${username}"`)
+  } else {
+    console.log(`· Skipped admin bootstrap (${existingAdminCount} already exist)`)
+  }
+
   // ================= Team =================
   await prisma.teamMember.deleteMany()
   const teamMembers = [

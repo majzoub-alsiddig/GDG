@@ -6,6 +6,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { MenuIcon, CloseIcon, GDGMark } from "@/components/icons";
 
+type Props = {
+  admin: {
+    id: string;
+    username: string;
+    name: string;
+  };
+};
+
 const NAV_LINKS = [
   { label: "Dashboard", href: "/admin" },
   { label: "Articles", href: "/admin/articles" },
@@ -13,6 +21,7 @@ const NAV_LINKS = [
   { label: "Courses", href: "/admin/courses" },
   { label: "Categories", href: "/admin/categories" },
   { label: "Team", href: "/admin/team" },
+  { label: "Admins", href: "/admin/admins" },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -20,11 +29,13 @@ function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export default function AdminNavBar() {
+export default function AdminNavBar({ admin }: Props) {
   const pathname = usePathname();
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
+
+  const initial = (admin.name || admin.username)[0]?.toUpperCase() ?? "A";
 
   async function handleLogout() {
     setLoggingOut(true);
@@ -40,7 +51,6 @@ export default function AdminNavBar() {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-gray-200 bg-white/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Logo + Admin badge */}
         <Link
           href="/admin"
           className="flex items-center gap-2.5 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-2"
@@ -54,8 +64,7 @@ export default function AdminNavBar() {
           </span>
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Admin">
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="Admin">
           {NAV_LINKS.map((link) => {
             const active = isActive(pathname, link.href);
             return (
@@ -63,7 +72,7 @@ export default function AdminNavBar() {
                 key={link.href}
                 href={link.href}
                 aria-current={active ? "page" : undefined}
-                className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
+                className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${
                   active
                     ? "bg-blue-50 text-[#1a73e8]"
                     : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
@@ -75,13 +84,14 @@ export default function AdminNavBar() {
           })}
         </nav>
 
-        {/* Right side */}
         <div className="flex items-center gap-2">
-          <div className="hidden items-center gap-2 md:flex">
+          <div className="hidden items-center gap-2 lg:flex">
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-900 text-xs font-semibold text-white">
-              A
+              {initial}
             </span>
-            <span className="text-sm font-medium text-gray-700">Admin</span>
+            <span className="max-w-[10rem] truncate text-sm font-medium text-gray-700">
+              {admin.name}
+            </span>
           </div>
 
           <button
@@ -93,29 +103,23 @@ export default function AdminNavBar() {
             {loggingOut ? "Signing out…" : "Sign out"}
           </button>
 
-          {/* Mobile toggle */}
           <button
             type="button"
             onClick={() => setMenuOpen((v) => !v)}
             aria-expanded={menuOpen}
             aria-controls="admin-mobile-nav"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-700 transition-colors hover:bg-gray-100 md:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-700 transition-colors hover:bg-gray-100 lg:hidden"
           >
-            {menuOpen ? (
-              <CloseIcon className="h-5 w-5" />
-            ) : (
-              <MenuIcon className="h-5 w-5" />
-            )}
+            {menuOpen ? <CloseIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile nav */}
       {menuOpen && (
         <div
           id="admin-mobile-nav"
-          className="border-t border-gray-200 bg-white md:hidden"
+          className="border-t border-gray-200 bg-white lg:hidden"
         >
           <div className="mx-auto flex max-w-7xl flex-col px-4 py-2 sm:px-6">
             {NAV_LINKS.map((link) => {
@@ -136,6 +140,12 @@ export default function AdminNavBar() {
                 </Link>
               );
             })}
+            <div className="mt-2 flex items-center gap-2 border-t border-gray-100 px-3.5 pt-3 pb-2">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-900 text-xs font-semibold text-white">
+                {initial}
+              </span>
+              <span className="text-sm font-medium text-gray-700">{admin.name}</span>
+            </div>
           </div>
         </div>
       )}

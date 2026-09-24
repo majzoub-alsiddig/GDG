@@ -1,7 +1,18 @@
 import Link from "next/link";
-import {PenIcon, CalendarIcon, BookOpenIcon, UsersIcon, ArrowRightIcon} from "@/components/icons"
+import { PenIcon, CalendarIcon, BookOpenIcon, UsersIcon, ArrowRightIcon } from "@/components/icons"
+import { getCurrentAdmin } from "@/lib/admin-auth";
 
 const SECTIONS = [
+  {
+    title: "Admins",
+    description: "Manage who can sign in and edit content.",
+    href: "/admin/admins",
+    accent: "text-[#EA4335]",
+    bg: "bg-red-50",
+    ring: "ring-red-100",
+    Icon: UsersIcon,
+    stat: "Manage access",
+  },
   {
     title: "Articles",
     description: "Write, edit, and publish community articles.",
@@ -44,7 +55,10 @@ const SECTIONS = [
   },
 ];
 
-export default function AdminDashboard() {
+export default async function AdminDashboard() {
+  const admin = await getCurrentAdmin();
+  const firstName = admin?.name.split(" ")[0] ?? "Admin";
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
       <div className="flex flex-col gap-2">
@@ -52,7 +66,7 @@ export default function AdminDashboard() {
           Dashboard
         </p>
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Welcome back, Admin
+          Welcome back, {firstName}
         </h1>
         <p className="max-w-2xl text-sm text-gray-500 sm:text-base">
           Manage everything that appears on the public site - articles, events,

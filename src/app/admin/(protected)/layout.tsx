@@ -1,21 +1,21 @@
-import { cookies } from "next/headers";
+// src/app/admin/(protected)/layout.tsx
 import { redirect } from "next/navigation";
-
-const SESSION_COOKIE = "admin_session";
+import { getCurrentAdmin } from "@/lib/admin-auth";
+import AdminNavBar from "../_components/AdminNavBar";
 
 export default async function ProtectedAdminLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
-
-  if (!cookieStore.has(SESSION_COOKIE)) {
+  const admin = await getCurrentAdmin();
+  if (!admin) {
     redirect("/admin/login");
   }
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-50">
+      <AdminNavBar admin={admin} />
       <main className="flex-1">{children}</main>
     </div>
   );

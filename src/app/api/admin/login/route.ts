@@ -1,8 +1,13 @@
 // src/app/api/admin/login/route.ts
 import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+import { verifyPassword } from "@/lib/passwords";
+import { SESSION_COOKIE, SESSION_MAX_AGE, signAdminId } from "@/lib/session";
 
-const SESSION_COOKIE = "admin_session";
-const SESSION_MAX_AGE = 60 * 60 * 24 * 7; // 7 days
+// A well-formed dummy hash to keep timing consistent when the username doesn't exist.
+const DUMMY_HASH =
+  "scrypt$00000000000000000000000000000000$" +
+  "0".repeat(128);
 
 export async function POST(request: Request) {
   let body: { username?: string; password?: string };
@@ -15,12 +20,17 @@ export async function POST(request: Request) {
   const username = (body.username ?? "").trim();
   const password = body.password ?? "";
 
-  // TODO: allow admins to save their data in the db, and allow the manager to add new admins-delete
-  const ADMIN_USERNAME = process.env.ADMIN_USERNAME ?? "admin";
-  const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? "admin123";
+  if (!username || !password) {
+    return NextResponse.json(
+      { error: "Username and password are required" },
+      { status: 400 }
+    );
+  }
 
-  if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
-    // Soft delay to make brute-force attempts less pleasant
+  const admin = await prisma.admin.findUnique({ where: { username } });
+  const ok = await verifyPassword(password, admin?.passwordHash ?? DUMMY_HASH);
+
+  if (!admin || !admin.active || !ok) {
     await new Promise((r) => setTimeout(r, 400));
     return NextResponse.json(
       { error: "Invalid username or password" },
@@ -28,8 +38,13 @@ export async function POST(request: Request) {
     );
   }
 
+  await prisma.admin.update({
+    where: { id: admin.id },
+    data: { lastLoginAt: new Date() },
+  });
+
   const response = NextResponse.json({ ok: true });
-  response.cookies.set(SESSION_COOKIE, "authenticated", {
+  response.cookies.set(SESSION_COOKIE, signAdminId(admin.id), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
