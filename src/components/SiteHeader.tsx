@@ -4,83 +4,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { CloseIcon, MenuIcon } from "@/components/icons";
+import { CloseIcon, MenuIcon, CheckIcon, ChevronDownIcon, GlobeIcon, GDGMark } from "@/components/icons";
 
-/* ------------------------------------------------------------------ */
-/*  Logo mark  -  two chevron pairs, Google colours, bold outline       */
-/* ------------------------------------------------------------------ */
-
-function GDGMark({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 72 44" className={className} aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g stroke="#18181b" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round">
-      <rect x="-5.5" y="-5.5" width="28" height="11" rx="5.5" fill="#EA4335" transform="translate(15, 22) rotate(-40)" />
-      <rect x="-5.5" y="-5.5" width="28" height="11" rx="5.5" fill="#4285F4" transform="translate(15, 22) rotate(40)" />
-
-      <rect x="-22.5" y="-5.5" width="28" height="11" rx="5.5" fill="#FBBC05" transform="translate(57, 22) rotate(-40)" />
-      <rect x="-22.5" y="-5.5" width="28" height="11" rx="5.5" fill="#34A853" transform="translate(57, 22) rotate(40)" />
-    </g>
-  </svg>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  Inline icons                                                      */
-/* ------------------------------------------------------------------ */
-
-type IconProps = { className?: string };
-
-function ChevronDownIcon({ className }: IconProps) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="m6 9 6 6 6-6" />
-    </svg>
-  );
-}
-
-function CheckIcon({ className }: IconProps) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="m5 12 5 5L20 7" />
-    </svg>
-  );
-}
-
-function GlobeIcon({ className }: IconProps) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z" />
-    </svg>
-  );
-}
 
 /* ------------------------------------------------------------------ */
 /*  Nav config                                                        */

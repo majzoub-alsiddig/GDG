@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { MenuIcon, CloseIcon } from "@/components/icons";
+import { MenuIcon, CloseIcon, GDGMark } from "@/components/icons";
 
 const NAV_LINKS = [
   { label: "Dashboard", href: "/admin" },
@@ -45,12 +45,7 @@ export default function AdminNavBar() {
           href="/admin"
           className="flex items-center gap-2.5 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-2"
         >
-          <span className="grid grid-cols-2 gap-[3px]" aria-hidden="true">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#4285F4]" />
-            <span className="h-1.5 w-1.5 rounded-full bg-[#EA4335]" />
-            <span className="h-1.5 w-1.5 rounded-full bg-[#FBBC05]" />
-            <span className="h-1.5 w-1.5 rounded-full bg-[#34A853]" />
-          </span>
+          <GDGMark className="h-6 w-auto" />
           <span className="text-[15px] font-bold tracking-tight text-gray-900">
             GDG <span className="font-medium text-gray-500">UofK</span>
           </span>

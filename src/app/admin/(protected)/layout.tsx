@@ -1,6 +1,5 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import AdminNavBar from "../_components/AdminNavBar";
 
 const SESSION_COOKIE = "admin_session";
 
