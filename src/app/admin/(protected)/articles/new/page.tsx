@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import ArticleForm, { type ArticleFormInitial } from "../_components/ArticleForm";
+import { ArrowRightIcon, ArrowLeftIcon } from "@/components/icons";
 
 export default async function NewArticlePage() {
   const categories = await prisma.articleCategory.findMany({
@@ -29,7 +30,8 @@ export default async function NewArticlePage() {
         href="/admin/articles"
         className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900"
       >
-        🡨 Back to articles
+        <ArrowLeftIcon className="h-4 w-4" />
+        Back to articles
       </Link>
       <h1 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
         Add article
@@ -46,7 +48,7 @@ export default async function NewArticlePage() {
             href="/admin/categories"
             className="font-semibold underline hover:no-underline"
           >
-            Add a category →
+            Add a category <ArrowRightIcon className="h-4 w-4" />
           </Link>
         </div>
       ) : (

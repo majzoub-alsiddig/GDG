@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import TeamForm from "../../_components/TeamForm";
+import { ArrowLeftIcon } from "@/components/icons";
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -17,7 +18,8 @@ export default async function EditTeamMemberPage({ params }: Params) {
         href="/admin/team"
         className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900"
       >
-        🡨 Back to team
+        <ArrowLeftIcon className="h-4 w-4" />
+        Back to team
       </Link>
       <h1 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
         Edit team member

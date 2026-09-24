@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import EventForm, { type EventFormInitial } from "../_components/EventForm";
+import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons";
+
 
 // Helper: returns YYYY-MM-DDTHH:mm suitable for datetime-local
 function toLocalDatetimeString(d: Date): string {
@@ -42,7 +44,8 @@ export default async function NewEventPage() {
         href="/admin/events"
         className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900"
       >
-        🡨 Back to events
+        <ArrowLeftIcon className="h-4 w-4" />
+        Back to events
       </Link>
       <h1 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
         Add event
@@ -59,7 +62,8 @@ export default async function NewEventPage() {
             href="/admin/categories"
             className="font-semibold underline hover:no-underline"
           >
-            Add a category →
+            Add a category 
+            <ArrowRightIcon className="h-4 w-4" />
           </Link>
         </div>
       ) : (

@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import ArticleForm, {
   type ArticleFormInitial,
 } from "../../_components/ArticleForm";
+import { ArrowLeftIcon } from "@/components/icons";
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -41,7 +42,8 @@ export default async function EditArticlePage({ params }: Params) {
         href="/admin/articles"
         className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900"
       >
-        🡨 Back to articles
+        <ArrowLeftIcon className="h-4 w-4" /> 
+        Back to articles
       </Link>
       <h1 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
         Edit article

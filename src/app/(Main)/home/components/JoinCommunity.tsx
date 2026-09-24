@@ -41,7 +41,7 @@ export default function JoinCommunity() {
               href="/events"
               className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
             >
-              Explore events
+              Explore events {/* TODO: add the communty link*/}
             </a>
           </div>
         </div>

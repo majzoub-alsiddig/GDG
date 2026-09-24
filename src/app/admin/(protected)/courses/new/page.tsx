@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import CourseForm from "../_components/CourseForm";
+import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons";
+
 
 export default async function NewCoursePage() {
   const categories = await prisma.courseCategory.findMany({
@@ -17,7 +19,8 @@ export default async function NewCoursePage() {
         href="/admin/courses"
         className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900"
       >
-        🡨 Back to courses
+        <ArrowLeftIcon className="h-4 w-4" />
+        Back to courses
       </Link>
       <h1 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
         Add course
@@ -33,7 +36,7 @@ export default async function NewCoursePage() {
             href="/admin/categories"
             className="font-semibold underline hover:no-underline"
           >
-            Add a category →
+            Add a category <ArrowRightIcon className="h-4 w-4" />
           </Link>
         </div>
       ) : (

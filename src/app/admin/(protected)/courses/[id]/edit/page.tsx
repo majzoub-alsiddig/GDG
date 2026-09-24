@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import CourseForm from "../../_components/CourseForm";
+import { ArrowLeftIcon } from "@/components/icons";
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -22,7 +23,8 @@ export default async function EditCoursePage({ params }: Params) {
         href="/admin/courses"
         className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900"
       >
-        🡨 Back to courses
+        <ArrowLeftIcon className="h-4 w-4" />
+        Back to courses
       </Link>
       <h1 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
         Edit course
