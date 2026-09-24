@@ -1,9 +1,10 @@
-// app/faq/components/FAQItem.tsx
+// src/app/(Main)/faq/components/FAQItem.tsx
 "use client";
 
 import { useId, useState } from "react";
 import type { FAQItem as FAQItemType } from "../types";
 import { ChevronDownIcon } from "@/components/icons";
+import { useTranslations } from "@/i18n";
 
 type Props = {
   item: FAQItemType;
@@ -11,9 +12,13 @@ type Props = {
 };
 
 export default function FAQItem({ item, defaultOpen = false }: Props) {
+  const { t } = useTranslations();
   const [open, setOpen] = useState(defaultOpen);
   const contentId = useId();
   const buttonId = useId();
+
+  const question = t(`faq.items.${item.id}.question`);
+  const answer = t(`faq.items.${item.id}.answer`);
 
   return (
     <div
@@ -28,10 +33,10 @@ export default function FAQItem({ item, defaultOpen = false }: Props) {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls={contentId}
-          className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left transition-colors hover:bg-gray-50/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-inset sm:px-6"
+          className="flex w-full items-center justify-between gap-4 px-5 py-5 text-start transition-colors hover:bg-gray-50/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-inset sm:px-6"
         >
           <span className="text-base font-semibold leading-snug text-gray-900 sm:text-[17px]">
-            {item.question}
+            {question}
           </span>
           <ChevronDownIcon
             className={`h-5 w-5 flex-shrink-0 text-gray-500 transition-transform duration-300 ${
@@ -53,7 +58,7 @@ export default function FAQItem({ item, defaultOpen = false }: Props) {
         <div className="overflow-hidden">
           <div className="border-t border-gray-100 px-5 pb-5 pt-4 sm:px-6">
             <p className="text-sm leading-relaxed text-gray-600 sm:text-base">
-              {item.answer}
+              {answer}
             </p>
           </div>
         </div>

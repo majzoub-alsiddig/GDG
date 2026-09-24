@@ -6,9 +6,9 @@ import articles from "./articles.json";
 import events from "./events.json";
 import courses from "./courses.json";
 import team from "./team.json";
+import faq from "./faq.json";
 
 // Uncomment as you translate each page:
-// import faq from "./faq.json";
 // import admin from "./admin.json";
 
 const ar = {
@@ -19,7 +19,7 @@ const ar = {
   ...events,
   ...courses,
   ...team,
-  // ...faq,
+  ...faq,
   // ...admin,
 };
 

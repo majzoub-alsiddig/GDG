@@ -1,8 +1,13 @@
-// app/faq/components/FAQHero.tsx
+// src/app/(Main)/faq/components/FAQHero.tsx
+"use client";
+
 import coverImg from "@/../assets/cover.jpg";
 import { ArrowRightIcon, HelpCircleIcon } from "@/components/icons";
+import { useTranslations } from "@/i18n";
 
 export default function FAQHero() {
+  const { t } = useTranslations();
+
   return (
     <section className="relative isolate flex min-h-[360px] items-center overflow-hidden bg-gray-900 sm:min-h-[400px] lg:min-h-[440px]">
       {/* Background */}
@@ -22,11 +27,11 @@ export default function FAQHero() {
         <div className="max-w-2xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/90 backdrop-blur-sm">
             <HelpCircleIcon className="h-3.5 w-3.5" />
-            GDG UofK · Help Center
+            {t("faq.hero.badge")}
           </span>
 
           <h1 className="mt-6 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-            Frequently Asked Questions
+            {t("faq.hero.title")}
           </h1>
 
           {/* Google-colour accent rule */}
@@ -36,9 +41,7 @@ export default function FAQHero() {
           />
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-gray-200 sm:text-lg">
-            Everything you need to know about GDG UofK  -  from who we are to how
-            to get involved. Can&rsquo;t find your answer? Reach out to us
-            below.
+            {t("faq.hero.description")}
           </p>
 
           <div className="mt-8">
@@ -46,8 +49,8 @@ export default function FAQHero() {
               href="#faq"
               className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-gray-900 transition hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
             >
-              Browse questions
-              <ArrowRightIcon className="h-4 w-4" />
+              {t("faq.hero.browse")}
+              <ArrowRightIcon className="h-4 w-4 rtl:rotate-180" />
             </a>
           </div>
         </div>
