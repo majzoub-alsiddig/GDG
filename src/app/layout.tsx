@@ -25,6 +25,8 @@ export const metadata: Metadata = {
   description: "Google Developer Group at the University of Khartoum. Learn, build, and connect.",
 };
 
+// TODO: add the gdg icon on the page metadata
+
 export default function RootLayout({
   children,
 }: Readonly<{

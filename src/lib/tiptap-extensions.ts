@@ -11,7 +11,7 @@ import { HorizontalRule } from "@/components/tiptap-node/horizontal-rule-node/ho
 
 /**
  * Extensions used for BOTH editing and rendering article HTML.
- * Keep this list in sync — anything the editor can produce must be
+ * Keep this list in sync - anything the editor can produce must be
  * renderable here, or it will silently disappear from the public page.
  */
 export const renderExtensions = [

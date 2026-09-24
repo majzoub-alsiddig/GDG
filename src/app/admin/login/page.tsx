@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import LoginForm from "./_components/LoginForm";
 
 export const metadata: Metadata = {
-  title: "Admin Sign In — GDG UofK",
+  title: "Admin Sign In - GDG UofK",
 };
 
 export default function AdminLoginPage() {

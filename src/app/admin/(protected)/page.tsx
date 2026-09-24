@@ -104,8 +104,8 @@ export default function AdminDashboard() {
           Welcome back, Admin
         </h1>
         <p className="max-w-2xl text-sm text-gray-500 sm:text-base">
-          Manage everything that appears on the public site — articles, events,
-          courses, and team members — from one place.
+          Manage everything that appears on the public site - articles, events,
+          courses, and team members - from one place.
         </p>
       </div>
 

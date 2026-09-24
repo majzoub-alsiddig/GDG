@@ -205,7 +205,7 @@ export default function CategoryManager({
         </h1>
         <p className="mt-2 text-sm text-gray-500">
           Categories appear as filters on the public pages. Deleting a category
-          that still has items is blocked — reassign them first.
+          that still has items is blocked - reassign them first.
         </p>
       </div>
 

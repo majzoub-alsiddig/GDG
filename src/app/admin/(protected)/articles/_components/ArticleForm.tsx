@@ -270,7 +270,7 @@ export default function ArticleForm({ mode, initial, categories }: Props) {
         <div className="mb-4">
           <h2 className="text-base font-bold text-gray-900">Content</h2>
           <p className="mt-1 text-sm text-gray-500">
-            Rich text — add headings, images, videos, links, lists, and more.
+            Rich text - add headings, images, videos, links, lists, and more.
           </p>
         </div>
         <RichTextEditor value={content} onChange={setContent} minHeight="480px" />

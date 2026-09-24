@@ -15,7 +15,7 @@ export async function POST(request: Request) {
   const username = (body.username ?? "").trim();
   const password = body.password ?? "";
 
-  // TODO: replace with real auth (DB lookup, password hashing, etc.)
+  // TODO: allow admins to save their data in the db, and allow the manager to add new admins-delete
   const ADMIN_USERNAME = process.env.ADMIN_USERNAME ?? "admin";
   const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? "admin123";
 

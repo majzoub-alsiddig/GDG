@@ -48,7 +48,7 @@ export default async function EditEventPage({ params }: Params) {
         href="/admin/events"
         className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900"
       >
-        ← Back to events
+        🡨 Back to events
       </Link>
       <h1 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
         Edit event

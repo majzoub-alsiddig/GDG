@@ -37,7 +37,7 @@ export function useArticlesSearch({
       setIsLoading(true);
       setError(null);
 
-      // Simulated client-side filter — swap for a fetch() later if you
+      // Simulated client-side filter - swap for a fetch() later if you
       // move to server-side search.
       try {
         const trimmed = q.trim().toLowerCase();

@@ -258,7 +258,7 @@ export default function EventForm({ mode, initial, categories }: Props) {
           <FormField
             label="Link *"
             id="field-link"
-            hint="Where attendees go — an internal detail page (/events/your-slug) or an external registration URL."
+            hint="Where attendees go - an internal detail page (/events/your-slug) or an external registration URL."
           >
             <input
               id="field-link"

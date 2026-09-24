@@ -45,3 +45,5 @@ src/generated/
 
 public/uploads/*
 !public/uploads/.gitkeep
+
+*.sh

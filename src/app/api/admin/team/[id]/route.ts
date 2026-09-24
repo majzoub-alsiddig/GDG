@@ -33,7 +33,7 @@ export async function PATCH(request: Request, { params }: Params) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  // Partial update — only touch keys present in the body
+  // Partial update - only touch keys present in the body
   const data: Record<string, unknown> = {};
   const takeStr = (k: string) => {
     if (k in body && typeof body[k] === "string") {

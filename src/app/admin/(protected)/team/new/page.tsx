@@ -8,7 +8,7 @@ export default function NewTeamMemberPage() {
         href="/admin/team"
         className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900"
       >
-        ← Back to team
+        🡨 Back to team
       </Link>
       <h1 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
         Add team member

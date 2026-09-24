@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/admin-auth";
 
+// TODO: complete the teams categories
 const CATEGORIES = ["Leadership", "Technical", "Media", "Operations"] as const;
 
 type Payload = {

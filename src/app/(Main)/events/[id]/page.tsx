@@ -85,7 +85,7 @@ export default async function FullEventPage({
   const event = await getEventBySlug(id);
   if (!event) notFound();
 
-  // Related events — same category, upcoming, excluding this one
+  // Related events - same category, upcoming, excluding this one
   const relatedDb = await prisma.event.findMany({
     where: {
       published: true,
@@ -155,7 +155,7 @@ export default async function FullEventPage({
           </span>
         </div>
 
-        {/* CTA — external link vs internal */}
+        {/* CTA - external link vs internal */}
         <div className="mt-8">
           <a
             href={event.link}
