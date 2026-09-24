@@ -152,7 +152,7 @@ export default async function FullArticlePage({
         </div>
       </header>
 
-      <figure className="mx-auto mt-10 max-w-5xl px-4 sm:px-6 lg:px-8">
+      <figure className="mx-auto mt-10 max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-gray-100 ring-1 ring-black/5">
           <img
             src={article.cover}
