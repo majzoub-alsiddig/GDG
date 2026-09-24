@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import {EyeIcon, EyeOffIcon} from "@/components/icons";
+import { ArrowLeftIcon, EyeIcon, EyeOffIcon, GDGMark } from "@/components/icons";
 
 
 export default function LoginForm() {
@@ -62,12 +62,8 @@ export default function LoginForm() {
       <div className="relative w-full max-w-md">
         {/* Logo */}
         <div className="mb-8 flex items-center justify-center gap-2.5">
-          <span className="grid grid-cols-2 gap-[3px]" aria-hidden="true">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#4285F4]" />
-            <span className="h-1.5 w-1.5 rounded-full bg-[#EA4335]" />
-            <span className="h-1.5 w-1.5 rounded-full bg-[#FBBC05]" />
-            <span className="h-1.5 w-1.5 rounded-full bg-[#34A853]" />
-          </span>
+
+          <GDGMark className="h-6 w-auto" />
           <span className="text-[15px] font-bold tracking-tight text-gray-900">
             GDG <span className="font-medium text-gray-500">UofK</span>
           </span>
@@ -168,12 +164,10 @@ export default function LoginForm() {
         </div>
 
         {/* Back to site */}
-        <p className="mt-6 text-center text-sm text-gray-500">
-          <Link
-            href="/"
-            className="font-medium text-[#1a73e8] hover:underline"
-          >
-            🡨 Back to GDG UofK
+        <p className="mt-6 flex justify-center text-sm text-gray-500">
+          <Link href="/" className="inline-flex items-center gap-1.5 font-medium text-[#1a73e8] transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-2 rounded">
+            <ArrowLeftIcon className="h-4 w-4" />
+            Back to GDG UofK
           </Link>
         </p>
       </div>
