@@ -5,7 +5,7 @@ import { useState } from "react";
 import type { TeamMember } from "@/generated/prisma/client";
 import ImageUpload from "@/app/admin/_components/ImageUpload";
 
-const CATEGORIES = ["Leadership", "Technical", "Media", "Operations"] as const;
+const CATEGORIES = ["Core", "Technical", "Media", "Managment"] as const;
 
 type Mode = "create" | "edit";
 

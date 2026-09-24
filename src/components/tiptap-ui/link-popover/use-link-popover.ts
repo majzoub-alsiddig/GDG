@@ -105,7 +105,7 @@ export function shouldShowLinkButton(props: {
 }
 
 /**
- * Custom hook for handling link operations in a Tiptap editor
+ * Custom hook for handling link Managment in a Tiptap editor
  */
 export function useLinkHandler(props: LinkHandlerProps) {
   const { editor, onSetLink } = props

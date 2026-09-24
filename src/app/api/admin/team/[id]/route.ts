@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/admin-auth";
 
-const CATEGORIES = ["Leadership", "Technical", "Media", "Operations"] as const;
+const CATEGORIES = ["Core", "Technical", "Media", "Managment"] as const;
 
 type Params = { params: Promise<{ id: string }> };
 

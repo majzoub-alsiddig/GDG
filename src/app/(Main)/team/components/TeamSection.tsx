@@ -13,10 +13,10 @@ type Props = {
 };
 
 const CATEGORY_ORDER: TeamCategory[] = [
-  "Leadership",
+  "Core",
   "Technical",
   "Media",
-  "Operations",
+  "Managment",
 ];
 
 export default function TeamSection({ members, loading = false }: Props) {

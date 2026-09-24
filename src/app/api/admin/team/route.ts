@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/admin-auth";
 
 // TODO: complete the teams categories
-const CATEGORIES = ["Leadership", "Technical", "Media", "Operations"] as const;
+const CATEGORIES = ["Core", "Technical", "Media", "Managment"] as const;
 
 type Payload = {
   name?: unknown;

@@ -1,5 +1,5 @@
 // app/team/types.ts
-export type TeamCategory = "Leadership" | "Technical" | "Media" | "Operations";
+export type TeamCategory = "Core" | "Technical" | "Media" | "Managment";
 
 export type SocialLinks = {
   github?: string;
