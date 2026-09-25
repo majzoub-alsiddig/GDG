@@ -299,7 +299,7 @@
   padding: 2.5rem 1.5rem !important;
 }
 
-/* Constrain the reading column by limiting each block's width — NOT by
+/* Constrain the reading column by limiting each block's width - NOT by
    narrowing the ProseMirror itself. This preserves the clickable area
    while keeping the text at a comfortable ~56rem reading width. */
 .rich-text-editor[data-fullscreen="true"] .tiptap.simple-editor > * {

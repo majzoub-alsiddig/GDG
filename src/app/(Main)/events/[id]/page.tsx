@@ -68,7 +68,7 @@ export default async function FullEventPage({
   const event = await getEventBySlug(id);
   if (!event) notFound();
 
-  // Related events — same category, excluding this one
+  // Related events - same category, excluding this one
   const relatedDb = await prisma.event.findMany({
     where: {
       published: true,

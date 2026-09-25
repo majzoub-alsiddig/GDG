@@ -3,7 +3,7 @@
     "hero": {
       "badge": "GDG UofK · Community",
       "title": "Meet Our Team",
-      "description": "The people behind GDG UofK — a community of developers, designers, organizers, and technology enthusiasts working together to create opportunities for students to learn and grow.",
+      "description": "The people behind GDG UofK - a community of developers, designers, organizers, and technology enthusiasts working together to create opportunities for students to learn and grow.",
       "meetTheTeam": "Meet the team"
     },
     "intro": {
@@ -26,7 +26,7 @@
         },
         "share": {
           "title": "Share",
-          "description": "Teach, mentor, and grow together — because knowledge multiplies when it's shared."
+          "description": "Teach, mentor, and grow together - because knowledge multiplies when it's shared."
         }
       }
     },

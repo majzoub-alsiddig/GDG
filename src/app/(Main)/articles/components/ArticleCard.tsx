@@ -18,7 +18,7 @@ export default function ArticleCard({ article }: { article: Article }) {
       href={`/articles/${article.id}`}
       className="group flex flex-col rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[#1a73e8] focus-visible:ring-offset-4"
     >
-      {/* Cover — 16:9 */}
+      {/* Cover - 16:9 */}
       <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-gray-100 ring-1 ring-black/5">
         <img
           src={article.cover}

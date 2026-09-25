@@ -14,7 +14,7 @@
     },
     "section": {
       "title": "Explore all courses",
-      "description": "Pick a topic and start learning right away — every course opens on our YouTube channel.",
+      "description": "Pick a topic and start learning right away - every course opens on our YouTube channel.",
       "filterAriaLabel": "Filter courses by category",
       "all": "All",
       "courseCount": "{count} course",

@@ -7,7 +7,7 @@ import { faqData } from "../data/faq";
 import FAQItem from "./FAQItem";
 import { useTranslations } from "@/i18n";
 
-// Internal sentinel — never displayed, so a real category named "All" can't collide.
+// Internal sentinel - never displayed, so a real category named "All" can't collide.
 const ALL = "__ALL__" as const;
 
 const CATEGORY_ORDER: FAQCategory[] = [

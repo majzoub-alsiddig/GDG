@@ -13,7 +13,7 @@ type Props = {
   loading?: boolean;
 };
 
-// Internal sentinel — never displayed, so a real DB category named "All" can't collide.
+// Internal sentinel - never displayed, so a real DB category named "All" can't collide.
 const ALL = "__ALL__";
 
 export default function CoursesSection({ courses, loading = false }: Props) {

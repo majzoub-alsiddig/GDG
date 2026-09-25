@@ -75,7 +75,7 @@ export default function AdminManager({
       {admins.length === 0 ? (
         <AdminEmptyState
           title="No admins"
-          message="Something's wrong — you should at least see yourself. Reload the page."
+          message="Something's wrong - you should at least see yourself. Reload the page."
         />
       ) : (
         <ul className="mt-10 divide-y divide-gray-100 overflow-hidden rounded-2xl border border-gray-200 bg-white">
