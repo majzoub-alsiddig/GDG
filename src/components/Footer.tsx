@@ -59,7 +59,7 @@ const SOCIAL_LINKS: SocialLink[] = [
     href: "https://whatsapp.com/channel/0029Vb77fOH002T8HKROP32H",
     Icon: WhatsAppIcon,
   },
-  { key: "footer.social.tiktok", href: "#", Icon: TikTokIcon },
+  { key: "footer.social.tiktok", href: "https://www.tiktok.com/@gdg.uofk", Icon: TikTokIcon },
 ];
 
 const EMAIL = "contact@gdguofk.club";
