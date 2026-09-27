@@ -48,3 +48,5 @@ public/uploads/*
 
 *.sh
 *.txt
+.next/
+node_modules/
