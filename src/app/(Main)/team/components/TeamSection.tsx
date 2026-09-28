@@ -11,6 +11,7 @@ import { useTranslations } from "@/i18n";
 type Props = {
   members: TeamMember[];
   loading?: boolean;
+  emptyVariant?: "default" | "season";
 };
 
 const CATEGORY_ORDER: TeamCategory[] = [
@@ -20,7 +21,11 @@ const CATEGORY_ORDER: TeamCategory[] = [
   "Managment",
 ];
 
-export default function TeamSection({ members, loading = false }: Props) {
+export default function TeamSection({
+  members,
+  loading = false,
+  emptyVariant = "default",
+}: Props) {
   const { t } = useTranslations();
 
   // Translate a DB category value; fall back to the raw value for unknowns.
@@ -75,7 +80,7 @@ export default function TeamSection({ members, loading = false }: Props) {
           {loading ? (
             <TeamSkeleton />
           ) : members.length === 0 ? (
-            <TeamEmptyState />
+            <TeamEmptyState variant={emptyVariant} />
           ) : (
             <div className="flex flex-col gap-14 sm:gap-16">
               {grouped.map(({ category, members: list }) => (
