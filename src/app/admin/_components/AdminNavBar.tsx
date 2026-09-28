@@ -21,6 +21,7 @@ const NAV_LINKS = [
   { label: "Courses", href: "/admin/courses" },
   { label: "Categories", href: "/admin/categories" },
   { label: "Team", href: "/admin/team" },
+  { label: "Seasons", href: "/admin/seasons" },
   { label: "Admins", href: "/admin/admins" },
 ];
 
@@ -111,7 +112,11 @@ export default function AdminNavBar({ admin }: Props) {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             className="inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-700 transition-colors hover:bg-gray-100 lg:hidden"
           >
-            {menuOpen ? <CloseIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
+            {menuOpen ? (
+              <CloseIcon className="h-5 w-5" />
+            ) : (
+              <MenuIcon className="h-5 w-5" />
+            )}
           </button>
         </div>
       </div>
@@ -144,7 +149,9 @@ export default function AdminNavBar({ admin }: Props) {
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-900 text-xs font-semibold text-white">
                 {initial}
               </span>
-              <span className="text-sm font-medium text-gray-700">{admin.name}</span>
+              <span className="text-sm font-medium text-gray-700">
+                {admin.name}
+              </span>
             </div>
           </div>
         </div>

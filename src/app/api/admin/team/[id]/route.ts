@@ -13,7 +13,12 @@ export async function GET(_request: Request, { params }: Params) {
   if (guard) return guard;
 
   const { id } = await params;
-  const member = await prisma.teamMember.findUnique({ where: { id } });
+  const member = await prisma.teamMember.findUnique({
+    where: { id },
+    include: {
+      season: { select: { id: true, name: true, slug: true, isActive: true } },
+    },
+  });
   if (!member) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
@@ -33,7 +38,7 @@ export async function PATCH(request: Request, { params }: Params) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  // Partial update - only touch keys present in the body
+  // Partial update- only touch keys present in the body.
   const data: Record<string, unknown> = {};
   const takeStr = (k: string) => {
     if (k in body && typeof body[k] === "string") {
@@ -69,10 +74,40 @@ export async function PATCH(request: Request, { params }: Params) {
     }
   }
 
+  // seasonId: nullable FK. Empty string / null => null (unassign).
+  if ("seasonId" in body) {
+    const raw = body.seasonId;
+    if (raw === null || raw === "") {
+      data.seasonId = null;
+    } else if (typeof raw === "string") {
+      const trimmed = raw.trim();
+      data.seasonId = trimmed.length > 0 ? trimmed : null;
+    } else {
+      return NextResponse.json(
+        { error: "Invalid seasonId" },
+        { status: 400 }
+      );
+    }
+
+    if (data.seasonId) {
+      const season = await prisma.season.findUnique({
+        where: { id: data.seasonId as string },
+        select: { id: true },
+      });
+      if (!season) {
+        return NextResponse.json(
+          { error: "Season not found" },
+          { status: 400 }
+        );
+      }
+    }
+  }
+
   try {
     const member = await prisma.teamMember.update({ where: { id }, data });
     revalidatePath("/team");
     revalidatePath("/admin/team");
+    revalidatePath("/admin/seasons");
     return NextResponse.json({ member });
   } catch {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
@@ -88,6 +123,7 @@ export async function DELETE(_request: Request, { params }: Params) {
     await prisma.teamMember.delete({ where: { id } });
     revalidatePath("/team");
     revalidatePath("/admin/team");
+    revalidatePath("/admin/seasons");
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json({ error: "Not found" }, { status: 404 });

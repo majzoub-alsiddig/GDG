@@ -3,7 +3,7 @@
     "hero": {
       "badge": "GDG UofK · Community",
       "title": "Meet Our Team",
-      "description": "The people behind GDG UofK — a community of developers, designers, organizers, and technology enthusiasts working together to create opportunities for students to learn and grow.",
+      "description": "The people behind GDG UofK- a community of developers, designers, organizers, and technology enthusiasts working together to create opportunities for students to learn and grow.",
       "meetTheTeam": "Meet the team"
     },
     "intro": {
@@ -26,7 +26,7 @@
         },
         "share": {
           "title": "Share",
-          "description": "Teach, mentor, and grow together — because knowledge multiplies when it's shared."
+          "description": "Teach, mentor, and grow together- because knowledge multiplies when it's shared."
         }
       }
     },
@@ -41,6 +41,9 @@
       "Media": "Media",
       "Managment": "Management"
     },
+    "seasons": {
+      "label": "Browse by season"
+    },
     "card": {
       "portraitAlt": "Portrait of {name}",
       "socialAriaLabel": "{platform} profile of {name}",
@@ -50,7 +53,9 @@
     },
     "empty": {
       "title": "Team information is coming soon",
-      "message": "We're putting together the profiles of our team members. Check back soon."
+      "message": "We're putting together the profiles of our team members. Check back soon.",
+      "seasonTitle": "No members in this season",
+      "seasonMessage": "This season's roster hasn't been added yet. Try another season above."
     },
     "cta": {
       "title": "Want to be part of GDG?",

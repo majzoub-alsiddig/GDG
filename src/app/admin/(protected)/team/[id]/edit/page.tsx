@@ -9,7 +9,15 @@ type Params = { params: Promise<{ id: string }> };
 
 export default async function EditTeamMemberPage({ params }: Params) {
   const { id } = await params;
-  const member = await prisma.teamMember.findUnique({ where: { id } });
+
+  const [member, seasons] = await Promise.all([
+    prisma.teamMember.findUnique({ where: { id } }),
+    prisma.season.findMany({
+      orderBy: [{ order: "asc" }, { createdAt: "asc" }],
+      select: { id: true, name: true, isActive: true },
+    }),
+  ]);
+
   if (!member) notFound();
 
   return (
@@ -28,7 +36,7 @@ export default async function EditTeamMemberPage({ params }: Params) {
         Editing: <span className="font-medium text-gray-700">{member.name}</span>
       </p>
       <div className="mt-8 rounded-3xl border border-gray-200 bg-white p-6 sm:p-8">
-        <TeamForm mode="edit" member={member} />
+        <TeamForm mode="edit" member={member} seasons={seasons} />
       </div>
     </div>
   );

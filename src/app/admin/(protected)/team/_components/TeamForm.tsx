@@ -1,3 +1,4 @@
+// src/app/admin/(protected)/team/_components/TeamForm.tsx
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -8,10 +9,12 @@ import ImageUpload from "@/app/admin/_components/ImageUpload";
 const CATEGORIES = ["Core", "Technical", "Media", "Managment"] as const;
 
 type Mode = "create" | "edit";
+type SeasonOption = { id: string; name: string; isActive: boolean };
 
 type Props = {
   mode: Mode;
   member?: TeamMember;
+  seasons: SeasonOption[];
 };
 
 type FormState = {
@@ -20,6 +23,7 @@ type FormState = {
   about: string;
   photo: string;
   category: string;
+  seasonId: string;
   github: string;
   linkedin: string;
   instagram: string;
@@ -28,13 +32,21 @@ type FormState = {
   order: string;
 };
 
-function initialState(member?: TeamMember): FormState {
+function initialState(
+  member: TeamMember | undefined,
+  seasons: SeasonOption[]
+): FormState {
+  // Default season on create: the active one (if any).
+  const fallbackSeasonId =
+    member?.seasonId ?? seasons.find((s) => s.isActive)?.id ?? "";
+
   return {
     name: member?.name ?? "",
     role: member?.role ?? "",
     about: member?.about ?? "",
     photo: member?.photo ?? "",
     category: member?.category ?? "Technical",
+    seasonId: fallbackSeasonId,
     github: member?.github ?? "",
     linkedin: member?.linkedin ?? "",
     instagram: member?.instagram ?? "",
@@ -44,9 +56,9 @@ function initialState(member?: TeamMember): FormState {
   };
 }
 
-export default function TeamForm({ mode, member }: Props) {
+export default function TeamForm({ mode, member, seasons }: Props) {
   const router = useRouter();
-  const [form, setForm] = useState<FormState>(initialState(member));
+  const [form, setForm] = useState<FormState>(initialState(member, seasons));
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -65,6 +77,7 @@ export default function TeamForm({ mode, member }: Props) {
       about: form.about.trim(),
       photo: form.photo.trim(),
       category: form.category,
+      seasonId: form.seasonId || null,
       github: form.github.trim() || null,
       linkedin: form.linkedin.trim() || null,
       instagram: form.instagram.trim() || null,
@@ -137,7 +150,7 @@ export default function TeamForm({ mode, member }: Props) {
         </Field>
       </div>
 
-      {/* Category + Order */}
+      {/* Category + Season */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Field label="Category *" id="field-category">
           <select
@@ -154,6 +167,35 @@ export default function TeamForm({ mode, member }: Props) {
             ))}
           </select>
         </Field>
+        <Field
+          label="Season"
+          id="field-season"
+          hint={
+            seasons.length === 0
+              ? "No seasons yet- create one under Admin → Seasons."
+              : undefined
+          }
+        >
+          <select
+            id="field-season"
+            value={form.seasonId}
+            onChange={(e) => update("seasonId", e.target.value)}
+            className={inputClass}
+            disabled={seasons.length === 0}
+          >
+            <option value="">— No season-</option>
+            {seasons.map((s) => (
+              <option key={s.id} value={s.id}>
+                {s.name}
+                {s.isActive ? " (active)" : ""}
+              </option>
+            ))}
+          </select>
+        </Field>
+      </div>
+
+      {/* Order */}
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Field label="Sort order" id="field-order">
           <input
             id="field-order"
@@ -267,15 +309,17 @@ export default function TeamForm({ mode, member }: Props) {
 }
 
 const inputClass =
-  "w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 transition-colors focus:border-[#1a73e8] focus:outline-none focus:ring-2 focus:ring-[#1a73e8]/20";
+  "w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 transition-colors focus:border-[#1a73e8] focus:outline-none focus:ring-2 focus:ring-[#1a73e8]/20 disabled:bg-gray-50 disabled:text-gray-400";
 
 function Field({
   label,
   id,
+  hint,
   children,
 }: {
   label: string;
   id: string;
+  hint?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -287,6 +331,7 @@ function Field({
         {label}
       </label>
       {children}
+      {hint && <p className="mt-1.5 text-xs text-gray-400">{hint}</p>}
     </div>
   );
 }

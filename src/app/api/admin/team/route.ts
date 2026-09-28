@@ -18,6 +18,7 @@ type Payload = {
   twitter?: unknown;
   website?: unknown;
   order?: unknown;
+  seasonId?: unknown;
 };
 
 function validate(body: Payload) {
@@ -58,6 +59,20 @@ function validate(body: Payload) {
   const order = Number(body.order);
   out.order = Number.isFinite(order) ? order : 0;
 
+  // seasonId: optional, nullable. Empty string / null / undefined => null.
+  if (
+    body.seasonId === null ||
+    body.seasonId === undefined ||
+    body.seasonId === ""
+  ) {
+    out.seasonId = null;
+  } else if (typeof body.seasonId === "string") {
+    const trimmed = body.seasonId.trim();
+    out.seasonId = trimmed.length > 0 ? trimmed : null;
+  } else {
+    errors.push("Invalid seasonId");
+  }
+
   return { errors, data: out };
 }
 
@@ -67,6 +82,9 @@ export async function GET() {
 
   const members = await prisma.teamMember.findMany({
     orderBy: [{ order: "asc" }, { createdAt: "asc" }],
+    include: {
+      season: { select: { id: true, name: true, slug: true, isActive: true } },
+    },
   });
   return NextResponse.json({ members });
 }
@@ -87,6 +105,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: errors.join(", ") }, { status: 400 });
   }
 
+  // Verify the referenced season actually exists before we insert.
+  if (data.seasonId) {
+    const season = await prisma.season.findUnique({
+      where: { id: data.seasonId as string },
+      select: { id: true },
+    });
+    if (!season) {
+      return NextResponse.json({ error: "Season not found" }, { status: 400 });
+    }
+  }
+
   const member = await prisma.teamMember.create({
     data: data as Parameters<typeof prisma.teamMember.create>[0]["data"],
   });
@@ -94,6 +123,7 @@ export async function POST(request: Request) {
   // Refresh the public team page so changes go live immediately
   revalidatePath("/team");
   revalidatePath("/admin/team");
+  revalidatePath("/admin/seasons");
 
   return NextResponse.json({ member }, { status: 201 });
 }

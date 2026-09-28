@@ -1,9 +1,15 @@
+// src/app/admin/(protected)/team/new/page.tsx
 import Link from "next/link";
 import TeamForm from "../_components/TeamForm";
 import { ArrowLeftIcon } from "@/components/icons";
+import { prisma } from "@/lib/prisma";
 
+export default async function NewTeamMemberPage() {
+  const seasons = await prisma.season.findMany({
+    orderBy: [{ order: "asc" }, { createdAt: "asc" }],
+    select: { id: true, name: true, isActive: true },
+  });
 
-export default function NewTeamMemberPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
       <Link
@@ -21,7 +27,7 @@ export default function NewTeamMemberPage() {
         immediately after saving.
       </p>
       <div className="mt-8 rounded-3xl border border-gray-200 bg-white p-6 sm:p-8">
-        <TeamForm mode="create" />
+        <TeamForm mode="create" seasons={seasons} />
       </div>
     </div>
   );
