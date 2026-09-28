@@ -50,3 +50,4 @@ public/uploads/*
 *.txt
 .next/
 node_modules/
+gdg-deploy-*.tar.gz
