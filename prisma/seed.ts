@@ -1,3 +1,4 @@
+// prisma/seed.ts
 import 'dotenv/config'
 import { PrismaClient } from '../src/generated/prisma/client'
 import { PrismaLibSql } from '@prisma/adapter-libsql'
@@ -30,8 +31,20 @@ async function main() {
     console.log(`· Skipped admin bootstrap (${existingAdminCount} already exist)`)
   }
 
-  // ================= Team =================
+  // ================= Seasons + Team =================
+  // FK-safe delete order: members reference seasons, so delete members first.
+  // onDelete: SetNull on the relation means deleting a season would also work,
+  // but explicit ordering is clearer and matches the reset intent of the seed.
   await prisma.teamMember.deleteMany()
+  await prisma.season.deleteMany()
+
+  await prisma.season.create({
+    data: { name: "2024/2025", slug: "2024-2025", order: 1, isActive: false },
+  })
+  const currentSeason = await prisma.season.create({
+    data: { name: "2025/2026", slug: "2025-2026", order: 2, isActive: true },
+  })
+
   const teamMembers = [
     {
       name: "Dr. Sara Ahmed",
@@ -115,7 +128,9 @@ async function main() {
     },
   ]
   for (const member of teamMembers) {
-    await prisma.teamMember.create({ data: member })
+    await prisma.teamMember.create({
+      data: { ...member, seasonId: currentSeason.id },
+    })
   }
 
   // ================= Events + Categories =================
@@ -460,10 +475,11 @@ async function main() {
     await prisma.article.create({ data: article })
   }
 
+  console.log(`✅ Seeded 2 seasons (active: ${currentSeason.name})`)
+  console.log(`✅ Seeded ${teamMembers.length} team members (season: ${currentSeason.name})`)
   console.log(`✅ Seeded ${categoryData.length} course categories`)
   console.log(`✅ Seeded ${courses.length} courses`)
   console.log(`✅ Seeded ${eventCategoryData.length} event categories`)
-  console.log(`✅ Seeded ${teamMembers.length} team members`)
   console.log(`✅ Seeded ${articleCategoryData.length} article categories`)
   console.log(`✅ Seeded ${articles.length} articles`)
 }
@@ -476,3 +492,4 @@ main()
   .finally(async () => {
     await prisma.$disconnect()
   })
+  

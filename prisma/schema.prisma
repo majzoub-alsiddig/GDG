@@ -1,3 +1,4 @@
+// prisma/schema.prisma
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -5,6 +6,19 @@ generator client {
 
 datasource db {
   provider = "sqlite"
+}
+
+model Season {
+  id        String       @id @default(cuid())
+  name      String       @unique
+  slug      String       @unique
+  order     Int          @default(0)
+  isActive  Boolean      @default(false)
+  members   TeamMember[]
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  @@index([order])
 }
 
 model TeamMember {
@@ -20,8 +34,12 @@ model TeamMember {
   twitter   String?
   website   String?
   order     Int      @default(0)
+  seasonId  String?
+  season    Season?  @relation(fields: [seasonId], references: [id], onDelete: SetNull)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([seasonId])
 }
 
 model EventCategory {
